@@ -1,12 +1,21 @@
 import org.junit.Test;
-import org.junit.jupiter.api.DynamicTest;
+import static org.junit.jupiter.api.Assertions.*;
 
-import static junit.framework.TestCase.assertEquals;
 
 public class TestClass1 {
+
+
+
     @Test
     public void test1() {
-        assertEquals(0,0);
+        assertEquals(7,7);
     }
 
+
+
+
 }
+
+
+
+
