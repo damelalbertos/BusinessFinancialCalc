@@ -36,7 +36,7 @@ public class CentralBusinessTest {
         //Check that the item names are correct
         assertEquals(bus1.getMenu().get("1").getName(), "item1");
         assertEquals(bus1.getMenu().get("2").getName(), "item2");
-        assertEquals(bus1.getMenu().get("1").getName(), "item3");
+        assertEquals(bus1.getMenu().get("3").getName(), "item3");
 
 
 

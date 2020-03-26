@@ -23,6 +23,8 @@ public class CentralBusiness {
          * @return none
          */
         public void createMenu(HashMap<String, Item> menuItems){
+            menu.clear();
+            menu = menuItems;
 
         }
 
