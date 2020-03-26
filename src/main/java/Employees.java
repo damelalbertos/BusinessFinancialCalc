@@ -1,4 +1,5 @@
 import java.text.DecimalFormat;
+import java.util.EmptyStackException;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.regex.Pattern;
@@ -9,7 +10,7 @@ public class Employees  {
     private double wage;
     private double hoursWorked;
 
-    private Map<String, Employees> employeesMap = new HashMap<>();
+    private HashMap<String, Employees> employeesMap;
 
 
 
@@ -18,7 +19,7 @@ public class Employees  {
         this.id = id;
         this.wage = wage;
         this.hoursWorked = hoursWorked;
-
+        this.employeesMap = new HashMap<String, Employees>();
     }
 
 
@@ -29,25 +30,21 @@ public class Employees  {
      * @param
      */
     public double calcPay(String id) throws IllegalArgumentException{
-        double hours = employeesMap.get(id).hoursWorked;
-        double wage = employeesMap.get(id).wage;
-        double pay = 0;
 
         if(!employeesMap.containsKey(id)){
             throw new IllegalArgumentException("Employee with id" + id + "doesn't exists");
-        }
-        if(hours <= 40){
-            pay = wage*hours;
-        }
+        } else {
+            double hours = employeesMap.get(id).hoursWorked;
+            double wage = employeesMap.get(id).wage;
+            double pay = 0;
+            if(hours <= 40){
+                pay = wage*hours;
+            }
 
-        else {
-            pay = wage*40 + calcOvertimePay(hours-40);
-
-
-
-        }
-
-//        DecimalFormat newFormat = new DecimalFormat("#. ##");
+            else {
+                pay = wage*40 + calcOvertimePay(hours-40);
+            }
+            DecimalFormat newFormat = new DecimalFormat("#. ##");
 //
 //
 //        balance = Double.valueOf(newFormat.format(balance));
@@ -55,7 +52,11 @@ public class Employees  {
 //        toAccount.balance = Double.valueOf(newFormat.format(toAccount.balance));
 //
 
-        return pay;
+            return pay;
+        }
+
+
+//
 
 
 
