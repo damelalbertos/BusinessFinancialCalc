@@ -1,40 +1,32 @@
+import java.util.HashMap;
+
 public class Customers {
 
-    private int orderId;
-    private int orderAmount;
+    private int customerId;
+    private String fName;
 
-
-
-
-
-
-
-
-    public int calcOrderAmount(int orderId){
-
-
-
-
-        return 0;
+    public Customers(int customerID, String fName) {
+        this.customerId=customerID;
+        this.fName=fName;
     }
+
+
     /**
      *
-     *
-     * @param orderId
+     * @param
+     * @param
      * @return
+     * @throws
      */
-    public int getOrderId(int orderId){
+    public void order(HashMap<String, Item> orderedItems){
 
-
-        return 0;
     }
 
 
-    public int getOrderAmount(int orderId){
 
 
 
-        return 0;
-    }
+
+
 
 }
