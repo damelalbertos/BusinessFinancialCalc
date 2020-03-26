@@ -1,46 +1,53 @@
 public class Employees {
 
     private String id;
-    private int wage;
-    private int hoursWorked;
-    private String employeeType;
+    private double wage;
+    private double hoursWorked;
 
-    public Employees(String id, int wage, int hoursWorked, String employeeType){
+    protected BusinessTracker business;
+
+
+    public Employees(BusinessTracker business){
+        this.business = business;
+    }
+
+
+    public Employees(String id, double wage, double hoursWorked){
         this.id = id;
         this.wage = wage;
         this.hoursWorked = hoursWorked;
-        this.employeeType = employeeType;
     }
 
-    /**
-     * Description: Calculates pay for employee based on their Id
-     *
-     * @param id
-     */
-    public void calcPay(String id){
 
 
 
-    }
+//
+    public double getWage() throws IllegalArgumentException{
 
-    /**
-     *
-     *
-     */
-    public void calcHoursWorked(){
+        return wage;
 
 
     }
+
+
+
 
     /**
      *
      *
      */
-    public void calcOvertimePay(){
+    public double getHoursWorked() throws IllegalArgumentException{
 
+
+
+        return hoursWorked;
 
 
     }
+
+
+
+
 
 
     /**
@@ -48,8 +55,11 @@ public class Employees {
      *
      * @return
      */
-    public String getInfo(){
+    public String getInfo() throws IllegalArgumentException{
 
+        if(!business.exists(id)){
+            throw new IllegalArgumentException("Employee with id" + id + "doesn't exists");
+        }
 
 
         return "doSomething";
