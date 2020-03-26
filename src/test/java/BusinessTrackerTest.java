@@ -4,12 +4,12 @@ import java.util.HashMap;
 
 import static org.junit.jupiter.api.Assertions.*;
 
-public class CentralBusinessTest {
+public class BusinessTrackerTest {
 
     @Test
     void createMenuTest() {
 
-        CentralBusiness bus1 = new CentralBusiness("Business 1");
+        BusinessTracker bus1 = new BusinessTracker("Business 1");
 
         Item item1 = new Item("1", 10, "item1", 10.00);
         Item item2 = new Item("2", 10, "item2", 5.00);

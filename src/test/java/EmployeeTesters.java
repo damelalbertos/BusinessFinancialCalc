@@ -7,7 +7,7 @@ public class EmployeeTesters {
     @Test
     public void  calcPayTest(){
 
-        BusinessTracker business = new BusinessTracker();
+        BusinessTracker business = new BusinessTracker("BusinessName");
 
         Employees employee1 = new Employees("1000", 11.25, 36);
         Employees employee2 = new Employees("1001", 13.25, 50);
@@ -39,7 +39,7 @@ public class EmployeeTesters {
     @Test
     public void calcOvertimePayTest(){
 
-        BusinessTracker business = new BusinessTracker();
+        BusinessTracker business = new BusinessTracker("BusinessName");
 
         Employees employee = new Employees("100", 14.26, 42);
         Employees employee2 = new Employees("1001", 13.25, 50);
@@ -65,7 +65,7 @@ public class EmployeeTesters {
 
     @Test
     public void getHoursWorked(){
-        BusinessTracker business = new BusinessTracker();
+        BusinessTracker business = new BusinessTracker("BusinessName");
         Employees employee1 = new Employees("1000", 11.25, 36);
         Employees employee2 = new Employees("1001", 13.25, 50);
         Employees employee3 = new Employees("1002", 10, 40);

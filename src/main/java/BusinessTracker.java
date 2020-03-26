@@ -8,20 +8,47 @@ public class BusinessTracker {
 
     private int revenue;
     private int expenses;
+    private String businessName;
     private Map<String, Employees> employeesMap = new HashMap<>();
+    private HashMap<String, Item> inventory;
+    private HashMap<String, Order> allOrders;
+    private HashMap<String, Item> menu;
+
+    public HashMap<String, Item> getMenu() {
+        return menu;
+    }
 
 
+    public BusinessTracker(String businessName) {
+        this.businessName = businessName;
+        this.employeesMap = new HashMap<String, Employees>();
+        this.inventory = new HashMap<String, Item>();
+        this.allOrders = new HashMap<String, Order>();
+        this.menu = new HashMap<String, Item>();
+    }
+
+    /**
+     * creates a menu for the business and sets to menu hash map. replaces old one if exists
+     *
+     * @param menuItems - a map with a key of the itemID, and value of the item object itself
+     * @return none
+     */
+    public void createMenu(HashMap<String, Item> menuItems) {
+        menu.clear();
+        menu = menuItems;
+
+    }
 
 
-    public Employees getEmployee(String id) throws IllegalArgumentException{
+    public Employees getEmployee(String id) throws IllegalArgumentException {
         if (!employeesMap.containsKey(id)) {
             throw new IllegalArgumentException("Employee with id " + id + " doesn't exists");
         }
         return employeesMap.get(id);
     }
 
-    public boolean exists(String id){
-        if(!employeesMap.containsKey(id)){
+    public boolean exists(String id) {
+        if (!employeesMap.containsKey(id)) {
             return false;
         }
 
@@ -29,15 +56,14 @@ public class BusinessTracker {
 
     }
 
-    public void removeEmployee(String id, Employees employee){
+    public void removeEmployee(String id, Employees employee) {
         employeesMap.remove(id, employee);
     }
 
 
-    public void addAccount(String id, Employees employees){
+    public void addAccount(String id, Employees employees) {
         employeesMap.put(id, employees);
     }
-
 
 
     /**
@@ -56,11 +82,8 @@ public class BusinessTracker {
             if (hours <= 40) {
                 pay = wage * hours;
             } else {
-                pay = (wage * 40 )+ ((hours - 40)*wage*1.5);
+                pay = (wage * 40) + ((hours - 40) * wage * 1.5);
             }
-
-
-
 
 
             DecimalFormat newFormat = new DecimalFormat("#. ##");
@@ -77,50 +100,40 @@ public class BusinessTracker {
     }
 
 
-        /**
-         *
-         *
-         */
-        public double calcOvertimePay(String id, double hours) {
-            hours = employeesMap.get(id).getHoursWorked()-40;
-            double wage = employeesMap.get(id).getWage() * 1.5;
+    /**
+     *
+     */
+    public double calcOvertimePay(String id, double hours) {
+        hours = employeesMap.get(id).getHoursWorked() - 40;
+        double wage = employeesMap.get(id).getWage() * 1.5;
 
-            double overtimePay = wage*hours;
+        double overtimePay = wage * hours;
 
-            return overtimePay;
-
+        return overtimePay;
 
 
-        }
+    }
 
-
-
-        /**
-         *
-         *
-         * @param revenue
-         */
+    /**
+     * @param revenue
+     */
 
     public void Revenue(int revenue) {
         this.revenue = revenue;
     }
 
     /**
-     *
-     *
      * @param expenses
      */
-    public void Expenses(int expenses){
+    public void Expenses(int expenses) {
         this.expenses = expenses;
     }
 
 
     /**
      *
-     *
      */
-    public int getRevenue(){
-
+    public int getRevenue() {
 
 
         return revenue;
@@ -128,10 +141,8 @@ public class BusinessTracker {
 
     /**
      *
-     *
-     *
      */
-    public int getExpenses(){
+    public int getExpenses() {
 
 
         return expenses;
@@ -140,17 +151,11 @@ public class BusinessTracker {
 
     /**
      *
-     *
      */
-    public void customerOrder(){
-
+    public void customerOrder() {
 
 
     }
-
-
-
-
 
 
 }
