@@ -29,6 +29,13 @@ public class Inventory {
         inventory.put(item.getItemID(), item);
     }
 
+    /**
+     * Purpose: Removes an item from inventory based on itemId
+     * Parameters: the id of the item to be removed
+     */
+    public void removeItem(String itemId){
+        //todo
+    }
 
     /**
      * Description: Gives the cost of a specific item
