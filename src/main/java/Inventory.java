@@ -28,7 +28,7 @@ public class Inventory {
      *
      */
     public void addItem(Item item){
-        //todo
+        inventory.put(item.getItemID(), item);
     }
 
 
