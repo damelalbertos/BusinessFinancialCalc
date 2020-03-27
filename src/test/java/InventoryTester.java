@@ -27,4 +27,16 @@ public class InventoryTester {
         assertEquals(testInventory.getInventory().get("0001"), testItem1);
         assertEquals(testInventory.getInventory().get("0002"), testItem2);
     }
+
+    @Test
+    public void getItemCostTest(){
+        Inventory testInventory = new Inventory();
+        Item testItem1 = new Item("0001", 5, "Tomatoes", 0.69);
+        Item testItem2 = new Item("0002", 5, "Burger Patty", 4.00);
+        testInventory.addItem(testItem1);
+        testInventory.addItem(testItem2);
+
+        assertEquals(testInventory.getInventory().get("0001").getCost(), testInventory.getItemCost("0001"));
+        assertEquals(testInventory.getInventory().get("0002").getCost(), testInventory.getItemCost("0002"));
+    }
 }

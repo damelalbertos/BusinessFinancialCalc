@@ -17,15 +17,13 @@ public class Inventory {
      * products of to increase amount of items
      */
     public void buyMoreProducts(){
-
-
+        //TODO
     }
 
 
     /**
-     * adding new item to inventory
-     *
-     *
+     * Purpose: Adds a new item to inventory HashMap
+     * Parameters: the item to be added
      */
     public void addItem(Item item){
         inventory.put(item.getItemID(), item);
@@ -33,9 +31,9 @@ public class Inventory {
 
 
     /**
-     * Description: Pass in Item id so we know the cost of the item we are gonna buy
-     *
-     *
+     * Description: Gives the cost of a specific item
+     * Parameters: the itemId of the specified item
+     * returns: the cost of that item.
      */
     public double getItemCost(String itemId){
         //TODO
