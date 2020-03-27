@@ -6,13 +6,15 @@ import java.util.Map;
 
 public class Inventory {
 
-    private Map<String, Item>itemMap = new HashMap<>();
+    private HashMap<String, Item> inventory;
+
+    public Inventory(){
+        this.inventory = new HashMap<String, Item>();
+    }
 
     /**
      * Description: Pass in Item id so we know which one to buy more
      * products of to increase amount of items
-     *
-     *
      */
     public void buyMoreProducts(){
 
@@ -25,9 +27,8 @@ public class Inventory {
      *
      *
      */
-    public void addProduct(){
-
-
+    public void addItem(Item item){
+        //todo
     }
 
 
@@ -36,46 +37,38 @@ public class Inventory {
      *
      *
      */
-    public void getItemCost(){
-
-
-
-
-
+    public double getItemCost(String itemId){
+        //TODO
+        return 0.0;
     }
 
     /**
-     *
-     *
+     * Return all item names with the amount each item has in a string
      */
 
-    public void getItemList(){
-
-
-
-
+    public String getProductInventory(){
+        //todo
+        return "";
     }
 
 
     /**
-     *
-     *
+     * returns the amount of items in the inventory list
      */
-    public void getItemCount(){
-
-
-
-
+    public double getInventoryCount(){
+        //todo
+        return 0.0;
     }
 
     /**
      *(take item id and decrease based on customers order?)
-     *
      */
     public void decrementItem(){
 
 
     }
 
-
+    public HashMap<String, Item> getInventory() {
+        return inventory;
+    }
 }

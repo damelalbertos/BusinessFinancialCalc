@@ -4,27 +4,27 @@ public class Item extends Inventory{
     private String itemId;
     private String itemName;
     private int itemCount;
-    private double menuPrice;
+    private double cost;
 
 
-    public Item(String itemId, int itemCount, String itemName, double menuPrice){
+    public Item(String itemId, int itemCount, String itemName, double cost){
         this.itemId = itemId;
         this.itemCount = itemCount;
         this.itemName = itemName;
-        this.menuPrice = menuPrice;
+        this.cost = cost;
 
 
     }
 
 
-    public String getName(){ return itemName; }
+    public String getName(){ return this.itemName; }
 
 
-    public int getCount(){ return itemCount; }
+    public int getCount(){ return this.itemCount; }
 
-    public double getMenuPrice() { return menuPrice;}
+    public double getCost() { return this.cost;}
 
-    public String getItemID(){return itemId;}
+    public String getItemID(){return this.itemId;}
 
 
 }
