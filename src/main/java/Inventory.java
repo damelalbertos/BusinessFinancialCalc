@@ -20,6 +20,9 @@ public class Inventory {
         //TODO
     }
 
+    public Item getItem(String itemId){
+        return inventory.get(itemId);
+    }
 
     /**
      * Purpose: Adds a new item to inventory HashMap

@@ -40,8 +40,8 @@ public class InventoryTester {
 
         testInventory.removeItem("0001");
         testInventory.removeItem("0002");
-        assertEquals(null, testInventory.getInventory().get("0001"));
-        assertEquals(null, testInventory.getInventory().get("0002"));
+        assertEquals(null, testInventory.getItem("0001"));
+        assertEquals(null, testInventory.getItem("0002"));
     }
 
     @Test
