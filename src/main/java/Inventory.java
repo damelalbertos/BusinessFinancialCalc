@@ -34,7 +34,7 @@ public class Inventory {
      * Parameters: the id of the item to be removed
      */
     public void removeItem(String itemId){
-        //todo
+        inventory.remove(itemId);
     }
 
     /**
