@@ -19,14 +19,8 @@ public class Employees {
     }
 
 
-
-
-//
     public double getWage() throws IllegalArgumentException{
-
         return wage;
-
-
     }
 
 

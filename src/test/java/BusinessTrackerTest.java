@@ -29,9 +29,9 @@ public class BusinessTrackerTest {
         assertFalse(bus1.getMenu().containsKey("5"));
 
         //Check that the menu prices are correct
-        assertEquals(bus1.getMenu().get("1").getMenuPrice(), 10.00);
-        assertEquals(bus1.getMenu().get("2").getMenuPrice(), 5.00);
-        assertEquals(bus1.getMenu().get("3").getMenuPrice(), 2.25);
+        assertEquals(bus1.getMenu().get("1").getCost(), 10.00);
+        assertEquals(bus1.getMenu().get("2").getCost(), 5.00);
+        assertEquals(bus1.getMenu().get("3").getCost(), 2.25);
 
         //Check that the item names are correct
         assertEquals(bus1.getMenu().get("1").getName(), "item1");

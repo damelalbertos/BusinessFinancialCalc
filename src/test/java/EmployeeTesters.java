@@ -3,7 +3,6 @@ import static org.junit.jupiter.api.Assertions.*;
 
 public class EmployeeTesters {
 
-
     @Test
     public void  calcPayTest(){
 
