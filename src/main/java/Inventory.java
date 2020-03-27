@@ -36,8 +36,9 @@ public class Inventory {
      * returns: the cost of that item.
      */
     public double getItemCost(String itemId){
-        //TODO
-        return 0.0;
+        Item item = inventory.get(itemId);
+        double itemCost = item.getCost();
+        return itemCost;
     }
 
     /**
