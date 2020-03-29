@@ -36,7 +36,7 @@ public class Item extends Inventory{
         String[] splitter = Double.toString(amount).split("\\.");
         splitter[0].length();   // Before Decimal Count
         int decimalLength = splitter[1].length();
-        if(amount > -1 && decimalLength < 3){
+        if(amount > 0 && decimalLength < 3){
             return true;
         }
         else{

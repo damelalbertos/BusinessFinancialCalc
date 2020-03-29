@@ -30,6 +30,8 @@ public class InventoryTester {
 
         testInventory.addItem(testItem1);
         testInventory.addItem(testItem2);
+        testInventory.addItem(testItem3);
+        testInventory.addItem(testItem4);
         assertEquals(testInventory.getInventory().get("0001"), testItem1);
         assertEquals(testInventory.getInventory().get("0002"), testItem2);
 

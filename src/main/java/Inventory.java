@@ -28,10 +28,14 @@ public class Inventory {
      * Purpose: Adds a new item to inventory HashMap
      * Parameters: the item to be added
      */
-    public void addItem(Item item){
-
-
-        inventory.put(item.getItemID(), item);
+    public void addItem(Item item) {
+        if (inventory.containsKey(item.getItemID())) {
+            throw new IllegalArgumentException("ID already exists");
+        } else if (!Item.isAmountValid(item.getCost())) {
+            throw new IllegalArgumentException("Invalid cost");
+        } else {
+            inventory.put(item.getItemID(), item);
+        }
     }
 
     /**
