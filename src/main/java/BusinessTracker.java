@@ -12,9 +12,9 @@ public class BusinessTracker {
     private Map<String, Employees> employeesMap = new HashMap<>();
     private HashMap<String, Item> inventory;
     private HashMap<String, Order> allOrders;
-    private HashMap<String, Item> menu;
+    private HashMap<String, MenuItem> menu;
 
-    public HashMap<String, Item> getMenu() {
+    public HashMap<String, MenuItem> getMenu() {
         return menu;
     }
 
@@ -24,18 +24,18 @@ public class BusinessTracker {
         this.employeesMap = new HashMap<String, Employees>();
         this.inventory = new HashMap<String, Item>();
         this.allOrders = new HashMap<String, Order>();
-        this.menu = new HashMap<String, Item>();
+        this.menu = new HashMap<String, MenuItem>();
     }
 
     /**
-     * creates a menu for the business and sets to menu hash map. replaces old one if exists
-     *
-     * @param menuItems - a map with a key of the itemID, and value of the item object itself
+     * creates a menu item for the business and sets it in  menu hash map.
+     * @throws IllegalArgumentException if menuItem ID already exists
+     * @throws IllegalArgumentException if price of menuitem isn't valid
+     * @throws IllegalArgumentException if not all ingredients can be found in inventory
+     * @param menuItem - the menu item to be added
      * @return none
      */
-    public void createMenu(HashMap<String, Item> menuItems) {
-        menu.clear();
-        menu = menuItems;
+    public void addToMenu(MenuItem menuItem){
 
     }
 

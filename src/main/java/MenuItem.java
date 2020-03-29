@@ -14,7 +14,7 @@ public class MenuItem extends Inventory{
         this.menuItemId = menuItemId;
         this.menuItemName = menuItemName;
         this.price = price;
-        this.itemIngredients = itemIngredients;
+        this.itemIngredients = new ArrayList<Item>();
     }
 
 
