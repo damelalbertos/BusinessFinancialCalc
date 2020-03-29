@@ -1,6 +1,7 @@
 import java.lang.reflect.Array;
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
 
 public class MenuItem extends Inventory{
 
@@ -10,7 +11,7 @@ public class MenuItem extends Inventory{
     private ArrayList<Item> itemIngredients;
 
 
-    public MenuItem(String menuItemId, String menuItemName, double price, ArrayList<Item> itemIngredients){
+    public MenuItem(String menuItemId, String menuItemName, double price){
         this.menuItemId = menuItemId;
         this.menuItemName = menuItemName;
         this.price = price;
@@ -24,7 +25,13 @@ public class MenuItem extends Inventory{
 
     public double getPrice() { return this.price;}
 
-    public ArrayList<Item> getItemIngredients(){return this.itemIngredients;}
+    public ArrayList<Item> getItemIngredients(){
+        return itemIngredients;
+    }
+
+    public void setItemIngredients(ArrayList<Item> ingredients){
+        this.itemIngredients=ingredients;
+    }
 
 
     /**

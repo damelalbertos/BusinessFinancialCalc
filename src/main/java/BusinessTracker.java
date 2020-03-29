@@ -14,11 +14,6 @@ public class BusinessTracker {
     private HashMap<String, Order> allOrders;
     private HashMap<String, MenuItem> menu;
 
-    public HashMap<String, MenuItem> getMenu() {
-        return menu;
-    }
-
-
     public BusinessTracker(String businessName) {
         this.businessName = businessName;
         this.employeesMap = new HashMap<String, Employees>();
@@ -27,15 +22,29 @@ public class BusinessTracker {
         this.menu = new HashMap<String, MenuItem>();
     }
 
+    public HashMap<String, MenuItem> getMenu() {
+        return menu;
+    }
+
     /**
      * creates a menu item for the business and sets it in  menu hash map.
      * @throws IllegalArgumentException if menuItem ID already exists
      * @throws IllegalArgumentException if price of menuitem isn't valid
      * @throws IllegalArgumentException if not all ingredients can be found in inventory
      * @param menuItem - the menu item to be added
+     * @param inventory - inventory of the business
      * @return none
      */
-    public void addToMenu(MenuItem menuItem){
+    public void addToMenu(MenuItem menuItem, HashMap<String, Item> inventory){
+        if (menu.containsKey(menuItem.getMenuID())) {
+            throw new IllegalArgumentException("ID already exists in the menu");
+        } else if (!Item.isAmountValid(menuItem.getPrice())) {
+            throw new IllegalArgumentException("Invalid price");
+        } else if (!menuItem.checkIngredientsExist(inventory)) {
+            throw new IllegalArgumentException("Ingredients not accounted for in inventory are in the menu item");
+        } else {
+            menu.put(menuItem.getMenuID(), menuItem);
+        }
 
     }
 

@@ -7,8 +7,8 @@ import static org.junit.jupiter.api.Assertions.*;
 
 public class BusinessTrackerTest {
 
-    @Test
-    void addToMenuTest() {
+    @org.junit.Test
+    public void addToMenuTest() {
 
         BusinessTracker bus1 = new BusinessTracker("Business 1");
         Inventory testInventory = new Inventory();
@@ -35,21 +35,27 @@ public class BusinessTrackerTest {
         ArrayList<Item> cokeIngredients = new ArrayList<>();
         cokeIngredients.add(testItem5);
 
-        MenuItem menuItem1 = new MenuItem("1", "burger", 7.00, burgerIngredients);
-        MenuItem menuItem2 = new MenuItem("2", "coke", 1.50, cokeIngredients);
+        MenuItem menuItem1 = new MenuItem("1", "burger", 7.00);
+        menuItem1.setItemIngredients(burgerIngredients);
 
-        bus1.addToMenu(menuItem1);
-        bus1.addToMenu(menuItem2);
+        MenuItem menuItem2 = new MenuItem("2", "coke", 1.50);
+        menuItem2.setItemIngredients(cokeIngredients);
+
+        bus1.addToMenu(menuItem1, testInventory.getInventory());
+        bus1.addToMenu(menuItem2, testInventory.getInventory());
 
         ArrayList<Item> chickenIngredients = new ArrayList<>();
-        chickenIngredients.add(testItem1);
+        chickenIngredients.add(testItem6);
 
-        MenuItem menuItem3 = new MenuItem("3", "chicken", 6.00, chickenIngredients);
+        MenuItem menuItem3 = new MenuItem("3", "chicken", 6.00);
+        menuItem3.setItemIngredients(chickenIngredients);
 
-        MenuItem menuItem4 = new MenuItem("3", "chicken", 6.220, chickenIngredients);
-        MenuItem menuItem5 = new MenuItem("3", "chicken", -6.00, chickenIngredients);
-
-        MenuItem menuItem6 = new MenuItem("1", "chicken", 6.00, chickenIngredients);
+        MenuItem menuItem4 = new MenuItem("3", "chicken", 6.220);
+        menuItem4.setItemIngredients(chickenIngredients);
+        MenuItem menuItem5 = new MenuItem("3", "chicken", -6.00);
+        menuItem5.setItemIngredients(chickenIngredients);
+        MenuItem menuItem6 = new MenuItem("1", "chicken", 6.00);
+        menuItem6.setItemIngredients(chickenIngredients);
 
         //Check that the ID's exist in the menu
         assertTrue(bus1.getMenu().containsKey("1"));
@@ -59,7 +65,7 @@ public class BusinessTrackerTest {
         //Check that the menu prices are correct
         assertEquals(bus1.getMenu().get("1").getPrice(), 7.00);
         assertEquals(bus1.getMenu().get("2").getPrice(), 1.50);
-        
+
         //Check that the item names are correct
         assertEquals(bus1.getMenu().get("1").getMenuItemName(), "burger");
         assertEquals(bus1.getMenu().get("2").getMenuItemName(), "coke");
@@ -70,14 +76,14 @@ public class BusinessTrackerTest {
         assertEquals(bus1.getMenu().get("2").getItemIngredients().get(0).getName(), "Coke");
 
         //Not all ingredients in inventory for menu, should throw exception
-        assertThrows(IllegalArgumentException.class, () -> bus1.addToMenu(menuItem3));
+        assertThrows(IllegalArgumentException.class, () -> bus1.addToMenu(menuItem3, testInventory.getInventory()));
 
         //Invalid item cost, should throw exception
-        assertThrows(IllegalArgumentException.class, () -> bus1.addToMenu(menuItem4));
-        assertThrows(IllegalArgumentException.class, () -> bus1.addToMenu(menuItem5));
+        assertThrows(IllegalArgumentException.class, () -> bus1.addToMenu(menuItem4, testInventory.getInventory()));
+        assertThrows(IllegalArgumentException.class, () -> bus1.addToMenu(menuItem5, testInventory.getInventory()));
 
         //Duplicate IDs, should throw exception
-        assertThrows(IllegalArgumentException.class, () -> bus1.addToMenu(menuItem6));
+        assertThrows(IllegalArgumentException.class, () -> bus1.addToMenu(menuItem6, testInventory.getInventory()));
 
     }
 

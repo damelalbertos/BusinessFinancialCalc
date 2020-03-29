@@ -30,12 +30,14 @@ public class MenuItemTester {
         burgerIngredients.add(testItem2);
         burgerIngredients.add(testItem3);
 
-        MenuItem burger = new MenuItem("001", "Burger", 5.00, burgerIngredients);
+        MenuItem burger = new MenuItem("001", "Burger", 5.00);
+        burger.setItemIngredients(burgerIngredients);
 
         ArrayList<Item> friesIngredients = new ArrayList<>();
         friesIngredients.add(testItem4);
 
-        MenuItem fries = new MenuItem("002", "Fries", 3.00, friesIngredients);
+        MenuItem fries = new MenuItem("002", "Fries", 3.00);
+        fries.setItemIngredients(friesIngredients);
 
         ArrayList<Item> cheeseburgerIngredients = new ArrayList<>();
         cheeseburgerIngredients.add(testItem1);
@@ -43,13 +45,15 @@ public class MenuItemTester {
         cheeseburgerIngredients.add(testItem3);
         cheeseburgerIngredients.add(testItem5);
 
-        MenuItem cheeseburger = new MenuItem("003", "Cheeseburger", 6.00, cheeseburgerIngredients);
+        MenuItem cheeseburger = new MenuItem("003", "Cheeseburger", 6.00);
+        cheeseburger.setItemIngredients(cheeseburgerIngredients);
 
         ArrayList<Item> cheesyfriesIngredients = new ArrayList<>();
         cheesyfriesIngredients.add(testItem4);
         cheesyfriesIngredients.add(testItem5);
 
-        MenuItem cheesyfries = new MenuItem("004", "Fries", 3.50, cheesyfriesIngredients);
+        MenuItem cheesyfries = new MenuItem("004", "Fries", 3.50);
+        cheesyfries.setItemIngredients(cheesyfriesIngredients);
 
 
 
