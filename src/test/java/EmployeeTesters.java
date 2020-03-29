@@ -21,11 +21,14 @@ public class EmployeeTesters {
         Employees employee1 = new Employees("1000", 11.25, 36);
         Employees employee2 = new Employees("1001", 13.25, 50);
         Employees employee3 = new Employees("1002", 10, 40);
+        Employees employee4 = new Employees("1002", 20, 40);
 
 
         business.addAccount("1000", employee1);
         business.addAccount("1001", employee2);
         business.addAccount("1002", employee3);
+
+
 
         assertEquals(36, business.getEmployee("1000").getHoursWorked());
         assertEquals(50, business.getEmployee("1001").getHoursWorked());
@@ -33,7 +36,6 @@ public class EmployeeTesters {
 
         assertThrows(IllegalArgumentException.class, () -> business.getEmployee("12342").getHoursWorked());
         assertThrows(IllegalArgumentException.class, () -> business.getEmployee("0").getHoursWorked());
-
     }
 
 

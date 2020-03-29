@@ -61,6 +61,9 @@ public class InventoryTester {
         testInventory.removeItem("0002");
         assertEquals(null, testInventory.getItem("0001"));
         assertEquals(null, testInventory.getItem("0002"));
+
+        //item does not exist
+        assertThrows(IllegalArgumentException.class, () -> testInventory.removeItem("003"));
     }
 
     @Test
@@ -73,5 +76,8 @@ public class InventoryTester {
 
         assertEquals(testInventory.getInventory().get("0001").getCost(), testInventory.getItemCost("0001"));
         assertEquals(testInventory.getInventory().get("0002").getCost(), testInventory.getItemCost("0002"));
+
+        //item does not exist
+        assertThrows(IllegalArgumentException.class, () -> testInventory.getItemCost("003"));
     }
 }

@@ -12,7 +12,7 @@ public class ItemTester {
     public void isAmountValidTest(){
 
         //Negative number
-        assertFalse(Item.isAmountValid(-5.27));
+        assertFalse(Item.isAmountValid(-.01));
         assertFalse(Item.isAmountValid(-50.6));
         assertFalse(Item.isAmountValid(-100));
         assertFalse(Item.isAmountValid(-1672.976));
