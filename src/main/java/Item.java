@@ -6,13 +6,13 @@ public class Item extends Inventory{
     private int itemCount;
     private double cost;
 
+    private int amount;
 
     public Item(String itemId, int itemCount, String itemName, double cost){
         this.itemId = itemId;
         this.itemCount = itemCount;
         this.itemName = itemName;
         this.cost = cost;
-
 
     }
 
@@ -25,6 +25,10 @@ public class Item extends Inventory{
     public double getCost() { return this.cost;}
 
     public String getItemID(){return this.itemId;}
+
+    public int addCount(int amount){
+        return itemCount+amount;
+    }
 
 
     /**

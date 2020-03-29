@@ -8,6 +8,7 @@ public class Inventory {
 
     private HashMap<String, Item> inventory;
 
+
     public Inventory(){
         this.inventory = new HashMap<String, Item>();
     }
@@ -16,8 +17,13 @@ public class Inventory {
      * Description: Pass in Item id so we know which one to buy more
      * products of to increase amount of items
      */
-    public void buyMoreProducts(){
+    public int buyMoreProducts(String itemId, int amount){
         //TODO
+
+        if(!inventory.containsKey(itemId)){
+            throw new IllegalArgumentException("No Item to buy products for");
+        }
+        return inventory.get(itemId).addCount(amount);
     }
 
     public Item getItem(String itemId){
