@@ -28,8 +28,14 @@ public class Inventory {
      * Purpose: Adds a new item to inventory HashMap
      * Parameters: the item to be added
      */
-    public void addItem(Item item){
-        inventory.put(item.getItemID(), item);
+    public void addItem(Item item) {
+        if (inventory.containsKey(item.getItemID())) {
+            throw new IllegalArgumentException("ID already exists");
+        } else if (!Item.isAmountValid(item.getCost())) {
+            throw new IllegalArgumentException("Invalid cost");
+        } else {
+            inventory.put(item.getItemID(), item);
+        }
     }
 
     /**
@@ -37,7 +43,12 @@ public class Inventory {
      * Parameters: the id of the item to be removed
      */
     public void removeItem(String itemId){
-        inventory.remove(itemId);
+        if (!inventory.containsKey(itemId)) {
+            throw new IllegalArgumentException("ID doesn't exist in inventory");
+        } else {
+            inventory.remove(itemId);
+        }
+
     }
 
     /**
@@ -46,9 +57,11 @@ public class Inventory {
      * returns: the cost of that item.
      */
     public double getItemCost(String itemId){
-        Item item = inventory.get(itemId);
-        double itemCost = item.getCost();
-        return itemCost;
+        if (!inventory.containsKey(itemId)) {
+            throw new IllegalArgumentException("ID doesn't exist in inventory");
+        } else {
+            return inventory.get(itemId).getCost();
+        }
     }
 
     /**
