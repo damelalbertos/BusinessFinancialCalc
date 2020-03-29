@@ -73,6 +73,7 @@ public class EmployeeTesters {
         business.addAccount("1000", employee1);
         business.addAccount("1001", employee2);
         business.addAccount("1002", employee3);
+
         assertEquals(36, business.getEmployee("1000").getHoursWorked());
         assertEquals(50, business.getEmployee("1001").getHoursWorked());
         assertEquals(40, business.getEmployee("1002").getHoursWorked());

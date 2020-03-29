@@ -29,6 +29,8 @@ public class Inventory {
      * Parameters: the item to be added
      */
     public void addItem(Item item){
+
+
         inventory.put(item.getItemID(), item);
     }
 

@@ -26,5 +26,14 @@ public class Item extends Inventory{
 
     public String getItemID(){return this.itemId;}
 
+    /**
+     * Checks if the amount is in proper format
+     * @param amount
+     * @return boolean (true if amount is positive and has two decimal points or less, otherwise false)
+     */
+    public static boolean isAmountValid(double amount) {
+        return false;
+    }
+
 
 }

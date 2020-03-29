@@ -57,12 +57,19 @@ public class BusinessTracker {
     }
 
     public void removeEmployee(String id, Employees employee) {
+        if (!employeesMap.containsKey(id)) {
+            throw new IllegalArgumentException("Employee does not exist");
+        }
         employeesMap.remove(id, employee);
     }
 
 
     public void addAccount(String id, Employees employees) {
-        employeesMap.put(id, employees);
+        if (employeesMap.containsKey(id)) {
+            throw new IllegalArgumentException("Employee ID already exists.");
+        } else {
+            employeesMap.put(id, employees);
+        }
     }
 
 
