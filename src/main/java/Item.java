@@ -26,6 +26,7 @@ public class Item extends Inventory{
 
     public String getItemID(){return this.itemId;}
 
+
     /**
      * Checks if the amount is in proper format
      * @param amount
