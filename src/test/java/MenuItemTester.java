@@ -54,12 +54,12 @@ public class MenuItemTester {
 
 
         //Check that passes correctly
-        assertTrue(burger.checkIngredientsExist());
-        assertTrue(fries.checkIngredientsExist());
+        assertTrue(burger.checkIngredientsExist(testInventory.getInventory()));
+        assertTrue(fries.checkIngredientsExist(testInventory.getInventory()));
 
         //Check that fails when not all ingredients are in inventory
-        assertFalse(cheeseburger.checkIngredientsExist());
-        assertFalse(cheesyfries.checkIngredientsExist());
+        assertFalse(cheeseburger.checkIngredientsExist(testInventory.getInventory()));
+        assertFalse(cheesyfries.checkIngredientsExist(testInventory.getInventory()));
 
 
 
