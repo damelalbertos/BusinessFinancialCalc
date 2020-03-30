@@ -1,3 +1,4 @@
+import java.util.Iterator;
 import java.util.regex.Pattern;
 import java.util.HashMap;
 import java.util.Map;
@@ -96,13 +97,22 @@ public class Inventory {
      * Parameters: None
      */
 
-    public String getProductInventory(){
-        //todo
+    public String getProductInventory() throws EmptyInventoryException {
+        StringBuilder result  = new StringBuilder();
         //check if inventory is empty
+        if (inventory.isEmpty()){
+            throw new EmptyInventoryException("Inventory is Empty!;");
+        }
 
+        // create string
+        Iterator<Map.Entry<String, Item>> it = inventory.entrySet().iterator();
+        while (it.hasNext()){
+            Map.Entry<String, Item> entry = (Map.Entry<String, Item>) it.next();
+            String itemCountStr = Integer.toString(entry.getValue().getCount());
+            result.append(entry.getValue().getName() + ": " + itemCountStr + "\n");
+        }
 
-        // create string and print it out
-        return "";
+        return result.toString();
     }
 
     /**
