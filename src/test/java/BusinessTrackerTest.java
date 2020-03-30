@@ -8,7 +8,7 @@ import static org.junit.jupiter.api.Assertions.*;
 public class BusinessTrackerTest {
 
     @org.junit.Test
-    public void addToMenuTest() {
+    public void addToMenuTest() throws ItemAlreadyExistsException {
 
         BusinessTracker bus1 = new BusinessTracker("Business 1");
         Inventory testInventory = new Inventory();
