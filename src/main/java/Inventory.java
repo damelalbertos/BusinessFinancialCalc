@@ -136,8 +136,7 @@ public class Inventory {
      * Returns: double inventoryAmount
      */
     public int getInventoryCount(){
-        //todo
-        return 0;
+        return inventory.size();
     }
 
     /**
