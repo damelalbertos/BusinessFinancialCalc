@@ -166,4 +166,25 @@ public class InventoryTester {
 
         assertEquals(3, testInventory.getInventoryCount());
     }
+
+    @Test
+    public void decrementItemTest() throws ItemAlreadyExistsException, ItemDoesNotExistsException {
+        Inventory testInventory = new Inventory();
+
+        Item testItem1 = new Item("0001", 20, "Burger Patty", 1.00);
+        Item testItem2 = new Item("0002", 0, "Buns", 0.60);
+        Item testItem3 = new Item("0003", 1, "Cheese", 0.40);
+        testInventory.addItem(testItem1);
+        testInventory.addItem(testItem2);
+
+        testInventory.decrementItem("0001");
+        assertEquals(19, testInventory.getItemCount("0001"));
+
+        //test item with itemCount = 0
+        assertThrows(ItemCountAt0Exception.class, () -> testInventory.decrementItem("0002"));
+
+        //test item with itemCount = 1, should be 0 after decrement
+        testInventory.decrementItem("0003");
+        assertEquals(0, testInventory.getItemCount("0003"));
+    }
 }

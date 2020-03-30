@@ -9,6 +9,12 @@ class EmptyInventoryException extends Exception{
     }
 }
 
+class ItemCountAt0Exception extends Exception{
+    public ItemCountAt0Exception(String errorMessage) {
+        super(errorMessage);
+    }
+}
+
 class ItemDoesNotExistsException extends Exception{
     public ItemDoesNotExistsException(String errorMessage) {
         super(errorMessage);
@@ -148,7 +154,7 @@ public class Inventory {
         //check if item exists in inventory, throw exception if not
 
 
-        //decrement itemcount of specified item
+        //decrement itemCount of specified item
     }
 
     public HashMap<String, Item> getInventory() {

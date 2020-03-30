@@ -10,9 +10,16 @@ public class Item extends Inventory{
 
     public Item(String itemId, int itemCount, String itemName, double cost){
         this.itemId = itemId;
-        this.itemCount = itemCount;
         this.itemName = itemName;
-        this.cost = cost;
+        if (itemCount < 0){
+            throw new IllegalArgumentException("Item Count can't be a negative number");
+        }
+        else{this.itemCount = itemCount;}
+        if (!isAmountValid(cost)){
+            throw new IllegalArgumentException("Cost amount is invalid!");
+        }
+        else{this.cost = cost;}
+
 
     }
 
