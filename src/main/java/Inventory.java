@@ -119,12 +119,15 @@ public class Inventory {
      * Description: Return a string with the item name and item count for a specific item
      * Parameters: String itemName
      */
-    public int getItemCount(String itemId){
+    public int getItemCount(String itemId) throws ItemDoesNotExistsException {
         //TODO
         //check it item is in inventory, throw exception if not
+        if (!inventory.containsKey(itemId)){
+            throw new ItemDoesNotExistsException("Item is not inventory!");
+        }
 
         //return ItemCount for specified item
-        return 0;
+        return inventory.get(itemId).getCount();
     }
 
 
