@@ -26,6 +26,7 @@ public class Item extends Inventory{
 
     public String getName(){ return this.itemName; }
 
+    public void decrementCount(){this.itemCount-=1;}
 
     public int getCount(){ return this.itemCount; }
 

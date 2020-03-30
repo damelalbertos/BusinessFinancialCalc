@@ -149,12 +149,17 @@ public class Inventory {
      * Description: decrement amount value for given item
      * parameters: String itemId
      */
-    public void decrementItem(String itemId){
-        //TODO
+    public void decrementItem(String itemId) throws ItemDoesNotExistsException, ItemCountAt0Exception {
         //check if item exists in inventory, throw exception if not
+        if (!inventory.containsKey(itemId)){
+            throw new ItemDoesNotExistsException("Inventory Item does not exist!");
+        }
 
-
+        if (inventory.get(itemId).getCount() == 0){
+            throw new ItemCountAt0Exception("Cannot decrement Item, count is at 0");
+        }
         //decrement itemCount of specified item
+        inventory.get(itemId).decrementCount();
     }
 
     public HashMap<String, Item> getInventory() {
