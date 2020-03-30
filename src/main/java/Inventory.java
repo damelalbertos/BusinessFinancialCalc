@@ -119,11 +119,12 @@ public class Inventory {
      * Description: Return a string with the item name and item count for a specific item
      * Parameters: String itemName
      */
-    public void getItemCount(String itemId){
+    public int getItemCount(String itemId){
         //TODO
         //check it item is in inventory, throw exception if not
 
         //return ItemCount for specified item
+        return 0;
     }
 
 
