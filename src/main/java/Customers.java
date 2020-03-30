@@ -12,10 +12,14 @@ public class Customers {
 
 
     /**
-     * Description:
+     *
+     * @param
+     * @param
+     * @return
+     * @throws
      */
     public void order(HashMap<String, Item> orderedItems){
-        //TODO
+
     }
 
 
