@@ -10,7 +10,7 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
 public class MenuItemTester {
 
     @Test
-    public void checkIngredientsExistTest(){
+    public void checkIngredientsExistTest() throws ItemAlreadyExistsException {
         BusinessTracker bus1 = new BusinessTracker("Business 1");
         Inventory testInventory = new Inventory();
 
