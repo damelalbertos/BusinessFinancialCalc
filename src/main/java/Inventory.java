@@ -120,7 +120,6 @@ public class Inventory {
      * Parameters: String itemName
      */
     public int getItemCount(String itemId) throws ItemDoesNotExistsException {
-        //TODO
         //check it item is in inventory, throw exception if not
         if (!inventory.containsKey(itemId)){
             throw new ItemDoesNotExistsException("Item is not inventory!");
@@ -136,9 +135,9 @@ public class Inventory {
      * Parameters: None
      * Returns: double inventoryAmount
      */
-    public double getInventoryCount(){
+    public int getInventoryCount(){
         //todo
-        return 0.0;
+        return 0;
     }
 
     /**

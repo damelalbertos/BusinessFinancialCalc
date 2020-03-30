@@ -146,4 +146,24 @@ public class InventoryTester {
         //test that it throws exception
         assertThrows(ItemDoesNotExistsException.class, () -> testInventory.getItemCount("0001"));
     }
+
+    @Test
+    public void getInventoryCountTest() throws ItemAlreadyExistsException, ItemDoesNotExistsException {
+        Inventory testInventory = new Inventory();
+
+        Item testItem1 = new Item("0001", 20, "Burger Patty", 1.00);
+        Item testItem2 = new Item("0002", 15, "Lettuce", 0.50);
+        Item testItem3 = new Item("0003", 8, "Tomatoes", 0.69);
+        Item testItem4 = new Item("0004", 10, "Buns", 4.00);
+        testInventory.addItem(testItem1);
+        testInventory.addItem(testItem2);
+        testInventory.addItem(testItem3);
+        testInventory.addItem(testItem4);
+
+        assertEquals(4, testInventory.getInventoryCount());
+
+        testInventory.removeItem("0001");
+
+        assertEquals(3, testInventory.getInventoryCount());
+    }
 }
