@@ -131,7 +131,6 @@ public class InventoryTester {
     @Test
     public void getItemCountTest() throws ItemAlreadyExistsException, ItemDoesNotExistsException {
         Inventory testInventory = new Inventory();
-
         //test with  items
         Item testItem1 = new Item("0001", 20, "Burger Patty", 1.00);
         Item testItem2 = new Item("0002", 15, "Lettuce", 0.50);
