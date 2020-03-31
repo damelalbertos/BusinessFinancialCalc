@@ -39,10 +39,12 @@ public class MenuItem extends Inventory{
      * @return boolean (true if all ingredients are in inventory, false if not)
      */
     public boolean checkIngredientsExist(HashMap<String, Item> inventory){
+        //Iterate through the menuItem's ingredients and get its name and ID
         for (int x=0; x<itemIngredients.size(); x++) {
             String id = itemIngredients.get(x).getItemID();
             String name = itemIngredients.get(x).getName();
 
+            //Check that the ingredient item exists in the inventory, and that the ID matches up with the correct name
             if (!inventory.containsKey(id)) {
                 return false;
             } else if (!inventory.get(id).getName().equals(name)) {

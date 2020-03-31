@@ -36,12 +36,16 @@ public class BusinessTracker {
      * @return none
      */
     public void addToMenu(MenuItem menuItem, HashMap<String, Item> inventory){
+        //check that it isn't a duplicate ID
         if (menu.containsKey(menuItem.getMenuID())) {
             throw new IllegalArgumentException("ID already exists in the menu");
+        //check that the price is a valid amount
         } else if (!Item.isAmountValid(menuItem.getPrice())) {
             throw new IllegalArgumentException("Invalid price");
+        //check that all ingredients exist in inventory
         } else if (!menuItem.checkIngredientsExist(inventory)) {
             throw new IllegalArgumentException("Ingredients not accounted for in inventory are in the menu item");
+        //if all constraints pass, add menu item to menu
         } else {
             menu.put(menuItem.getMenuID(), menuItem);
         }
