@@ -113,10 +113,6 @@ public class BusinessTrackerTest {
         assertThrows(IllegalArgumentException.class, () -> business.calcPay("0"));
 
 
-
-
-
-
     }
 
     @org.junit.Test
