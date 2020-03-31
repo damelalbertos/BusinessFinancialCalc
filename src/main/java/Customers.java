@@ -1,20 +1,26 @@
 import java.util.ArrayList;
 import java.util.HashMap;
 
-public class Customers {
+public class Customers extends Order {
 
-    private int customerId;
+    private String customerId;
+    private String fname;
 
-    public Customers(int customerID) {
+    private HashMap<String, MenuItem>orderedItems;
+
+    public Customers(String customerID, String fname) {
+
         this.customerId=customerID;
+        this.fname = fname;
+
     }
 
 
     /**
      * Description:
      */
-    public void order(ArrayList<Item> orderedItems, Inventory inventory){
-        //TODO
+    public void order(MenuItem item){
+        orderedItems.put(customerId, item);
     }
 
 

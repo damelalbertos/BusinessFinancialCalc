@@ -14,6 +14,10 @@ public class Order {
         this.orderedItems = orderedItems;
         this.total = total;
     }
+
+    public Order() {
+    }
+
     public String getCustomerID(){ return customerID;}
 
     public double getTotal() { return total;}
