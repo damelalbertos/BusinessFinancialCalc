@@ -3,8 +3,7 @@ import org.junit.Test;
 import java.util.HashMap;
 
 import static junit.framework.TestCase.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertFalse;
-import static org.junit.jupiter.api.Assertions.assertTrue;
+import static org.junit.jupiter.api.Assertions.*;
 
 public class ItemTester {
 
@@ -30,6 +29,19 @@ public class ItemTester {
         assertTrue(Item.isAmountValid(2374.62));
     }
 
+    @Test
+    public void ItemConstructorTest(){
+        //Invalid Costs
+        assertThrows(IllegalArgumentException.class, () -> new Item("0006", 5, "Ketchup", -.01));
+        assertThrows(IllegalArgumentException.class, () -> new Item("0007", 5, "Mushrooms", -50.25));
+        assertThrows(IllegalArgumentException.class, () -> new Item("0008", 5, "Pickles", 25.312));
+        assertThrows(IllegalArgumentException.class, () -> new Item("0009", 5, "Mayonnaise", .566970));
+
+        //Invalid ItemCount
+        assertThrows(IllegalArgumentException.class, () -> new Item("0006", -1, "Ketchup", .01));
+        assertThrows(IllegalArgumentException.class, () -> new Item("0007", -10, "Mushrooms", 50));
+        assertThrows(IllegalArgumentException.class, () -> new Item("0008", -100, "Pickles", 25));
+    }
 }
 
 
