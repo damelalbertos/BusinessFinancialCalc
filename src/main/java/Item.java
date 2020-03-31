@@ -45,6 +45,7 @@ public class Item extends Inventory{
      * @return boolean (true if amount is positive and has two decimal points or less, otherwise false)
      */
     public static boolean isAmountValid(double amount) {
+        //Splits the amount to check for proper decimal places
         String[] splitter = Double.toString(amount).split("\\.");
         splitter[0].length();   // Before Decimal Count
         int decimalLength = splitter[1].length();
