@@ -12,6 +12,7 @@ public class InventoryTester {
     public void InventoryConstructorTest(){
         Inventory testInventory = new Inventory();
 
+        //test that the constructor successfully creates the inventory
         assertEquals(new HashMap<String, Item>(), testInventory.getInventory());
     }
 
@@ -29,10 +30,12 @@ public class InventoryTester {
         testInventory.addItem(testItem2);
         testInventory.addItem(testItem3);
         testInventory.addItem(testItem4);
+
+        //check if the item was successfully added to the inventory
         assertEquals(testInventory.getInventory().get("0001"), testItem1);
         assertEquals(testInventory.getInventory().get("0002"), testItem2);
 
-        //ID already exists
+        //test when the ID already exists
         assertThrows(ItemAlreadyExistsException.class, () -> testInventory.addItem(testItem5));
     }
 
@@ -48,10 +51,12 @@ public class InventoryTester {
 
         testInventory.removeItem("0001");
         testInventory.removeItem("0002");
+
+        //test that the item was successfully removed
         assertNull(testInventory.getItem("0001"));
         assertNull(testInventory.getItem("0002"));
 
-        //item does not exist
+        //test when that an item that does not exist can't be removed
         assertThrows(ItemDoesNotExistsException.class, () -> testInventory.removeItem("003"));
     }
 
@@ -63,6 +68,7 @@ public class InventoryTester {
         testInventory.addItem(testItem1);
         testInventory.addItem(testItem2);
 
+        //test that method is returning the cost of the specified item
         assertEquals(testInventory.getInventory().get("0001").getCost(), testInventory.getItemCost("0001"));
         assertEquals(testInventory.getInventory().get("0002").getCost(), testInventory.getItemCost("0002"));
 
@@ -85,10 +91,13 @@ public class InventoryTester {
         testInventory.addItem(testItem4);
 
 
+        //test that the method successfully adds to the inventory count
         assertEquals(10, testInventory.buyMoreProducts("0001", 5));
         assertEquals(15, testInventory.buyMoreProducts("0004", 10));
         assertEquals(105, testInventory.buyMoreProducts("0002", 100));
         assertEquals(9, testInventory.buyMoreProducts("0003", 4));
+
+        //test when the specified item does not exist
         assertThrows(ItemDoesNotExistsException.class, () ->testInventory.buyMoreProducts("0006", 10));
     }
 
@@ -126,12 +135,13 @@ public class InventoryTester {
         testInventory.addItem(testItem2);
 
 
+        //test that the methof returns the specified item's count
         assertEquals(20, testInventory.getItemCount("0001"));
         assertEquals(15, testInventory.getItemCount("0002"));
 
         testInventory.removeItem("0001");
 
-        //test that it throws exception
+        //test that it throws exception if item is not in inventory
         assertThrows(ItemDoesNotExistsException.class, () -> testInventory.getItemCount("0001"));
     }
 
@@ -148,10 +158,12 @@ public class InventoryTester {
         testInventory.addItem(testItem3);
         testInventory.addItem(testItem4);
 
+        //test that the method returns the amount of items in the inventory
         assertEquals(4, testInventory.getInventoryCount());
 
         testInventory.removeItem("0001");
 
+        //double check the inventoryCount check
         assertEquals(3, testInventory.getInventoryCount());
     }
 

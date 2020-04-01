@@ -11,16 +11,14 @@ public class Item extends Inventory{
     public Item(String itemId, int itemCount, String itemName, double cost){
         this.itemId = itemId;
         this.itemName = itemName;
-        if (itemCount < 0){
+        if (itemCount < 0){ // checks is item count is initialized as lest than 0
             throw new IllegalArgumentException("Item Count can't be a negative number");
         }
         else{this.itemCount = itemCount;}
-        if (!isAmountValid(cost)){
+        if (!isAmountValid(cost)){ //validates cost of item amount
             throw new IllegalArgumentException("Cost amount is invalid!");
         }
         else{this.cost = cost;}
-
-
     }
 
 
