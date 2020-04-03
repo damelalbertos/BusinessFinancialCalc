@@ -79,6 +79,7 @@ public class InventoryTester {
 
     @Test
     public void buyMoreItemsTest() throws ItemDoesNotExistsException, ItemAlreadyExistsException {
+        //make inventory
         Inventory testInventory = new Inventory();
 
         Item testItem1 = new Item("0001", 5, "Buns", 1.00);
