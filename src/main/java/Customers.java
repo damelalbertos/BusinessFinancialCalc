@@ -15,7 +15,7 @@ public class Customers extends MenuItem{
     //private ArrayList<Item> orderedItems;
     private double total;
 
-   private static List<String> orderList= new ArrayList<String>();
+
 
     private static Map<String, List<String>>orderedItems;
 
@@ -38,11 +38,14 @@ public class Customers extends MenuItem{
     public void order(MenuItem item){
 
 
+
+        List<String> orderList= orderedItems.get(orderId);
+        if(orderList == null){
+            orderList = new ArrayList<String>();
+            orderedItems.put(orderId, orderList);
+
+        }
         orderList.add(item.getMenuItemName());
-
-
-
-        orderedItems.put(orderId, orderList);
 
 
 
