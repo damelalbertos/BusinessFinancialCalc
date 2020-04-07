@@ -70,7 +70,9 @@ public class CustomersTest {
 
 
 
-        assertEquals("Fries" , customer1.getItems());
+        assertEquals("Burger, Fries" , customer1.getItems());
+        assertEquals("Burger, Burger, Burger" , customer2.getItems());
+        assertEquals("Fries" , customer3.getItems());
 
 
     }

@@ -3,6 +3,7 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.regex.Pattern;
 
 public class Customers extends MenuItem{
 
@@ -14,9 +15,9 @@ public class Customers extends MenuItem{
     //private ArrayList<Item> orderedItems;
     private double total;
 
-    private static List<String> orderList= new ArrayList<String>();
+   private static List<String> orderList= new ArrayList<String>();
 
-    private static Map<String, MenuItem>orderedItems;
+    private static Map<String, List<String>>orderedItems;
 
 
 
@@ -27,7 +28,6 @@ public class Customers extends MenuItem{
         this.customerId=customerId;
         this.fName = fName;
         orderedItems = new HashMap<>();
-        List<MenuItem> orderList= new ArrayList<MenuItem>();
 
     }
 
@@ -36,7 +36,13 @@ public class Customers extends MenuItem{
      * Description:
      */
     public void order(MenuItem item){
-        orderedItems.put(orderId, item);
+
+
+        orderList.add(item.getMenuItemName());
+
+
+
+        orderedItems.put(orderId, orderList);
 
 
 
@@ -58,21 +64,21 @@ public class Customers extends MenuItem{
 
     public String getItems(){
 
-//        for(orderedItems.Entry<String,List<String>>entry : orderedItems.entrySet() ){
-//            String key = entry.getKey();
 
-        for(String key : orderedItems.keySet()){
-            orderList.add(orderedItems.get(orderId).getMenuItemName());
 
-        }
+        for(String key : orderedItems.get(orderId)){
+            //String orderString  = orderList.toString();
 
-        for(int i =0; i < orderList.size(); i++){
-            return orderList.get(i);
+            String orderString = orderedItems.get(orderId).toString();
+
+            return orderString.substring(1, orderString.length()-1); //removes brackets);
 
         }
 
-    return null;
-    }
+        return null;
+        }
+
+
 
     public String getOrderId(){ return orderId;}
 

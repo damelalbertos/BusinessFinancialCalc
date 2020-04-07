@@ -13,15 +13,15 @@ public class Order {
 
 
 
-//    public Order(String orderID, String customerId,  double total) {
-//        this.orderID = orderID;
-//        this.customerId = customerId;
-//        //this.orderedItems = orderedItems;
-//        this.total = total;
-//        orderedItems = new HashMap<String, MenuItem>();
-//
-//    }
-//
+    public Order(String orderID, String customerId,  double total) {
+        this.orderID = orderID;
+        this.customerId = customerId;
+        //this.orderedItems = orderedItems;
+        this.total = total;
+        orderedItems = new HashMap<String, MenuItem>();
+
+    }
+
 //    public Order() {
 //    }
 
