@@ -16,7 +16,7 @@ public class InventoryTester {
     }
 
     @Test
-    public void addItemTest() throws ItemAlreadyExistsException {
+    public void addItemTest() throws ItemAlreadyExistsException, ItemDoesNotExistsException {
         Inventory testInventory = new Inventory();
 
         Item testItem1 = new Item("0001", 5, "Buns", 1.00);
@@ -37,13 +37,13 @@ public class InventoryTester {
         assertEquals(testInventory.getInventory().get("0002"), testItem2);
 
         //ID already exists
-        assertThrows(IllegalArgumentException.class, () -> testInventory.addItem(testItem5));
+        assertThrows(ItemAlreadyExistsException.class, () -> testInventory.addItem(testItem5));
 
         //Invalid costs
-        assertThrows(IllegalArgumentException.class, () -> testInventory.addItem(testItem6));
-        assertThrows(IllegalArgumentException.class, () -> testInventory.addItem(testItem7));
-        assertThrows(IllegalArgumentException.class, () -> testInventory.addItem(testItem8));
-        assertThrows(IllegalArgumentException.class, () -> testInventory.addItem(testItem9));
+        assertThrows(ItemDoesNotExistsException.class, () -> testInventory.addItem(testItem6));
+        assertThrows(ItemDoesNotExistsException.class, () -> testInventory.addItem(testItem7));
+        assertThrows(ItemDoesNotExistsException.class, () -> testInventory.addItem(testItem8));
+        assertThrows(ItemDoesNotExistsException.class, () -> testInventory.addItem(testItem9));
 
 
     }
@@ -64,7 +64,7 @@ public class InventoryTester {
         assertNull(testInventory.getItem("0002"));
 
         //item does not exist
-        assertThrows(IllegalArgumentException.class, () -> testInventory.removeItem("003"));
+        assertThrows(ItemDoesNotExistsException.class, () -> testInventory.removeItem("003"));
     }
 
     @Test
@@ -79,7 +79,7 @@ public class InventoryTester {
         assertEquals(testInventory.getInventory().get("0002").getCost(), testInventory.getItemCost("0002"));
 
         //item does not exist
-        assertThrows(IllegalArgumentException.class, () -> testInventory.getItemCost("003"));
+        assertThrows(ItemDoesNotExistsException.class, () -> testInventory.getItemCost("003"));
     }
 
 
@@ -101,7 +101,7 @@ public class InventoryTester {
         assertEquals(15, testInventory.buyMoreProducts("0004", 10));
         assertEquals(105, testInventory.buyMoreProducts("0002", 100));
         assertEquals(9, testInventory.buyMoreProducts("0003", 4));
-        assertThrows(IllegalArgumentException.class, () ->testInventory.buyMoreProducts("0006", 10));
+        assertThrows(ItemDoesNotExistsException.class, () ->testInventory.buyMoreProducts("0006", 10));
     }
 
     @Test

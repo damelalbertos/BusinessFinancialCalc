@@ -18,6 +18,9 @@ public class MenuItem extends Inventory{
         this.itemIngredients = new ArrayList<Item>();
     }
 
+    public MenuItem() {
+    }
+
 
     public String getMenuID(){ return this.menuItemId; }
 

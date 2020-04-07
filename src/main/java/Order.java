@@ -4,28 +4,44 @@ import java.util.HashMap;
 public class Order {
 
     private String orderID;
-    private String customerID;
-    private ArrayList<Item> orderedItems;
+    private String customerId;
+    //private ArrayList<Item> orderedItems;
     private double total;
+    private String fname;
+    private HashMap<String, MenuItem>orderedItems;
 
-    public Order(String orderID, String customerID, ArrayList<Item> orderedItems, double total) {
-        this.orderID = orderID;
-        this.customerID = customerID;
-        this.orderedItems = orderedItems;
-        this.total = total;
-    }
 
-    public Order() {
-    }
 
-    public String getCustomerID(){ return customerID;}
 
-    public double getTotal() { return total;}
+//    public Order(String orderID, String customerId,  double total) {
+//        this.orderID = orderID;
+//        this.customerId = customerId;
+//        //this.orderedItems = orderedItems;
+//        this.total = total;
+//        orderedItems = new HashMap<String, MenuItem>();
+//
+//    }
+//
+//    public Order() {
+//    }
 
-    public ArrayList<Item> getItems(){ return orderedItems;}
 
-    public String getOrderID(){ return orderID;}
 
+//
+//    public String getCustomerId(){ return customerId;}
+//
+//    public double getTotal() { return total;}
+//
+//    public MenuItem getItems(){
+//        return orderedItems.get(customerId);
+//    }
+//
+//    public String getOrderID(){ return orderID;}
+//
+//
+//    public void order(MenuItem item){
+//        orderedItems.put(customerId, item);
+//    }
 
 
 

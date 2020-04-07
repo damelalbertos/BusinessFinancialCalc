@@ -1,5 +1,6 @@
 import org.junit.jupiter.api.Test;
 
+import javax.management.OperationsException;
 import java.util.ArrayList;
 
 import static org.junit.jupiter.api.Assertions.*;
@@ -10,6 +11,8 @@ public class CustomersTest {
     public void orderTest(){
         BusinessTracker bus1 = new BusinessTracker("Business 1");
         Inventory testInventory = new Inventory();
+
+
 
         //create items (ingredients)
         Item testItem1 = new Item("0001", 5, "Buns", 1.00);
@@ -55,8 +58,19 @@ public class CustomersTest {
 
         customer3.order(fries);
 
-        assertEquals("Burger, Fries" , customer1.getItems());
+        assertEquals("001" , customer1.getOrderId());
+        assertEquals("004" , customer2.getOrderId());
+        assertEquals("006" , customer3.getOrderId());
 
+        assertEquals("Bob" , customer1.getCustomerName());
+        assertEquals("Billy" , customer2.getCustomerName());
+        assertEquals("Jim" , customer3.getCustomerName());
+
+
+
+
+
+        assertEquals("Fries" , customer1.getItems());
 
 
     }
