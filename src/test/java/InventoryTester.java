@@ -39,12 +39,6 @@ public class InventoryTester {
         //ID already exists
         assertThrows(ItemAlreadyExistsException.class, () -> testInventory.addItem(testItem5));
 
-        //Invalid costs
-        assertThrows(ItemDoesNotExistsException.class, () -> testInventory.addItem(testItem6));
-        assertThrows(ItemDoesNotExistsException.class, () -> testInventory.addItem(testItem7));
-        assertThrows(ItemDoesNotExistsException.class, () -> testInventory.addItem(testItem8));
-        assertThrows(ItemDoesNotExistsException.class, () -> testInventory.addItem(testItem9));
-
         //test when the ID already exists
         assertThrows(ItemAlreadyExistsException.class, () -> testInventory.addItem(testItem5));
     }
