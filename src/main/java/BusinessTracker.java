@@ -9,7 +9,7 @@ public class BusinessTracker {
     private int revenue;
     private int expenses;
     private String businessName;
-    private Map<String, Employees> employeesMap = new HashMap<>();
+    private Map<String, Employees> employeesMap;
     private HashMap<String, Item> inventory;
     private HashMap<String, Order> allOrders;
     private HashMap<String, MenuItem> menu;

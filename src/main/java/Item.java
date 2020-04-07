@@ -6,21 +6,19 @@ public class Item extends Inventory{
     private int itemCount;
     private double cost;
 
+    private int amount;
 
     public Item(String itemId, int itemCount, String itemName, double cost){
         this.itemId = itemId;
         this.itemName = itemName;
-        if (itemCount < 0){
+        if (itemCount < 0){ // checks is item count is initialized as lest than 0
             throw new IllegalArgumentException("Item Count can't be a negative number");
         }
         else{this.itemCount = itemCount;}
-        if (!isAmountValid(cost)){
+        if (!isAmountValid(cost)){ //validates cost of item amount
             throw new IllegalArgumentException("Cost amount is invalid!");
         }
         else{this.cost = cost;}
-
-
-
     }
 
 
@@ -33,6 +31,10 @@ public class Item extends Inventory{
     public double getCost() { return this.cost;}
 
     public String getItemID(){return this.itemId;}
+
+    public int addCount(int amount){
+        return itemCount+amount;
+    }
 
 
     /**
