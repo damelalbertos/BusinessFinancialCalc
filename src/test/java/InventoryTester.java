@@ -17,7 +17,7 @@ public class InventoryTester {
     }
 
     @Test
-    public void addItemTest() throws ItemAlreadyExistsException {
+    public void addItemTest() throws ItemAlreadyExistsException, ItemDoesNotExistsException {
         Inventory testInventory = new Inventory();
 
         Item testItem1 = new Item("0001", 5, "Buns", 1.00);
@@ -34,6 +34,16 @@ public class InventoryTester {
         //check if the item was successfully added to the inventory
         assertEquals(testInventory.getInventory().get("0001"), testItem1);
         assertEquals(testInventory.getInventory().get("0002"), testItem2);
+
+
+        //ID already exists
+        assertThrows(ItemAlreadyExistsException.class, () -> testInventory.addItem(testItem5));
+
+        //Invalid costs
+        assertThrows(ItemDoesNotExistsException.class, () -> testInventory.addItem(testItem6));
+        assertThrows(ItemDoesNotExistsException.class, () -> testInventory.addItem(testItem7));
+        assertThrows(ItemDoesNotExistsException.class, () -> testInventory.addItem(testItem8));
+        assertThrows(ItemDoesNotExistsException.class, () -> testInventory.addItem(testItem9));
 
         //test when the ID already exists
         assertThrows(ItemAlreadyExistsException.class, () -> testInventory.addItem(testItem5));
@@ -56,6 +66,7 @@ public class InventoryTester {
         assertNull(testInventory.getItem("0001"));
         assertNull(testInventory.getItem("0002"));
 
+        //item does not exist
         //test when that an item that does not exist can't be removed
         assertThrows(ItemDoesNotExistsException.class, () -> testInventory.removeItem("003"));
     }
