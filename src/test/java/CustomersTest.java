@@ -1,8 +1,6 @@
 import org.junit.jupiter.api.Test;
-
 import javax.management.OperationsException;
 import java.util.ArrayList;
-
 import static org.junit.jupiter.api.Assertions.*;
 
 public class CustomersTest {
@@ -29,15 +27,7 @@ public class CustomersTest {
 
         //create menuItem object (burger)
         MenuItem burger = new MenuItem("001", "Burger", 5.00);
-//        burger.setItemIngredients(burgerIngredients);
-
-
         MenuItem fries = new MenuItem("002", "Fries", 3.00);
-
-
-//
-//        ArrayList<Item> friesIngredients = new ArrayList<>();
-//        friesIngredients.add(testItem4);
 
 
         Customers customer1 = new Customers("001", "Bob");
@@ -77,6 +67,4 @@ public class CustomersTest {
 
     }
 
-    }
-
-
+  }

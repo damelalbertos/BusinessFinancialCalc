@@ -41,7 +41,7 @@ public class Inventory {
      * products of to increase amount of items
      */
     public int buyMoreProducts(String itemId, int amount) throws ItemDoesNotExistsException {
-        if(!inventory.containsKey(itemId)){
+        if(!inventory.containsKey(itemId)){ //check is the item exists in the inventory
             throw new ItemDoesNotExistsException("No Item to buy products for");
         }
         return inventory.get(itemId).addCount(amount);
@@ -54,7 +54,7 @@ public class Inventory {
      * @return Item object
      */
     public Item getItem(String itemId){
-        Item item = inventory.get(itemId);
+        Item item = inventory.get(itemId); //return item object from the inventory list
         return item;
     }
 
@@ -68,7 +68,7 @@ public class Inventory {
         } else if (!Item.isAmountValid(item.getCost())) {
             throw new IllegalArgumentException("Invalid cost");
         } else {
-            inventory.put(item.getItemID(), item);
+            inventory.put(item.getItemID(), item); //line that adds the item to the inventory list
         }
     }
 
@@ -77,10 +77,10 @@ public class Inventory {
      * Parameters: the id of the item to be removed
      */
     public void removeItem(String itemId) throws ItemDoesNotExistsException {
-        if (!inventory.containsKey(itemId)) {
+        if (!inventory.containsKey(itemId)) { //check if the item exists in the inventory
             throw new ItemDoesNotExistsException("ID doesn't exist in inventory");
         } else {
-            inventory.remove(itemId);
+            inventory.remove(itemId); //line that removes the item based on the itemId (key)
         }
 
     }
@@ -94,7 +94,7 @@ public class Inventory {
         if (!inventory.containsKey(itemId)) {
             throw new ItemDoesNotExistsException("ID doesn't exist in inventory");
         } else {
-            return inventory.get(itemId).getCost();
+            return inventory.get(itemId).getCost(); //line that get the item cost of the specified item
         }
     }
 
@@ -110,12 +110,12 @@ public class Inventory {
             throw new EmptyInventoryException("Inventory is Empty!;");
         }
 
-        // create string
+        // create string, iterate through the inventory
         Iterator<Map.Entry<String, Item>> it = inventory.entrySet().iterator();
         while (it.hasNext()){
             Map.Entry<String, Item> entry = (Map.Entry<String, Item>) it.next();
             String itemCountStr = Integer.toString(entry.getValue().getCount());
-            result.append(entry.getValue().getName() + ": " + itemCountStr + "\n");
+            result.append(entry.getValue().getName() + ": " + itemCountStr + "\n"); //each line is "<name>: <itemCount>", this is added to a string that is returned
         }
 
         return result.toString();
@@ -155,6 +155,7 @@ public class Inventory {
             throw new ItemDoesNotExistsException("Inventory Item does not exist!");
         }
 
+        //check if item count is 0
         if (inventory.get(itemId).getCount() == 0){
             throw new ItemCountAt0Exception("Cannot decrement Item, count is at 0");
         }
@@ -164,6 +165,6 @@ public class Inventory {
 
     public HashMap<String, Item> getInventory() {
         return inventory;
-    }
+    } //returns the inventory, allows other classes to access the inventory
 }
 
