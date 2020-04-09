@@ -6,6 +6,7 @@ import java.util.regex.Pattern;
 public class BusinessTracker {
 
 
+
     private int revenue;
     private int expenses;
     private String businessName;
@@ -20,11 +21,25 @@ public class BusinessTracker {
         this.inventory = new HashMap<String, Item>();
         this.allOrders = new HashMap<String, Order>();
         this.menu = new HashMap<String, MenuItem>();
+        this.revenue = 0;
     }
 
     public HashMap<String, MenuItem> getMenu() {
         return menu;
     }
+
+    public double getRevenue() {return this.revenue;}
+
+
+    /**
+     *
+     * @param orderRevenue - revenue for an order (menu price)
+     * @return total revenue
+     */
+    public double addToRevenue(double orderRevenue) {
+        return 0;
+    }
+
 
     /**
      * creates a menu item for the business and sets it in  menu hash map.
@@ -134,30 +149,7 @@ public class BusinessTracker {
 
     }
 
-    /**
-     * @param revenue
-     */
 
-    public void Revenue(int revenue) {
-        this.revenue = revenue;
-    }
-
-    /**
-     * @param expenses
-     */
-    public void Expenses(int expenses) {
-        this.expenses = expenses;
-    }
-
-
-    /**
-     *
-     */
-    public int getRevenue() {
-
-
-        return revenue;
-    }
 
     /**
      *
@@ -168,14 +160,6 @@ public class BusinessTracker {
         return expenses;
     }
 
-
-    /**
-     *
-     */
-    public void customerOrder() {
-
-
-    }
 
 
 }
