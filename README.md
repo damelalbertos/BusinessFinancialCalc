@@ -16,4 +16,4 @@ Sprint 1 Retrospective - https://docs.google.com/document/d/16v1AlBQxT2cGih_Q2H2
 Sprint 2 goal: Expenses, Revenue, Customer Transactions towards revenue, expenses towards employee pay and re-up inventory
 Begin UI only for things that have been thouroughly tested. 
 
-UI State Diagram: https://app.diagrams.net/#G1jCc-sG7rs0i7BVq2J_MEMJ4v1hENi2Mr
+UI State Diagram: https://drive.google.com/file/d/1jCc-sG7rs0i7BVq2J_MEMJ4v1hENi2Mr/view?usp=sharing
