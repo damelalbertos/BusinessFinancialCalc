@@ -65,6 +65,10 @@ public class CustomersTest {
         assertEquals("Fries" , customer3.getItems());
 
 
+        assertEquals(15 , customer2.getTotal());
+        assertEquals(3, customer3.getTotal());
+
+
     }
 
   }

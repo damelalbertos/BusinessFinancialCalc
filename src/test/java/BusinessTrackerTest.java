@@ -64,14 +64,14 @@ public class BusinessTrackerTest {
         customer1.order(menuItem1);
 
         //check that revenue gets summed correctly
-        assertEquals(bus1.getRevenue(), 7.00);
+        assertEquals(7, bus1.getRevenue());
 
         //two more orders occur
         customer1.order(menuItem2);
         customer3.order(menuItem2);
 
         //check that revenue gets summed correctly
-        assertEquals(bus1.getRevenue(), 10.00);
+        assertEquals(10, bus1.getRevenue());
 
         //four more orders occur
         customer2.order(menuItem1);
@@ -80,7 +80,7 @@ public class BusinessTrackerTest {
         customer2.order(menuItem2);
 
         //check that revenue gets summed correctly
-        assertEquals(bus1.getRevenue(), 32.50);
+        assertEquals(32.50, bus1.getRevenue());
 
 
     }
