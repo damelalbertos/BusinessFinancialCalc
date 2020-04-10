@@ -65,6 +65,8 @@ public class BusinessTrackerTest {
 
 
 
+
+        //bus1.addToRevenue(customer1.getTotal());
         //check that revenue gets summed correctly
         assertEquals(7, bus1.getRevenue());
 

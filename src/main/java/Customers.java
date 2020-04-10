@@ -71,6 +71,7 @@ public class Customers extends BusinessTracker {
         }
 
 
+        revenue += total;
 
         return total;
     }
