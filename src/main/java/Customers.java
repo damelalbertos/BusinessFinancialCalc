@@ -42,6 +42,7 @@ public class Customers extends BusinessTracker {
         orderList.add(item.getMenuItemName());
         totalList.add(item.getPrice());
 
+        revenue+= item.getPrice();
 
     }
 
@@ -71,7 +72,7 @@ public class Customers extends BusinessTracker {
         }
 
 
-        revenue += total;
+        //revenue += total;
 
         return total;
     }

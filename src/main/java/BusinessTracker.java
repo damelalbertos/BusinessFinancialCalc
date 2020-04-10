@@ -7,7 +7,7 @@ public class BusinessTracker {
 
 
 
-    protected static int revenue;
+    protected static double revenue;
     private int expenses;
     private String businessName;
     private Map<String, Employees> employeesMap;
@@ -39,9 +39,9 @@ public class BusinessTracker {
      * @param orderRevenue - revenue for an order (menu price)
      * @return total revenue
      */
-    public double addToRevenue(double orderRevenue) {
-        return revenue+=orderRevenue;
-    }
+//    public static void addToRevenue(double orderRevenue) {
+//        revenue+=orderRevenue;
+//    }
 
 
     /**

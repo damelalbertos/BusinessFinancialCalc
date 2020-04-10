@@ -42,7 +42,7 @@ public class BusinessTrackerTest {
         cokeIngredients.add(testItem5);
 
         //create the first menuItem object (burger) and set its ingredients
-        MenuItem menuItem1 = new MenuItem("1", "burger", 7.00);
+        MenuItem menuItem1 = new MenuItem("1", "burger", 7);
         menuItem1.setItemIngredients(burgerIngredients);
 
         //create the second menuItem object (coke) and set its ingredients
@@ -71,11 +71,11 @@ public class BusinessTrackerTest {
         assertEquals(7, bus1.getRevenue());
 
         //two more orders occur
-        customer1.order(menuItem2);
+        //customer1.order(menuItem2);
         customer3.order(menuItem2);
 
         //check that revenue gets summed correctly
-        assertEquals(10, bus1.getRevenue());
+        assertEquals(8.50, bus1.getRevenue());
 
         //four more orders occur
         customer2.order(menuItem1);
@@ -84,7 +84,7 @@ public class BusinessTrackerTest {
         customer2.order(menuItem2);
 
         //check that revenue gets summed correctly
-        assertEquals(32.50, bus1.getRevenue());
+        assertEquals(31, bus1.getRevenue());
 
 
     }
