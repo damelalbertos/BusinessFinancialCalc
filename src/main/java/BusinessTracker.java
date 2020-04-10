@@ -24,11 +24,14 @@ public class BusinessTracker {
         this.revenue = 0;
     }
 
+    public BusinessTracker() {
+    }
+
     public HashMap<String, MenuItem> getMenu() {
         return menu;
     }
 
-    public double getRevenue() {return this.revenue;}
+    public double getRevenue() {return revenue;}
 
 
     /**
@@ -37,7 +40,7 @@ public class BusinessTracker {
      * @return total revenue
      */
     public double addToRevenue(double orderRevenue) {
-        return 0;
+        return revenue+=orderRevenue;
     }
 
 

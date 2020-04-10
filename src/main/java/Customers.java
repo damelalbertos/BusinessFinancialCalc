@@ -1,11 +1,11 @@
-import java.awt.*;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
-import java.util.regex.Pattern;
 
-public class Customers extends MenuItem {
+
+public class Customers extends BusinessTracker {
+
 
     private String customerId;
     private String fName;
@@ -21,6 +21,8 @@ public class Customers extends MenuItem {
         this.fName = fName;
         orderedItems = new HashMap<>();
         orderedTotal = new HashMap<>();
+
+
     }
 
 
@@ -54,30 +56,19 @@ public class Customers extends MenuItem {
 
     public String getItems() {
         for (String key : orderedItems.get(orderId)) {
-            //String orderString  = orderList.toString();
             String orderString = orderedItems.get(orderId).toString();
-            String totalString = orderedTotal.get(orderId).toString();
             return orderString.substring(1, orderString.length() - 1); //removes brackets);
 
         }
-
         return null;
     }
 
 
     public double getTotal() {
-
-        double [] arr = new double[orderedTotal.get(orderId).size()];
         for (int i = 0; i < orderedTotal.get(orderId).size(); i++) {
-            String totalString = orderedTotal.get(orderId).toString().replace(",","").replace("[", "").replace("]", "");
-            //key = Double.valueOf(totalString);
-            arr[i]= Double.parseDouble(String.valueOf(totalString));
-            total += arr[i];
-
-
+            total += orderedTotal.get(orderId).get(i);
 
         }
-
 
 
 
@@ -87,5 +78,8 @@ public class Customers extends MenuItem {
     public String getOrderId() {
         return orderId;
     }
+
+
+
 
 }

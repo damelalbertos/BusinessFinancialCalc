@@ -63,6 +63,8 @@ public class BusinessTrackerTest {
         //customer orders burger
         customer1.order(menuItem1);
 
+
+
         //check that revenue gets summed correctly
         assertEquals(7, bus1.getRevenue());
 
