@@ -35,13 +35,12 @@ public class BusinessTracker {
 
 
     /**
-     *
-     * @param orderRevenue - revenue for an order (menu price)
-     * @return total revenue
+     * Adds order total to revenue, called in order function in Customers class
+     * @param orderPrice - price of customer order
      */
-//    public static void addToRevenue(double orderRevenue) {
-//        revenue+=orderRevenue;
-//    }
+    public static void addToRevenue(double orderPrice) {
+        revenue+=orderPrice;
+    }
 
 
     /**

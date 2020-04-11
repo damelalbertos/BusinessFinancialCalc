@@ -42,8 +42,8 @@ public class Customers extends BusinessTracker {
         orderList.add(item.getMenuItemName());
         totalList.add(item.getPrice());
 
-        revenue+= item.getPrice();
-
+        //make sure the order gets added to revenue
+        BusinessTracker.addToRevenue(item.getPrice());
     }
 
     public String getCustomerName() {

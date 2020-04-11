@@ -64,9 +64,6 @@ public class BusinessTrackerTest {
         customer1.order(menuItem1);
 
 
-
-
-        //bus1.addToRevenue(customer1.getTotal());
         //check that revenue gets summed correctly
         assertEquals(7, bus1.getRevenue());
 
@@ -86,7 +83,17 @@ public class BusinessTrackerTest {
         //check that revenue gets summed correctly
         assertEquals(31, bus1.getRevenue());
 
+        //more orders occur
+        customer1.order(menuItem1);
+        customer2.order(menuItem1);
+        customer1.order(menuItem1);
+        customer1.order(menuItem2);
+        customer2.order(menuItem1);
+        customer3.order(menuItem1);
 
+        //check that revenue gets summed correctly
+        assertEquals(67.50, bus1.getRevenue());
+        assertNotEquals(15,bus1.getRevenue());
     }
 
 
