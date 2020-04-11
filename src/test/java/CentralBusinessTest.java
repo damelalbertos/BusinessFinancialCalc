@@ -13,12 +13,12 @@ public class CentralBusinessTest {
         Inventory testInventory = new Inventory();
 
         //create items (ingredients)
-        Item testItem1 = new Item("0001", 5, "Buns", 1.00);
-        Item testItem2 = new Item("0002", 5, "Lettuce", 0.50);
-        Item testItem3 = new Item("0003", 5, "Tomatoes", 0.69);
-        Item testItem4 = new Item("0004", 5, "Burger Patty", 4.00);
-        Item testItem5 = new Item("0005", 5, "Coke", 1.00);
-        Item testItem6 = new Item("0006", 5, "Chicken", 4.00);
+        Item testItem1 = new Item("0001", 25, "Buns", 1.00);
+        Item testItem2 = new Item("0002", 25, "Lettuce", 0.50);
+        Item testItem3 = new Item("0003", 25, "Tomatoes", 0.69);
+        Item testItem4 = new Item("0004", 25, "Burger Patty", 4.00);
+        Item testItem5 = new Item("0005", 25, "Coke", 1.00);
+        Item testItem6 = new Item("0006", 25, "Chicken", 4.00);
 
         //add items to business's inventory system
         testInventory.addItem(testItem1);
