@@ -47,7 +47,7 @@ public class Customer{
         ingredients = item.getItemIngredients();
 
         //decrement each ingredient used in menu item
-        for (int x = 0; x<ingredients.size()-1; x++) {
+        for (int x = 0; x<ingredients.size(); x++) {
             Inventory.decrementItem(ingredients.get(x).getItemID());
         }
         ;
