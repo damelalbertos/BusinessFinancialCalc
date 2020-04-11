@@ -1,18 +1,15 @@
-import org.junit.jupiter.api.Test;
-
 import java.util.ArrayList;
-import java.util.HashMap;
 
 import static org.junit.jupiter.api.Assertions.*;
 
-public class BusinessTrackerTest {
+public class CentralBusinessTest {
 
 
     @org.junit.Test
-    public void addToRevenueTest() throws ItemAlreadyExistsException{
+    public void addToRevenueTest() throws ItemAlreadyExistsException, ItemCountAt0Exception, ItemDoesNotExistsException{
 
         //set up a business with an inventory
-        BusinessTracker bus1 = new BusinessTracker("Business 1");
+        CentralBusiness bus1 = new CentralBusiness("Business 1");
         Inventory testInventory = new Inventory();
 
         //create items (ingredients)
@@ -54,11 +51,11 @@ public class BusinessTrackerTest {
         bus1.addToMenu(menuItem2, testInventory.getInventory());
 
         //create 3 customers for ordering
-        Customers customer1 = new Customers("001", "Bob");
+        Customer customer1 = new Customer("001", "Bob");
 
-        Customers customer2 = new Customers("004", "Billy");
+        Customer customer2 = new Customer("004", "Billy");
 
-        Customers customer3 = new Customers("006", "Jim");
+        Customer customer3 = new Customer("006", "Jim");
 
         //customer orders burger
         customer1.order(menuItem1);
@@ -101,7 +98,7 @@ public class BusinessTrackerTest {
     public void addToMenuTest() throws ItemAlreadyExistsException {
 
         //set up a business with an inventory
-        BusinessTracker bus1 = new BusinessTracker("Business 1");
+        CentralBusiness bus1 = new CentralBusiness("Business 1");
         Inventory testInventory = new Inventory();
 
         //create items (ingredients)
@@ -193,13 +190,13 @@ public class BusinessTrackerTest {
     @org.junit.Test
     public void  calcPayTest(){
 
-        BusinessTracker business = new BusinessTracker("BusinessName");
+        CentralBusiness business = new CentralBusiness("BusinessName");
 
-        Employees employee1 = new Employees("1000", 11.25, 36);
-        Employees employee2 = new Employees("1001", 13.25, 50);
-        Employees employee3 = new Employees("1002", 10, 40);
-        Employees employee4 = new Employees("1003", 15.37, 27);
-        Employees employee5 = new Employees("1004", 14.26, 42);
+        Employee employee1 = new Employee("1000", 11.25, 36);
+        Employee employee2 = new Employee("1001", 13.25, 50);
+        Employee employee3 = new Employee("1002", 10, 40);
+        Employee employee4 = new Employee("1003", 15.37, 27);
+        Employee employee5 = new Employee("1004", 14.26, 42);
         business.addAccount("1000", employee1);
         business.addAccount("1001", employee2);
         business.addAccount("1002", employee3);
@@ -221,10 +218,10 @@ public class BusinessTrackerTest {
     @org.junit.Test
     public void calcOvertimePayTest(){
 
-        BusinessTracker business = new BusinessTracker("BusinessName");
+        CentralBusiness business = new CentralBusiness("BusinessName");
 
-        Employees employee = new Employees("100", 14.26, 42);
-        Employees employee2 = new Employees("1001", 13.25, 50);
+        Employee employee = new Employee("100", 14.26, 42);
+        Employee employee2 = new Employee("1001", 13.25, 50);
 
         business.addAccount("100", employee);
         business.addAccount("1001", employee2);

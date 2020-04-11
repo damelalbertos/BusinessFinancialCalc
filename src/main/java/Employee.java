@@ -1,18 +1,18 @@
-public class Employees {
+public class Employee {
 
     private String id;
     private double wage;
     private double hoursWorked;
 
-    protected BusinessTracker business;
+    protected CentralBusiness business;
 
 
-    public Employees(BusinessTracker business){
+    public Employee(CentralBusiness business){
         this.business = business;
     }
 
 
-    public Employees(String id, double wage, double hoursWorked){
+    public Employee(String id, double wage, double hoursWorked){
         this.id = id;
         this.wage = wage;
         this.hoursWorked = hoursWorked;
