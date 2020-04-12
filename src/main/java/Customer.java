@@ -4,94 +4,51 @@ import java.util.List;
 import java.util.Map;
 
 
-public class Customer{
+public class Customer {
 
 
-    private String customerId;
     private String fName;
-    private String orderId;
-    private double total;
-    private static Map<String, List<String>> orderedItems;
-    private static Map<String, List<Double>> orderedTotal;
+    private String lName;
 
-
-    public Customer(String orderId, String fName) {
-        this.orderId = orderId;
-        this.customerId = customerId;
+    public Customer(String fName, String lName) {
         this.fName = fName;
-        orderedItems = new HashMap<>();
-        orderedTotal = new HashMap<>();
-
-
+        this.lName = lName;
     }
 
+    public void order(ArrayList<MenuItem> orderItems, String customerID, String orderID) throws ItemDoesNotExistsException, ItemCountAt0Exception {
+        //create new order
+        Order newOrder = new Order(customerID, orderID, 0);
 
-    /**
-     * Description:
-     */
-    public void order(MenuItem item) throws ItemAlreadyExistsException, ItemDoesNotExistsException, ItemCountAt0Exception{
-        List<String> orderList = orderedItems.get(orderId);
-        List<Double> totalList = orderedTotal.get(orderId);
-        if (orderList == null || totalList == null) {
-            orderList = new ArrayList<String>();
-            totalList = new ArrayList<Double>();
-            orderedItems.put(orderId, orderList);
-            orderedTotal.put(orderId, totalList);
+        //set ordered items to array of customer's menu items they want
+        newOrder.setOrderedItems(orderItems);
 
+        //create list for ingredients
+        ArrayList<Item> ingredients = new ArrayList<>();
+
+        //create variable that is total of order
+        double tot = 0;
+
+        for (int x = 0; x < orderItems.size(); x++) {
+            //iterate through and calculate total price of all menu items
+            tot+=orderItems.get(x).getPrice();
+            //iterate through and add all the ingredients for the menu items to the array
+            ingredients.addAll(orderItems.get(x).getItemIngredients());
         }
-        orderList.add(item.getMenuItemName());
-        totalList.add(item.getPrice());
 
-        //get ingredients in ordered menu item
-        ArrayList<Item> ingredients;
-        ingredients = item.getItemIngredients();
+        //set total
+        newOrder.setTotal(tot);
 
-        //decrement each ingredient used in menu item
-        for (int x = 0; x<ingredients.size(); x++) {
-            Inventory.decrementItem(ingredients.get(x).getItemID());
+        //put new order in map of all orders
+        CentralBusiness.allOrders.put(orderID, newOrder);
+
+        //decrement each ingredient used in menu items in order
+        for (int y = 0; y<ingredients.size(); y++) {
+            Inventory.decrementItem(ingredients.get(y).getItemID());
         }
-        ;
 
         //make sure the order gets added to revenue
-        CentralBusiness.addToRevenue(item.getPrice());
+        CentralBusiness.addToRevenue(tot);
     }
-
-    public String getCustomerName() {
-        return fName;
-    }
-
-    public String getCustomerId() {
-        return customerId;
-    }
-
-
-    public String getItems() {
-        for (String key : orderedItems.get(orderId)) {
-            String orderString = orderedItems.get(orderId).toString();
-            return orderString.substring(1, orderString.length() - 1); //removes brackets);
-
-        }
-        return null;
-    }
-
-
-    public double getTotal() {
-        for (int i = 0; i < orderedTotal.get(orderId).size(); i++) {
-            total += orderedTotal.get(orderId).get(i);
-
-        }
-
-
-        //revenue += total;
-
-        return total;
-    }
-
-    public String getOrderId() {
-        return orderId;
-    }
-
-
-
 
 }
+

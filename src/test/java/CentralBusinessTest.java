@@ -4,7 +4,6 @@ import static org.junit.jupiter.api.Assertions.*;
 
 public class CentralBusinessTest {
 
-
     @org.junit.Test
     public void addToRevenueTest() throws ItemAlreadyExistsException, ItemCountAt0Exception, ItemDoesNotExistsException{
 
@@ -50,43 +49,53 @@ public class CentralBusinessTest {
         bus1.addToMenu(menuItem1, testInventory.getInventory());
         bus1.addToMenu(menuItem2, testInventory.getInventory());
 
-        //create 3 customers for ordering
-        Customer customer1 = new Customer("001", "Bob");
+        //create 4 customers for ordering
+        Customer customer1 = new Customer("Bobby", "Billy");
 
-        Customer customer2 = new Customer("004", "Billy");
+        Customer customer2 = new Customer("Beth", "Jackson");
 
-        Customer customer3 = new Customer("006", "Jim");
+        Customer customer3 = new Customer("Jimmy", "Jim");
 
-        //customer orders burger
-        customer1.order(menuItem1);
+        Customer customer4 = new Customer("Tim", "Smith");
 
+        //Order items
+        ArrayList<MenuItem> customer1Order = new ArrayList<>();
+        customer1Order.add(menuItem1);
+
+        //customer 1 orders
+        customer1.order(customer1Order, "0", "0");
 
         //check that revenue gets summed correctly
         assertEquals(7, bus1.getRevenue());
 
-        //two more orders occur
-        //customer1.order(menuItem2);
-        customer3.order(menuItem2);
+        //another orders occur
+        ArrayList<MenuItem> customer2Order = new ArrayList<>();
+        customer2Order.add(menuItem2);
+        customer2.order(customer2Order, "1", "1");
 
         //check that revenue gets summed correctly
         assertEquals(8.50, bus1.getRevenue());
 
-        //four more orders occur
-        customer2.order(menuItem1);
-        customer2.order(menuItem1);
-        customer2.order(menuItem1);
-        customer2.order(menuItem2);
+        //another orders occur
+        ArrayList<MenuItem> customer3Order = new ArrayList<>();
+        customer3Order.add(menuItem1);
+        customer3Order.add(menuItem1);
+        customer3Order.add(menuItem1);
+        customer3Order.add(menuItem2);
+        customer3.order(customer3Order, "2", "2");
 
         //check that revenue gets summed correctly
         assertEquals(31, bus1.getRevenue());
 
         //more orders occur
-        customer1.order(menuItem1);
-        customer2.order(menuItem1);
-        customer1.order(menuItem1);
-        customer1.order(menuItem2);
-        customer2.order(menuItem1);
-        customer3.order(menuItem1);
+        ArrayList<MenuItem> customer4Order = new ArrayList<>();
+        customer4Order.add(menuItem1);
+        customer4Order.add(menuItem1);
+        customer4Order.add(menuItem1);
+        customer4Order.add(menuItem2);
+        customer4Order.add(menuItem1);
+        customer4Order.add(menuItem1);
+        customer4.order(customer4Order, "3", "3");
 
         //check that revenue gets summed correctly
         assertEquals(67.50, bus1.getRevenue());

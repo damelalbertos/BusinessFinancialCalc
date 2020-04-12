@@ -1,7 +1,7 @@
 import org.junit.Test;
 import static org.junit.jupiter.api.Assertions.*;
 
-public class EmployeeTesters {
+public class EmployeeTest {
 
 
 

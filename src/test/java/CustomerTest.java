@@ -1,7 +1,8 @@
 import org.junit.jupiter.api.Test;
 
 import java.util.ArrayList;
-import static org.junit.jupiter.api.Assertions.*;
+
+import static org.junit.jupiter.api.Assertions.assertEquals;
 
 public class CustomerTest {
 
@@ -34,23 +35,29 @@ public class CustomerTest {
         ArrayList<Item> friesIngredients = new ArrayList<>();
         friesIngredients.add(testItem4);
 
-        //create menuItem object (burger)
+        //create menuItem object (burger and fries)
         MenuItem burger = new MenuItem("001", "Burger", 5.00);
         MenuItem fries = new MenuItem("002", "Fries", 3.00);
         burger.setItemIngredients(burgerIngredients);
         fries.setItemIngredients(friesIngredients);
 
 
-        Customer customer1 = new Customer("001", "Bob");
+        Customer customer1 = new Customer("Bob", "Bobby");
 
-        Customer customer2 = new Customer("004", "Billy");
+        Customer customer2 = new Customer("Bill", "Billy");
 
-        Customer customer3 = new Customer("006", "Jim");
+        Customer customer3 = new Customer("Jim", "Jimmy");
 
-        Customer customer4 = new Customer("007", "Game");
+        Customer customer4 = new Customer("Sarah", "Smith");
 
-        customer1.order(burger);
-        customer1.order(fries);
+        //Order items
+        ArrayList<MenuItem> customer1Order = new ArrayList<>();
+        customer1Order.add(burger);
+        customer1Order.add(fries);
+
+        //customer 1 orders
+        customer1.order(customer1Order, "0", "0");
+
 
         //check that items are getting decremented from inventory
         assertEquals(14, testItem1.getCount());
@@ -58,16 +65,31 @@ public class CustomerTest {
         assertEquals(14, testItem3.getCount());
         assertEquals(14, testItem4.getCount());
 
-        customer2.order(burger);
-        customer2.order(burger);
-        customer2.order(burger);
+        //customer 2 order items
+        ArrayList<MenuItem> customer2Order = new ArrayList<>();
+        customer2Order.add(burger);
+        customer2Order.add(burger);
+        customer2Order.add(burger);
 
-        customer3.order(fries);
+        //customer 2 orders
+        customer2.order(customer2Order, "1", "1");
 
-        customer4.order(burger);
-        customer4.order(fries);
-        customer4.order(fries);
-        customer4.order(burger);
+        //customer 3 order items
+        ArrayList<MenuItem> customer3Order = new ArrayList<>();
+        customer3Order.add(fries);
+
+        //customer 3 order
+        customer3.order(customer3Order, "2", "2");
+
+        //customer 4 order items
+        ArrayList<MenuItem> customer4Order = new ArrayList<>();
+        customer4Order.add(burger);
+        customer4Order.add(burger);
+        customer4Order.add(fries);
+        customer4Order.add(fries);
+
+        //customer 4 order
+        customer4.order(customer4Order, "3", "3");
 
         //check that items are getting decremented from inventory
         assertEquals(9, testItem1.getCount());
@@ -75,34 +97,22 @@ public class CustomerTest {
         assertEquals(9, testItem3.getCount());
         assertEquals(11, testItem4.getCount());
 
-        assertEquals("001" , customer1.getOrderId());
-        assertEquals("004" , customer2.getOrderId());
-        assertEquals("006" , customer3.getOrderId());
+        //check order ID's
+        assertEquals("0" , bus1.allOrders.get("0").getOrderID());
+        assertEquals("1" ,bus1.allOrders.get("1").getOrderID());
+        assertEquals("2" , bus1.allOrders.get("2").getOrderID());
+        assertEquals("3" , bus1.allOrders.get("3").getOrderID());
 
-        assertEquals("Bob" , customer1.getCustomerName());
-        assertEquals("Billy" , customer2.getCustomerName());
-        assertEquals("Jim" , customer3.getCustomerName());
+        //check items are correct
+        assertEquals("Burger, Fries" , bus1.allOrders.get("0").getItemNames());
+        assertEquals("Burger, Burger, Burger" ,  bus1.allOrders.get("1").getItemNames());
+        assertEquals("Fries" ,  bus1.allOrders.get("2").getItemNames());
+        assertEquals("Burger, Burger, Fries, Fries" ,  bus1.allOrders.get("3").getItemNames());
 
-
-
-
-
-        assertEquals("Burger, Fries" , customer1.getItems());
-        assertEquals("Burger, Burger, Burger" , customer2.getItems());
-        assertEquals("Fries" , customer3.getItems());
-        assertEquals("Burger, Fries, Fries, Burger" , customer4.getItems());
-
-
-        assertEquals(8, customer1.getTotal());
-        assertEquals(15 , customer2.getTotal());
-        assertEquals(3, customer3.getTotal());
-        assertEquals(16, customer4.getTotal());
-
-
-
-
-
-
+        //check totals are correct
+        assertEquals(8, bus1.allOrders.get("0").getTotal());
+        assertEquals(15 , bus1.allOrders.get("1").getTotal());
+        assertEquals(3, bus1.allOrders.get("2").getTotal());
+        assertEquals(16, bus1.allOrders.get("3").getTotal());
     }
-
-  }
+}
