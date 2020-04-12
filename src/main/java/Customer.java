@@ -4,7 +4,7 @@ import java.util.List;
 import java.util.Map;
 
 
-public class Customers extends BusinessTracker {
+public class Customer{
 
 
     private String customerId;
@@ -15,7 +15,7 @@ public class Customers extends BusinessTracker {
     private static Map<String, List<Double>> orderedTotal;
 
 
-    public Customers(String orderId, String fName) {
+    public Customer(String orderId, String fName) {
         this.orderId = orderId;
         this.customerId = customerId;
         this.fName = fName;
@@ -29,7 +29,7 @@ public class Customers extends BusinessTracker {
     /**
      * Description:
      */
-    public void order(MenuItem item) {
+    public void order(MenuItem item) throws ItemAlreadyExistsException, ItemDoesNotExistsException, ItemCountAt0Exception{
         List<String> orderList = orderedItems.get(orderId);
         List<Double> totalList = orderedTotal.get(orderId);
         if (orderList == null || totalList == null) {
@@ -42,8 +42,18 @@ public class Customers extends BusinessTracker {
         orderList.add(item.getMenuItemName());
         totalList.add(item.getPrice());
 
+        //get ingredients in ordered menu item
+        ArrayList<Item> ingredients;
+        ingredients = item.getItemIngredients();
+
+        //decrement each ingredient used in menu item
+        for (int x = 0; x<ingredients.size(); x++) {
+            Inventory.decrementItem(ingredients.get(x).getItemID());
+        }
+        ;
+
         //make sure the order gets added to revenue
-        BusinessTracker.addToRevenue(item.getPrice());
+        CentralBusiness.addToRevenue(item.getPrice());
     }
 
     public String getCustomerName() {

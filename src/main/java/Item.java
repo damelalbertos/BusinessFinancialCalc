@@ -1,4 +1,4 @@
-public class Item extends Inventory{
+public class Item{
 
 
     private String itemId;

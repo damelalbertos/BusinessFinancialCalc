@@ -1,48 +1,62 @@
 import org.junit.jupiter.api.Test;
-import javax.management.OperationsException;
+
 import java.util.ArrayList;
 import static org.junit.jupiter.api.Assertions.*;
 
-public class CustomersTest {
+public class CustomerTest {
 
     @Test
-    public void orderTest(){
-        BusinessTracker bus1 = new BusinessTracker("Business 1");
+    public void orderTest() throws ItemCountAt0Exception, ItemDoesNotExistsException, ItemAlreadyExistsException{
+        CentralBusiness bus1 = new CentralBusiness("Business 1");
         Inventory testInventory = new Inventory();
 
 
 
         //create items (ingredients)
-        Item testItem1 = new Item("0001", 5, "Buns", 1.00);
-        Item testItem2 = new Item("0002", 5, "Lettuce", 0.50);
-        Item testItem3 = new Item("0003", 5, "Meat", 2.69);
-        Item testItem4 = new Item("0004", 5, "Potatoes", 1.50);
-        Item testItem5 = new Item("0005", 5, "Cheese", .50);
+        Item testItem1 = new Item("0001", 15, "Buns", 1.00);
+        Item testItem2 = new Item("0002", 15, "Lettuce", 0.50);
+        Item testItem3 = new Item("0003", 15, "Meat", 2.69);
+        Item testItem4 = new Item("0004", 15, "Potatoes", 1.50);
 
+        //add items to inventory
+        testInventory.addItem(testItem1);
+        testInventory.addItem(testItem2);
+        testInventory.addItem(testItem3);
+        testInventory.addItem(testItem4);
 
+        //add burger ingredients
         ArrayList<Item> burgerIngredients = new ArrayList<>();
         burgerIngredients.add(testItem1);
         burgerIngredients.add(testItem2);
         burgerIngredients.add(testItem3);
 
+        //add fries ingredients
+        ArrayList<Item> friesIngredients = new ArrayList<>();
+        friesIngredients.add(testItem4);
+
         //create menuItem object (burger)
         MenuItem burger = new MenuItem("001", "Burger", 5.00);
         MenuItem fries = new MenuItem("002", "Fries", 3.00);
+        burger.setItemIngredients(burgerIngredients);
+        fries.setItemIngredients(friesIngredients);
 
 
-        Customers customer1 = new Customers("001", "Bob");
+        Customer customer1 = new Customer("001", "Bob");
 
-        Customers customer2 = new Customers("004", "Billy");
+        Customer customer2 = new Customer("004", "Billy");
 
-        Customers customer3 = new Customers("006", "Jim");
+        Customer customer3 = new Customer("006", "Jim");
 
-        Customers customer4 = new Customers("007", "Game");
-
+        Customer customer4 = new Customer("007", "Game");
 
         customer1.order(burger);
         customer1.order(fries);
 
-
+        //check that items are getting decremented from inventory
+        assertEquals(14, testItem1.getCount());
+        assertEquals(14, testItem2.getCount());
+        assertEquals(14, testItem3.getCount());
+        assertEquals(14, testItem4.getCount());
 
         customer2.order(burger);
         customer2.order(burger);
@@ -54,6 +68,12 @@ public class CustomersTest {
         customer4.order(fries);
         customer4.order(fries);
         customer4.order(burger);
+
+        //check that items are getting decremented from inventory
+        assertEquals(9, testItem1.getCount());
+        assertEquals(9, testItem2.getCount());
+        assertEquals(9, testItem3.getCount());
+        assertEquals(11, testItem4.getCount());
 
         assertEquals("001" , customer1.getOrderId());
         assertEquals("004" , customer2.getOrderId());

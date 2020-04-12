@@ -17,11 +17,11 @@ public class EmployeeTesters {
 
     @Test
     public void getHoursWorked(){
-        BusinessTracker business = new BusinessTracker("BusinessName");
-        Employees employee1 = new Employees("1000", 11.25, 36);
-        Employees employee2 = new Employees("1001", 13.25, 50);
-        Employees employee3 = new Employees("1002", 10, 40);
-        Employees employee4 = new Employees("1002", 20, 40);
+        CentralBusiness business = new CentralBusiness("BusinessName");
+        Employee employee1 = new Employee("1000", 11.25, 36);
+        Employee employee2 = new Employee("1001", 13.25, 50);
+        Employee employee3 = new Employee("1002", 10, 40);
+        Employee employee4 = new Employee("1002", 20, 40);
 
 
         business.addAccount("1000", employee1);
