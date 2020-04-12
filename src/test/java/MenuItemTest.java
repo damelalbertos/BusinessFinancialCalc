@@ -1,18 +1,17 @@
 import org.junit.Test;
 
 import java.util.ArrayList;
-import java.util.HashMap;
 
 import static junit.framework.TestCase.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
-public class MenuItemTester {
+public class MenuItemTest {
 
     @Test
     public void checkIngredientsExistTest() throws ItemAlreadyExistsException {
         //set up a business with inventory
-        BusinessTracker bus1 = new BusinessTracker("Business 1");
+        CentralBusiness bus1 = new CentralBusiness("Business 1");
         Inventory testInventory = new Inventory();
 
         //create items (ingredients)

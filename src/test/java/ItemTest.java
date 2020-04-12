@@ -5,7 +5,7 @@ import java.util.HashMap;
 import static junit.framework.TestCase.assertEquals;
 import static org.junit.jupiter.api.Assertions.*;
 
-public class ItemTester {
+public class ItemTest {
 
     @Test
     public void isAmountValidTest(){

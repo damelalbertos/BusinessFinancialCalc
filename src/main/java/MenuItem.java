@@ -3,7 +3,7 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 
-public class MenuItem extends Inventory{
+public class MenuItem{
 
     private String menuItemId;
     private String menuItemName;

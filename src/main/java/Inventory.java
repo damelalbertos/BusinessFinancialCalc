@@ -29,7 +29,7 @@ class ItemAlreadyExistsException extends Exception{
 
 public class Inventory {
 
-    private HashMap<String, Item> inventory;
+    protected static HashMap<String, Item> inventory;
 
 
     public Inventory(){
@@ -149,7 +149,7 @@ public class Inventory {
      * Description: decrement amount value for given item
      * parameters: String itemId
      */
-    public void decrementItem(String itemId) throws ItemDoesNotExistsException, ItemCountAt0Exception {
+    public static void decrementItem(String itemId) throws ItemDoesNotExistsException, ItemCountAt0Exception {
         //check if item exists in inventory, throw exception if not
         if (!inventory.containsKey(itemId)){
             throw new ItemDoesNotExistsException("Inventory Item does not exist!");

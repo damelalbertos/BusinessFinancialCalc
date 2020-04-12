@@ -1,27 +1,23 @@
-import org.junit.jupiter.api.Test;
-
 import java.util.ArrayList;
-import java.util.HashMap;
 
 import static org.junit.jupiter.api.Assertions.*;
 
-public class BusinessTrackerTest {
-
+public class CentralBusinessTest {
 
     @org.junit.Test
-    public void addToRevenueTest() throws ItemAlreadyExistsException{
+    public void addToRevenueTest() throws ItemAlreadyExistsException, ItemCountAt0Exception, ItemDoesNotExistsException{
 
         //set up a business with an inventory
-        BusinessTracker bus1 = new BusinessTracker("Business 1");
+        CentralBusiness bus1 = new CentralBusiness("Business 1");
         Inventory testInventory = new Inventory();
 
         //create items (ingredients)
-        Item testItem1 = new Item("0001", 5, "Buns", 1.00);
-        Item testItem2 = new Item("0002", 5, "Lettuce", 0.50);
-        Item testItem3 = new Item("0003", 5, "Tomatoes", 0.69);
-        Item testItem4 = new Item("0004", 5, "Burger Patty", 4.00);
-        Item testItem5 = new Item("0005", 5, "Coke", 1.00);
-        Item testItem6 = new Item("0006", 5, "Chicken", 4.00);
+        Item testItem1 = new Item("0001", 25, "Buns", 1.00);
+        Item testItem2 = new Item("0002", 25, "Lettuce", 0.50);
+        Item testItem3 = new Item("0003", 25, "Tomatoes", 0.69);
+        Item testItem4 = new Item("0004", 25, "Burger Patty", 4.00);
+        Item testItem5 = new Item("0005", 25, "Coke", 1.00);
+        Item testItem6 = new Item("0006", 25, "Chicken", 4.00);
 
         //add items to business's inventory system
         testInventory.addItem(testItem1);
@@ -53,43 +49,53 @@ public class BusinessTrackerTest {
         bus1.addToMenu(menuItem1, testInventory.getInventory());
         bus1.addToMenu(menuItem2, testInventory.getInventory());
 
-        //create 3 customers for ordering
-        Customers customer1 = new Customers("001", "Bob");
+        //create 4 customers for ordering
+        Customer customer1 = new Customer("Bobby", "Billy");
 
-        Customers customer2 = new Customers("004", "Billy");
+        Customer customer2 = new Customer("Beth", "Jackson");
 
-        Customers customer3 = new Customers("006", "Jim");
+        Customer customer3 = new Customer("Jimmy", "Jim");
 
-        //customer orders burger
-        customer1.order(menuItem1);
+        Customer customer4 = new Customer("Tim", "Smith");
 
+        //Order items
+        ArrayList<MenuItem> customer1Order = new ArrayList<>();
+        customer1Order.add(menuItem1);
+
+        //customer 1 orders
+        customer1.order(customer1Order, "0", "0");
 
         //check that revenue gets summed correctly
         assertEquals(7, bus1.getRevenue());
 
-        //two more orders occur
-        //customer1.order(menuItem2);
-        customer3.order(menuItem2);
+        //another orders occur
+        ArrayList<MenuItem> customer2Order = new ArrayList<>();
+        customer2Order.add(menuItem2);
+        customer2.order(customer2Order, "1", "1");
 
         //check that revenue gets summed correctly
         assertEquals(8.50, bus1.getRevenue());
 
-        //four more orders occur
-        customer2.order(menuItem1);
-        customer2.order(menuItem1);
-        customer2.order(menuItem1);
-        customer2.order(menuItem2);
+        //another orders occur
+        ArrayList<MenuItem> customer3Order = new ArrayList<>();
+        customer3Order.add(menuItem1);
+        customer3Order.add(menuItem1);
+        customer3Order.add(menuItem1);
+        customer3Order.add(menuItem2);
+        customer3.order(customer3Order, "2", "2");
 
         //check that revenue gets summed correctly
         assertEquals(31, bus1.getRevenue());
 
         //more orders occur
-        customer1.order(menuItem1);
-        customer2.order(menuItem1);
-        customer1.order(menuItem1);
-        customer1.order(menuItem2);
-        customer2.order(menuItem1);
-        customer3.order(menuItem1);
+        ArrayList<MenuItem> customer4Order = new ArrayList<>();
+        customer4Order.add(menuItem1);
+        customer4Order.add(menuItem1);
+        customer4Order.add(menuItem1);
+        customer4Order.add(menuItem2);
+        customer4Order.add(menuItem1);
+        customer4Order.add(menuItem1);
+        customer4.order(customer4Order, "3", "3");
 
         //check that revenue gets summed correctly
         assertEquals(67.50, bus1.getRevenue());
@@ -101,7 +107,7 @@ public class BusinessTrackerTest {
     public void addToMenuTest() throws ItemAlreadyExistsException {
 
         //set up a business with an inventory
-        BusinessTracker bus1 = new BusinessTracker("Business 1");
+        CentralBusiness bus1 = new CentralBusiness("Business 1");
         Inventory testInventory = new Inventory();
 
         //create items (ingredients)
@@ -193,13 +199,13 @@ public class BusinessTrackerTest {
     @org.junit.Test
     public void  calcPayTest(){
 
-        BusinessTracker business = new BusinessTracker("BusinessName");
+        CentralBusiness business = new CentralBusiness("BusinessName");
 
-        Employees employee1 = new Employees("1000", 11.25, 36);
-        Employees employee2 = new Employees("1001", 13.25, 50);
-        Employees employee3 = new Employees("1002", 10, 40);
-        Employees employee4 = new Employees("1003", 15.37, 27);
-        Employees employee5 = new Employees("1004", 14.26, 42);
+        Employee employee1 = new Employee("1000", 11.25, 36);
+        Employee employee2 = new Employee("1001", 13.25, 50);
+        Employee employee3 = new Employee("1002", 10, 40);
+        Employee employee4 = new Employee("1003", 15.37, 27);
+        Employee employee5 = new Employee("1004", 14.26, 42);
         business.addAccount("1000", employee1);
         business.addAccount("1001", employee2);
         business.addAccount("1002", employee3);
@@ -221,10 +227,10 @@ public class BusinessTrackerTest {
     @org.junit.Test
     public void calcOvertimePayTest(){
 
-        BusinessTracker business = new BusinessTracker("BusinessName");
+        CentralBusiness business = new CentralBusiness("BusinessName");
 
-        Employees employee = new Employees("100", 14.26, 42);
-        Employees employee2 = new Employees("1001", 13.25, 50);
+        Employee employee = new Employee("100", 14.26, 42);
+        Employee employee2 = new Employee("1001", 13.25, 50);
 
         business.addAccount("100", employee);
         business.addAccount("1001", employee2);

@@ -1,30 +1,27 @@
 import java.text.DecimalFormat;
 import java.util.HashMap;
 import java.util.Map;
-import java.util.regex.Pattern;
 
-public class BusinessTracker {
-
-
+public class CentralBusiness {
 
     protected static double revenue;
     private int expenses;
     private String businessName;
-    private Map<String, Employees> employeesMap;
+    private Map<String, Employee> employeesMap;
     private HashMap<String, Item> inventory;
-    private HashMap<String, Order> allOrders;
+    protected static HashMap<String, Order> allOrders;
     private HashMap<String, MenuItem> menu;
 
-    public BusinessTracker(String businessName) {
+    public CentralBusiness(String businessName) {
         this.businessName = businessName;
-        this.employeesMap = new HashMap<String, Employees>();
+        this.employeesMap = new HashMap<String, Employee>();
         this.inventory = new HashMap<String, Item>();
         this.allOrders = new HashMap<String, Order>();
         this.menu = new HashMap<String, MenuItem>();
         this.revenue = 0;
     }
 
-    public BusinessTracker() {
+    public CentralBusiness() {
     }
 
     public HashMap<String, MenuItem> getMenu() {
@@ -35,7 +32,7 @@ public class BusinessTracker {
 
 
     /**
-     * Adds order total to revenue, called in order function in Customers class
+     * Adds order total to revenue, called in order function in Customer class
      * @param orderPrice - price of customer order
      */
     public static void addToRevenue(double orderPrice) {
@@ -70,7 +67,7 @@ public class BusinessTracker {
     }
 
 
-    public Employees getEmployee(String id) throws IllegalArgumentException {
+    public Employee getEmployee(String id) throws IllegalArgumentException {
         if (!employeesMap.containsKey(id)) {
             throw new IllegalArgumentException("Employee with id " + id + " doesn't exists");
         }
@@ -86,7 +83,7 @@ public class BusinessTracker {
 
     }
 
-    public void removeEmployee(String id, Employees employee) {
+    public void removeEmployee(String id, Employee employee) {
         if (!employeesMap.containsKey(id)) {
             throw new IllegalArgumentException("Employee does not exist");
         }
@@ -94,7 +91,7 @@ public class BusinessTracker {
     }
 
 
-    public void addAccount(String id, Employees employees) {
+    public void addAccount(String id, Employee employees) {
         if (employeesMap.containsKey(id)) {
             throw new IllegalArgumentException("Employee ID already exists.");
         } else {
