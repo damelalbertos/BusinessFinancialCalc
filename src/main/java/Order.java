@@ -5,15 +5,11 @@ public class Order {
 
     protected String orderID;
     protected String customerID;
-    private ArrayList<MenuItem> orderedItems;
-    private double total;
+    protected ArrayList<MenuItem> orderedItems;
+    protected double total;
 
 
-
-
-
-
-    public Order(String orderID, String customerID,  double total) {
+    public Order(String orderID, String customerID, double total) {
         this.orderID = orderID;
         this.customerID = customerID;
         this.total = 0;
@@ -23,14 +19,15 @@ public class Order {
 
     /**
      * Increment the order ID for a new order
+     * (Not yet applied to ordering)
      */
-    public void incrementOrderID() {
+    public String incrementOrderID() {
         //if no ID is set
         if (this.orderID.equals("")) {
             this.orderID = "0";
         } else {
             //get int value of the string
-            int val  = Integer.parseInt(this.orderID)+1;
+            int val = Integer.parseInt(this.orderID) + 1;
             //reset ID's if over 999 or not yet set
             if (val > 999 || this.orderID.equals("")) {
                 this.orderID = "0";
@@ -39,18 +36,20 @@ public class Order {
                 this.orderID = "" + val;
             }
         }
+        return this.orderID;
     }
 
     /**
      * Increment the customer ID for a new order
+     * (Not yet applied to ordering)
      */
-    public void incrementCustomerID() {
+    public String incrementCustomerID() {
         //if no ID is set
         if (this.customerID.equals("")) {
             this.customerID = "0";
         } else {
             //get int value of the string
-            int val  = Integer.parseInt(this.customerID)+1;
+            int val = Integer.parseInt(this.customerID) + 1;
             //reset ID's if over 999 or not yet set
             if (val > 999) {
                 this.customerID = "0";
@@ -59,39 +58,43 @@ public class Order {
                 this.customerID = "" + val;
             }
         }
+        return this.customerID;
     }
 
 
+    public String getCustomerID() {
+        return customerID;
+    }
 
-    public String getCustomerID(){ return customerID;}
+    public double getTotal() {
+        return total;
+    }
 
-    public double getTotal() { return total;}
-
-    public ArrayList getItems(){
+    public ArrayList<MenuItem> getItems() {
         return orderedItems;
     }
 
-    public String getOrderID(){ return orderID;}
-
-    public void order(ArrayList<MenuItem> orderItems) {
-        orderedItems = orderItems;
-        for (int x = 0; x < orderItems.size(); x++) {
-            total+=orderItems.get(0).getPrice();
+    public String getItemNames() {
+        String str = "";
+        for (int x = 0; x < orderedItems.size(); x++) {
+            str+=orderedItems.get(x).getMenuItemName() + ", ";
         }
+        return str.substring(0, str.length()-2);
+    }
 
-        Order order = new Order(orderID, customerID, total);
-        CentralBusiness.allOrders.put(orderID, order);
-
-
-
-
-
-
+    public String getOrderID() {
+        return orderID;
     }
 
 
+    public void setTotal(double total) {
+        this.total = total;
+    }
 
-
-
-
+    public void setOrderedItems(ArrayList<MenuItem> orderItems) {
+        this.orderedItems = orderItems;
+    }
 }
+
+
+
