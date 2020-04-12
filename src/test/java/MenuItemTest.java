@@ -6,7 +6,7 @@ import static junit.framework.TestCase.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
-public class MenuItemTester {
+public class MenuItemTest {
 
     @Test
     public void checkIngredientsExistTest() throws ItemAlreadyExistsException {

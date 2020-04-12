@@ -9,7 +9,7 @@ public class CentralBusiness {
     private String businessName;
     private Map<String, Employee> employeesMap;
     private HashMap<String, Item> inventory;
-    private HashMap<String, Order> allOrders;
+    protected static HashMap<String, Order> allOrders;
     private HashMap<String, MenuItem> menu;
 
     public CentralBusiness(String businessName) {

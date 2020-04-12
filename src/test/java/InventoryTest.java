@@ -6,7 +6,7 @@ import static junit.framework.TestCase.assertEquals;
 import static junit.framework.TestCase.assertNull;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 
-public class InventoryTester {
+public class InventoryTest {
 
     @Test
     public void InventoryConstructorTest(){
