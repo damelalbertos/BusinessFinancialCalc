@@ -36,6 +36,8 @@ public class CustomersTest {
 
         Customers customer3 = new Customers("006", "Jim");
 
+        Customers customer4 = new Customers("007", "Game");
+
 
         customer1.order(burger);
         customer1.order(fries);
@@ -47,6 +49,11 @@ public class CustomersTest {
         customer2.order(burger);
 
         customer3.order(fries);
+
+        customer4.order(burger);
+        customer4.order(fries);
+        customer4.order(fries);
+        customer4.order(burger);
 
         assertEquals("001" , customer1.getOrderId());
         assertEquals("004" , customer2.getOrderId());
@@ -63,6 +70,17 @@ public class CustomersTest {
         assertEquals("Burger, Fries" , customer1.getItems());
         assertEquals("Burger, Burger, Burger" , customer2.getItems());
         assertEquals("Fries" , customer3.getItems());
+        assertEquals("Burger, Fries, Fries, Burger" , customer4.getItems());
+
+
+        assertEquals(8, customer1.getTotal());
+        assertEquals(15 , customer2.getTotal());
+        assertEquals(3, customer3.getTotal());
+        assertEquals(16, customer4.getTotal());
+
+
+
+
 
 
     }
