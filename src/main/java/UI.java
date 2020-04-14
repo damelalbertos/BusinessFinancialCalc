@@ -47,7 +47,9 @@ public class UI {
 
                 if (scan.next().equals("order")) {
                     System.out.println("Enter first name and last name");
-                    new Customer(scan.next(), scan.next());
+                    Customer customer = new Customer(scan.next(), scan.next());
+
+
                     //new Order(random number 1-1000, random number 1-1000, total = 0);
 
                 }
