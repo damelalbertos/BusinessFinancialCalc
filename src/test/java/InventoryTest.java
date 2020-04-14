@@ -83,31 +83,6 @@ public class InventoryTest {
 
 
     @Test
-    public void buyMoreItemsTest() throws ItemDoesNotExistsException, ItemAlreadyExistsException {
-        //make inventory
-        Inventory testInventory = new Inventory();
-
-        Item testItem1 = new Item("0001", 5, "Buns", 1.00);
-        Item testItem2 = new Item("0002", 5, "Lettuce", 0.50);
-        Item testItem3 = new Item("0003", 5, "Tomatoes", 0.69);
-        Item testItem4 = new Item("0004", 5, "Burger Patty", 4.00);
-        testInventory.addItem(testItem1);
-        testInventory.addItem(testItem2);
-        testInventory.addItem(testItem3);
-        testInventory.addItem(testItem4);
-
-
-        //test that the method successfully adds to the inventory count
-        assertEquals(10, testInventory.buyMoreProducts("0001", 5));
-        assertEquals(15, testInventory.buyMoreProducts("0004", 10));
-        assertEquals(105, testInventory.buyMoreProducts("0002", 100));
-        assertEquals(9, testInventory.buyMoreProducts("0003", 4));
-
-        //test when the specified item does not exist
-        assertThrows(ItemDoesNotExistsException.class, () ->testInventory.buyMoreProducts("0006", 10));
-    }
-
-    @Test
     public void getProductInventoryTest() throws ItemAlreadyExistsException, EmptyInventoryException {
         Inventory testInventory = new Inventory();
         //test that it throws inventory empty exception

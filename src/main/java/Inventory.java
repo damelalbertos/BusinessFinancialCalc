@@ -29,23 +29,23 @@ class ItemAlreadyExistsException extends Exception{
 
 public class Inventory {
 
-    protected static HashMap<String, Item> inventory;
+    public HashMap<String, Item> inventory;
 
 
     public Inventory(){
         this.inventory = new HashMap<String, Item>();
     }
 
-    /**
-     * Description: Pass in Item id so we know which one to buy more
-     * products of to increase amount of items
-     */
-    public int buyMoreProducts(String itemId, int amount) throws ItemDoesNotExistsException {
-        if(!inventory.containsKey(itemId)){ //check is the item exists in the inventory
-            throw new ItemDoesNotExistsException("No Item to buy products for");
-        }
-        return inventory.get(itemId).addCount(amount);
-    }
+//    /**
+//     * Description: Pass in Item id so we know which one to buy more
+//     * products of to increase amount of items
+//     */
+//    public int buyMoreProducts(String itemId, int amount) throws ItemDoesNotExistsException {
+//        if(!inventory.containsKey(itemId)){ //check is the item exists in the inventory
+//            throw new ItemDoesNotExistsException("No Item to buy products for");
+//        }
+//        return inventory.get(itemId).addCount(amount);
+//    }
 
 
     /**
@@ -149,7 +149,7 @@ public class Inventory {
      * Description: decrement amount value for given item
      * parameters: String itemId
      */
-    public static void decrementItem(String itemId) throws ItemDoesNotExistsException, ItemCountAt0Exception {
+    public void decrementItem(String itemId) throws ItemDoesNotExistsException, ItemCountAt0Exception {
         //check if item exists in inventory, throw exception if not
         if (!inventory.containsKey(itemId)){
             throw new ItemDoesNotExistsException("Inventory Item does not exist!");
