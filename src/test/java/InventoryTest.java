@@ -1,6 +1,10 @@
+import org.junit.Assert;
 import org.junit.Test;
 
+import java.util.Arrays;
 import java.util.HashMap;
+import util.JsonUtil;
+
 
 import static junit.framework.TestCase.assertEquals;
 import static junit.framework.TestCase.assertNull;
@@ -197,4 +201,18 @@ public class InventoryTest {
         testInventory.decrementItem("0003");
         assertEquals(0, testInventory.getItemCount("0003"));
     }
+
+    @Test
+    public void decrementItemJsonTest() throws ItemAlreadyExistsException, ItemDoesNotExistsException, ItemCountAt0Exception {
+        Inventory testInventory = JsonUtil.fromJsonFile("C:\\Users\\cobio\\COMP345\\BusCalc\\src\\test\\inventoryTest.json", Inventory.class);
+
+        CentralBank testBank = JsonUtil.fromJsonFile("src/test/resources/centralBankTest.json", CentralBank.class);
+        Assert.assertEquals(4, testBank.numberOfAccounts());
+        testBank.addAccounts(Arrays.asList(new BankAccount("h@i.com", 100), new BankAccount("a@b.com", 200)));
+        Assert.assertEquals(6, testBank.numberOfAccounts());
+
+
+    }
+
+
 }
