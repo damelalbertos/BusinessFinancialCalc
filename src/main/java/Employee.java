@@ -12,6 +12,7 @@ public class Employee {
     }
 
 
+
     public Employee(String id, double wage, double hoursWorked){
         this.id = id;
         this.wage = wage;
@@ -49,14 +50,17 @@ public class Employee {
      *
      * @return
      */
-    public String getInfo() throws IllegalArgumentException{
+    public String getId() throws IllegalArgumentException{
 
         if(!business.exists(id)){
             throw new IllegalArgumentException("Employee with id" + id + "doesn't exists");
         }
 
 
-        return "doSomething";
+        return id;
     }
+
+
+
 
 }

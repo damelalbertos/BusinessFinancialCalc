@@ -20,6 +20,11 @@ public class CentralBusinessTest {
         CentralBusiness.inventory.addItem(testItem3);
         CentralBusiness.inventory.addItem(testItem4);
 
+        Employee employee1 = new Employee("1000", 11.25, 36);
+        Employee employee2 = new Employee("1001", 13.25, 50);
+        Employee employee3 = new Employee("1002", 10, 40);
+
+
 
         //test that the method successfully adds to the inventory count
         assertEquals(10, CentralBusiness.buyMoreProducts("0001", 5));
