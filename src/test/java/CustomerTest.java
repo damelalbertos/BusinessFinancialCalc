@@ -9,7 +9,6 @@ public class CustomerTest {
     @Test
     public void orderTest() throws ItemCountAt0Exception, ItemDoesNotExistsException, ItemAlreadyExistsException{
         CentralBusiness bus1 = new CentralBusiness("Business 1");
-        Inventory testInventory = new Inventory();
 
 
 
@@ -20,10 +19,10 @@ public class CustomerTest {
         Item testItem4 = new Item("0004", 15, "Potatoes", 1.50);
 
         //add items to inventory
-        testInventory.addItem(testItem1);
-        testInventory.addItem(testItem2);
-        testInventory.addItem(testItem3);
-        testInventory.addItem(testItem4);
+        CentralBusiness.inventory.addItem(testItem1);
+        CentralBusiness.inventory.addItem(testItem2);
+        CentralBusiness.inventory.addItem(testItem3);
+        CentralBusiness.inventory.addItem(testItem4);
 
         //add burger ingredients
         ArrayList<Item> burgerIngredients = new ArrayList<>();
