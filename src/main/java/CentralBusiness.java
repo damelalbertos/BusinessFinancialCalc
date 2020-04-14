@@ -5,23 +5,36 @@ import java.util.Map;
 public class CentralBusiness {
 
     protected static double revenue;
-    private int expenses;
+    protected static double expenses;
     private String businessName;
     private Map<String, Employee> employeesMap;
-    private HashMap<String, Item> inventory;
+    protected static Inventory inventory;
     protected static HashMap<String, Order> allOrders;
     private HashMap<String, MenuItem> menu;
 
     public CentralBusiness(String businessName) {
         this.businessName = businessName;
         this.employeesMap = new HashMap<String, Employee>();
-        this.inventory = new HashMap<String, Item>();
+        this.inventory = new Inventory();
         this.allOrders = new HashMap<String, Order>();
         this.menu = new HashMap<String, MenuItem>();
         this.revenue = 0;
+        this.expenses = 0;
     }
 
     public CentralBusiness() {
+    }
+
+    /**
+     * Description: Pass in Item id so we know which one to buy more
+     * products of to increase amount of items
+     */
+    public static int buyMoreProducts(String itemId, int amount) throws ItemDoesNotExistsException {
+        if(!inventory.inventory.containsKey(itemId)){ //check is the item exists in the inventory
+            throw new ItemDoesNotExistsException("No Item to buy products for");
+        }
+        addToExpenses(inventory.inventory.get(itemId).getCost() * amount);
+        return inventory.inventory.get(itemId).addCount(amount);
     }
 
     public HashMap<String, MenuItem> getMenu() {
@@ -38,6 +51,8 @@ public class CentralBusiness {
     public static void addToRevenue(double orderPrice) {
         revenue+=orderPrice;
     }
+
+    public static void addToExpenses(double businessExpense){expenses+=businessExpense;}
 
 
     /**
@@ -124,8 +139,7 @@ public class CentralBusiness {
 
 
             pay = Double.valueOf(newFormat.format(pay));
-
-            pay = Double.valueOf(newFormat.format(pay));
+            addToExpenses(pay);
 
 
             return pay;
@@ -153,7 +167,7 @@ public class CentralBusiness {
     /**
      *
      */
-    public int getExpenses() {
+    public double getExpenses() {
 
 
         return expenses;

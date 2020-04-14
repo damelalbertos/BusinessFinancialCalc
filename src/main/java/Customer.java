@@ -43,7 +43,7 @@ public class Customer {
 
         //decrement each ingredient used in menu items in order
         for (int y = 0; y<ingredients.size(); y++) {
-            Inventory.decrementItem(ingredients.get(y).getItemID());
+            CentralBusiness.inventory.decrementItem(ingredients.get(y).getItemID());
         }
 
         //make sure the order gets added to revenue

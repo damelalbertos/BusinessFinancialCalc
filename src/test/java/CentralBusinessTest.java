@@ -1,15 +1,84 @@
+import org.junit.Test;
+
 import java.util.ArrayList;
 
 import static org.junit.jupiter.api.Assertions.*;
 
 public class CentralBusinessTest {
 
+    @Test
+    public void buyMoreItemsTest() throws ItemDoesNotExistsException, ItemAlreadyExistsException {
+        //make Business
+        CentralBusiness bus1 = new CentralBusiness("Business 1");
+
+        Item testItem1 = new Item("0001", 5, "Buns", 1.00);
+        Item testItem2 = new Item("0002", 5, "Lettuce", 0.50);
+        Item testItem3 = new Item("0003", 5, "Tomatoes", 0.69);
+        Item testItem4 = new Item("0004", 5, "Burger Patty", 4.00);
+        CentralBusiness.inventory.addItem(testItem1);
+        CentralBusiness.inventory.addItem(testItem2);
+        CentralBusiness.inventory.addItem(testItem3);
+        CentralBusiness.inventory.addItem(testItem4);
+
+
+        //test that the method successfully adds to the inventory count
+        assertEquals(10, CentralBusiness.buyMoreProducts("0001", 5));
+        assertEquals(15, CentralBusiness.buyMoreProducts("0004", 10));
+        assertEquals(105, CentralBusiness.buyMoreProducts("0002", 100));
+        assertEquals(9, CentralBusiness.buyMoreProducts("0003", 4));
+
+        //test when the specified item does not exist
+        assertThrows(ItemDoesNotExistsException.class, () ->CentralBusiness.buyMoreProducts("0006", 10));
+    }
+
+    @org.junit.Test
+    public void addToExpensesTest() throws ItemAlreadyExistsException, ItemDoesNotExistsException {
+        //make Business
+        CentralBusiness bus1 = new CentralBusiness("Business 1");
+
+        //create items
+        Item testItem1 = new Item("0001", 5, "Buns", 1.00);
+        Item testItem2 = new Item("0002", 5, "Lettuce", 0.50);
+
+        //add items to the inventory
+        CentralBusiness.inventory.addItem(testItem1);
+        CentralBusiness.inventory.addItem(testItem2);
+
+        //buyMoreProducts 1
+        CentralBusiness.buyMoreProducts("0001", 5); //1.00 * 5
+        assertEquals(5.0, CentralBusiness.expenses);
+
+        //buyMoreProducts 2
+        //tests that it adds to a previous addition to expenses
+        CentralBusiness.buyMoreProducts("0002", 7);//0.50 * 7 + 5
+        assertEquals(8.5, CentralBusiness.expenses);
+
+
+        //create employees
+        Employee employee1 = new Employee("1000", 11.25, 36);
+        Employee employee2 = new Employee("1001", 13.25, 50);
+        Employee employee3 = new Employee("1002", 10, 40);
+
+        //add employees to system
+        bus1.addAccount("1000", employee1);
+        bus1.addAccount("1001", employee2);
+        bus1.addAccount("1002", employee3);
+
+        //calculate pay for first employee
+        bus1.calcPay("1000"); //expenses is already $8.50, after calcpay should be 413.50
+        assertEquals(413.5, CentralBusiness.expenses);
+
+        //calculate pay for second employee
+        double overtimeEmployeePay = bus1.calcPay("1001");
+        assertEquals(413.5+overtimeEmployeePay, CentralBusiness.expenses);
+
+    }
+
     @org.junit.Test
     public void addToRevenueTest() throws ItemAlreadyExistsException, ItemCountAt0Exception, ItemDoesNotExistsException{
 
         //set up a business with an inventory
         CentralBusiness bus1 = new CentralBusiness("Business 1");
-        Inventory testInventory = new Inventory();
 
         //create items (ingredients)
         Item testItem1 = new Item("0001", 25, "Buns", 1.00);
@@ -20,11 +89,11 @@ public class CentralBusinessTest {
         Item testItem6 = new Item("0006", 25, "Chicken", 4.00);
 
         //add items to business's inventory system
-        testInventory.addItem(testItem1);
-        testInventory.addItem(testItem2);
-        testInventory.addItem(testItem3);
-        testInventory.addItem(testItem4);
-        testInventory.addItem(testItem5);
+        CentralBusiness.inventory.addItem(testItem1);
+        CentralBusiness.inventory.addItem(testItem2);
+        CentralBusiness.inventory.addItem(testItem3);
+        CentralBusiness.inventory.addItem(testItem4);
+        CentralBusiness.inventory.addItem(testItem5);
 
         //create an array list of burger ingredients
         ArrayList<Item> burgerIngredients = new ArrayList<>();
@@ -46,8 +115,8 @@ public class CentralBusinessTest {
         menuItem2.setItemIngredients(cokeIngredients);
 
         //add the two menuItems to the business's menu
-        bus1.addToMenu(menuItem1, testInventory.getInventory());
-        bus1.addToMenu(menuItem2, testInventory.getInventory());
+        bus1.addToMenu(menuItem1, CentralBusiness.inventory.getInventory());
+        bus1.addToMenu(menuItem2, CentralBusiness.inventory.getInventory());
 
         //create 4 customers for ordering
         Customer customer1 = new Customer("Bobby", "Billy");
