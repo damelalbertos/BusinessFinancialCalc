@@ -2,20 +2,20 @@
   "inventory": {
     "001" : {
       "itemId" : "001",
-      "itemName" : "lettuce",
       "itemCount" : 100,
+      "itemName" : "lettuce",
       "cost" : 0.15
     },
     "002" : {
       "itemId" : "002",
-      "itemName" : "bun",
       "itemCount" : 100,
+      "itemName" : "bun",
       "cost" : 0.50
     },
     "003" : {
       "itemId" : "003",
+      "itemCount" : 300,
       "itemName" : "meat",
-      "itemCount" : 200,
       "cost" : 2.75
     }
   }

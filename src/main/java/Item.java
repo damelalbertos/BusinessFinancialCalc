@@ -6,6 +6,39 @@ public class Item{
     private int itemCount;
     private double cost;
 
+
+    public Item() {
+
+    }
+
+    public String getItemId() {
+        return itemId;
+    }
+
+    public void setItemId(String itemId) {
+        this.itemId = itemId;
+    }
+
+    public String getItemName() {
+        return itemName;
+    }
+
+    public void setItemName(String itemName) {
+        this.itemName = itemName;
+    }
+
+    public int getItemCount() {
+        return itemCount;
+    }
+
+    public void setItemCount(int itemCount) {
+        this.itemCount = itemCount;
+    }
+
+    public void setCost(double cost) {
+        this.cost = cost;
+    }
+
     public Item(String itemId, int itemCount, String itemName, double cost){
         this.itemId = itemId;
         this.itemName = itemName;

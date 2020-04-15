@@ -2,9 +2,7 @@ import org.junit.Assert;
 import org.junit.Test;
 
 import java.io.IOException;
-import java.util.Arrays;
 import java.util.HashMap;
-
 
 import static junit.framework.TestCase.assertEquals;
 import static junit.framework.TestCase.assertNull;
