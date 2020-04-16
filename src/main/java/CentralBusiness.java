@@ -10,7 +10,8 @@ public class CentralBusiness {
     private Map<String, Employee> employeesMap;
     protected static Inventory inventory;
     protected static HashMap<String, Order> allOrders;
-    private HashMap<String, MenuItem> menu;
+    protected static HashMap<String, MenuItem> menu;
+    protected static HashMap<String, Double> menuItemRevenue;
 
     public CentralBusiness(String businessName) {
         this.businessName = businessName;
@@ -18,6 +19,7 @@ public class CentralBusiness {
         this.inventory = new Inventory();
         this.allOrders = new HashMap<String, Order>();
         this.menu = new HashMap<String, MenuItem>();
+        this.menuItemRevenue = new HashMap<String, Double>();
         this.revenue = 0;
         this.expenses = 0;
     }
@@ -77,6 +79,7 @@ public class CentralBusiness {
         //if all constraints pass, add menu item to menu
         } else {
             menu.put(menuItem.getMenuID(), menuItem);
+            menuItemRevenue.put(menuItem.getMenuID(), 0.00);
         }
 
     }
@@ -179,8 +182,22 @@ public class CentralBusiness {
      * @param menuItem
      * @return the revenue generated for a particular item
      */
-    public double getRevenueByItem(MenuItem menuItem) {
-        return 0;
+    public double getRevenueByItem(MenuItem menuItem) throws ItemDoesNotExistsException {
+        if (!menu.containsKey(menuItem.getMenuID())) {
+            throw new ItemDoesNotExistsException(menuItem.getMenuItemName() + " does not exist in menu");
+        } else {
+            return menuItemRevenue.get(menuItem.getMenuID());
+        }
+    }
+
+
+    public static void setRevenueByItem(MenuItem menuItem, double rev) throws ItemDoesNotExistsException{
+        if (!menu.containsKey(menuItem.getMenuID())) {
+            throw new ItemDoesNotExistsException(menuItem.getMenuItemName() + " does not exist in menu");
+        } else {
+            double prevRev = menuItemRevenue.get(menuItem.getMenuID());
+            menuItemRevenue.put(menuItem.getMenuID(), prevRev+rev);
+        }
     }
 
 
