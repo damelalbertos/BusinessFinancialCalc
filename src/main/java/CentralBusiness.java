@@ -41,7 +41,6 @@ public class CentralBusiness {
         return menu;
     }
 
-    public static double getRevenue() {return revenue;}
 
 
     /**
@@ -53,6 +52,9 @@ public class CentralBusiness {
     }
 
     public static void addToExpenses(double businessExpense){expenses+=businessExpense;}
+
+
+    public double getRevenue() {return revenue;}
 
 
     /**

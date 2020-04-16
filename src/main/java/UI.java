@@ -1,4 +1,3 @@
-import java.util.Random;
 import java.util.Scanner;
 
 
@@ -45,16 +44,50 @@ public class UI {
 
                 System.out.println("What would you like to do?");
 
-                if (scan.next().equals("order")) {
-                    System.out.println("Enter first name and last name");
-                    Customer customer = new Customer(scan.next(), scan.next());
+//                if (scan.next().equals("order")) {
+//                    System.out.println("Enter first name and last name");
+//                    Customer customer = new Customer(scan.next(), scan.next());
+//
+//
+//                    //new Order(random number 1-1000, random number 1-1000, total = 0);
+//
+//                }
 
 
-                    //new Order(random number 1-1000, random number 1-1000, total = 0);
-
+                if(scan.next().equals("revenue")){
+                    System.out.println(bus1.getRevenue());
                 }
 
 
+                if(scan.next().equals("expenses")){
+                    System.out.println(bus1.getExpenses());
+                }
+
+                if(scan.next().equals("employee")){
+                    System.out.println("Would you like to add, remove or calculate pay");
+
+                    if(scan.next().equals("add")){
+                        System.out.println("Enter new ID");
+                        String id = scan.next();
+                        System.out.println("Enter wage");
+                        double wage = scan.nextDouble();
+                        System.out.println("Enter hoursWorked");
+                        int hoursWorked= scan.nextInt();
+                        Employee employee = new Employee(id, wage, hoursWorked);
+                        bus1.addAccount(id, employee);
+                    }
+
+                    if(scan.next().equals("remove")){
+                        System.out.println("Enter id for Employee to remove");
+                        String id= scan.next();
+
+
+                    }
+
+                    if(scan.next().equals("pay")){
+
+                    }
+                }
                 System.out.println("Would you like to continue? type quit or any key");
 
                 if(scan.next().equals("quit")){
