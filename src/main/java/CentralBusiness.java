@@ -174,5 +174,17 @@ public class CentralBusiness {
     }
 
 
+    /**
+     * @throws ItemDoesNotExistsException if menu item does not exist
+     * @param menuItem
+     * @return the revenue generated for a particular item
+     */
+    public double getRevenueByItem(MenuItem menuItem) {
+        return 0;
+    }
+
+
+
+
 
 }
