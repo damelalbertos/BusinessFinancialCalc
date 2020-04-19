@@ -52,9 +52,7 @@ public class Employee {
      */
     public String getId() throws IllegalArgumentException{
 
-        if(!business.exists(id)){
-            throw new IllegalArgumentException("Employee with id" + id + "doesn't exists");
-        }
+
 
 
         return id;

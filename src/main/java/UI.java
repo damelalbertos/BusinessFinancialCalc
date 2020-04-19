@@ -53,17 +53,18 @@ public class UI {
 //
 //                }
 
-
-                if(scan.next().equals("revenue")){
+                String i = scan.next();
+                if(i.equals("revenue")){
                     System.out.println(bus1.getRevenue());
                 }
 
 
-                if(scan.next().equals("expenses")){
+
+                if(i.equals("expenses")){
                     System.out.println(bus1.getExpenses());
                 }
 
-                if(scan.next().equals("employee")){
+                if(i.equals("employee")){
                     System.out.println("Would you like to add, remove or calculate pay");
 
                     if(scan.next().equals("add")){
@@ -77,20 +78,28 @@ public class UI {
                         bus1.addAccount(id, employee);
                     }
 
-                    if(scan.next().equals("remove")){
+                    if(i.equals("remove")){
                         System.out.println("Enter id for Employee to remove");
                         String id= scan.next();
 
 
+                        if(bus1.getEmployee(id) != null) {
+                            bus1.removeEmployee(id);
+                        }
+
+                        else{
+                            System.out.println("Employee Doesn't exist");
+                        }
+
                     }
 
-                    if(scan.next().equals("pay")){
+                    if(i.equals("pay")){
 
                     }
                 }
                 System.out.println("Would you like to continue? type quit or any key");
 
-                if(scan.next().equals("quit")){
+                if(i.equals("quit")){
                     break;
                 }
 

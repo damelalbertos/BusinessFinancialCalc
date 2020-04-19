@@ -314,4 +314,30 @@ public class CentralBusinessTest {
 
     }
 
+
+
+    @Test
+    public void removeAccount(){
+        CentralBusiness bus1 = new CentralBusiness("Business1");
+
+
+        Employee employee = new Employee("100", 14.26, 42);
+        Employee employee2 = new Employee("1001", 13.25, 50);
+
+        bus1.addAccount("100", employee);
+        bus1.addAccount("1001", employee2);
+
+        assertEquals("100", bus1.getEmployee("100").getId());
+        assertEquals("1001", bus1.getEmployee("1001").getId());
+
+
+        bus1.removeEmployee("100");
+
+        assertThrows(IllegalArgumentException.class, ()->bus1.getEmployee("100").getId());
+
+        bus1.removeEmployee("1001");
+
+        assertThrows(IllegalArgumentException.class, ()->bus1.getEmployee("1001").getId());
+
+    }
 }
