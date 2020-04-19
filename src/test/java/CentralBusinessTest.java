@@ -309,4 +309,114 @@ public class CentralBusinessTest {
 
     }
 
+    @Test
+    public void getRevenueByItemTest() throws ItemAlreadyExistsException, ItemCountAt0Exception, ItemDoesNotExistsException{
+        //set up a business with an inventory
+        CentralBusiness bus1 = new CentralBusiness("Business 1");
+
+        //create items (ingredients)
+        Item testItem1 = new Item("0001", 25, "Buns", 1.00);
+        Item testItem2 = new Item("0002", 25, "Lettuce", 0.50);
+        Item testItem3 = new Item("0003", 25, "Tomatoes", 0.69);
+        Item testItem4 = new Item("0004", 25, "Burger Patty", 4.00);
+        Item testItem5 = new Item("0005", 25, "Coke", 1.00);
+        Item testItem6 = new Item("0006", 25, "Chicken", 4.00);
+
+        //add items to business's inventory system
+        CentralBusiness.inventory.addItem(testItem1);
+        CentralBusiness.inventory.addItem(testItem2);
+        CentralBusiness.inventory.addItem(testItem3);
+        CentralBusiness.inventory.addItem(testItem4);
+        CentralBusiness.inventory.addItem(testItem5);
+
+        //create an array list of burger ingredients
+        ArrayList<Item> burgerIngredients = new ArrayList<>();
+        burgerIngredients.add(testItem1);
+        burgerIngredients.add(testItem2);
+        burgerIngredients.add(testItem3);
+        burgerIngredients.add(testItem4);
+
+        //create an array list of coke ingredients
+        ArrayList<Item> cokeIngredients = new ArrayList<>();
+        cokeIngredients.add(testItem5);
+
+        //create the first menuItem object (burger) and set its ingredients
+        MenuItem menuItem1 = new MenuItem("1", "burger", 8.50);
+        menuItem1.setItemIngredients(burgerIngredients);
+
+        //create the second menuItem object (coke) and set its ingredients
+        MenuItem menuItem2 = new MenuItem("2", "coke", 1.75);
+        menuItem2.setItemIngredients(cokeIngredients);
+
+        //not added to menu
+        MenuItem menuItem3 = new MenuItem("3", "hotdog", 5.75);
+        menuItem3.setItemIngredients(burgerIngredients);
+
+
+
+        //add the two menuItems to the business's menu
+        bus1.addToMenu(menuItem1, CentralBusiness.inventory.getInventory());
+        bus1.addToMenu(menuItem2, CentralBusiness.inventory.getInventory());
+
+        //create 4 customers for ordering
+        Customer customer1 = new Customer("Nate", "Jackson");
+
+        Customer customer2 = new Customer("Hannah", "Smith");
+
+        Customer customer3 = new Customer("James", "Johnson");
+
+        Customer customer4 = new Customer("Makenzie", "Lee");
+
+        //Order items
+        ArrayList<MenuItem> customer1Order = new ArrayList<>();
+        customer1Order.add(menuItem1);
+
+        //customer 1 orders
+        customer1.order(customer1Order, "0", "0");
+
+        //check that revenue gets summed correctly for each item
+        assertEquals(8.50, bus1.getRevenueByItem(menuItem1));
+        assertEquals(0, bus1.getRevenueByItem(menuItem2));
+
+
+        //another orders occur
+        ArrayList<MenuItem> customer2Order = new ArrayList<>();
+        customer2Order.add(menuItem2);
+        customer2.order(customer2Order, "1", "1");
+
+        //check that revenue gets summed correctly
+        assertEquals(8.50, bus1.getRevenueByItem(menuItem1));
+        assertEquals(1.75, bus1.getRevenueByItem(menuItem2));
+
+        //another orders occur
+        ArrayList<MenuItem> customer3Order = new ArrayList<>();
+        customer3Order.add(menuItem1);
+        customer3Order.add(menuItem1);
+        customer3Order.add(menuItem1);
+        customer3Order.add(menuItem2);
+        customer3.order(customer3Order, "2", "2");
+
+        //check that revenue gets summed correctly
+        assertEquals(34, bus1.getRevenueByItem(menuItem1));
+        assertEquals(3.50, bus1.getRevenueByItem(menuItem2));
+
+        //more orders occur
+        ArrayList<MenuItem> customer4Order = new ArrayList<>();
+        customer4Order.add(menuItem1);
+        customer4Order.add(menuItem1);
+        customer4Order.add(menuItem1);
+        customer4Order.add(menuItem2);
+        customer4Order.add(menuItem1);
+        customer4Order.add(menuItem1);
+        customer4Order.add(menuItem2);
+        customer4Order.add(menuItem2);
+        customer4.order(customer4Order, "3", "3");
+
+        //check that revenue gets summed correctly
+        assertEquals(76.50, bus1.getRevenueByItem(menuItem1));
+        assertEquals(8.75, bus1.getRevenueByItem(menuItem2));
+
+        //check exception thrown when menu item not in menu
+        assertThrows(ItemDoesNotExistsException.class, ()-> bus1.getRevenueByItem(menuItem3));
+    }
 }
