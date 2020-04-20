@@ -4,7 +4,7 @@ public class Employee {
     private double wage;
     private double hoursWorked;
 
-    protected CentralBusiness business;
+    private CentralBusiness business;
 
 
     public Employee(CentralBusiness business){
