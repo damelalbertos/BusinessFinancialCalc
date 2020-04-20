@@ -3,10 +3,10 @@ import java.util.HashMap;
 
 public class Order {
 
-    protected String orderID;
-    protected String customerID;
-    protected ArrayList<MenuItem> orderedItems;
-    protected double total;
+    private String orderID;
+    private String customerID;
+    private ArrayList<MenuItem> orderedItems;
+    private double total;
 
 
     public Order(String orderID, String customerID, double total) {
