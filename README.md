@@ -34,7 +34,7 @@ Begin UI only for things that have been thouroughly tested.
 -Class Diagram Spring 2 - https://drive.google.com/file/d/1qDL_s0iev8UAQLkSKDC2sNTKU2TH229L/view?usp=sharing
 
 
--Sprint Review 2 -
+-Sprint Review 2 - https://docs.google.com/document/d/1ZGQEpEFf8Aa9i4Xn344j2mCqLcVqRGEw7R6eAAWLgzQ/edit?ts=5e9f432c
 
 
 -Spring 2 Retrospective - 
