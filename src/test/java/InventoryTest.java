@@ -1,5 +1,7 @@
+import org.junit.Assert;
 import org.junit.Test;
 
+import java.io.IOException;
 import java.util.HashMap;
 
 import static junit.framework.TestCase.assertEquals;
@@ -172,4 +174,24 @@ public class InventoryTest {
         testInventory.decrementItem("0003");
         assertEquals(0, testInventory.getItemCount("0003"));
     }
+
+    @Test
+    public void decrementItemJsonTest() throws ItemDoesNotExistsException, ItemCountAt0Exception, IOException {
+        Inventory testInventory = JsonUtil.fromJsonFile("src/test/inventoryTest.json", Inventory.class);
+        testInventory.decrementItem("001");
+        Assert.assertEquals(99, testInventory.getItemCount("001"));
+
+        testInventory.decrementItem("002");
+        testInventory.decrementItem("002");
+        testInventory.decrementItem("002");
+        Assert.assertEquals(97, testInventory.getItemCount("002"));
+
+        testInventory.decrementItem("003");
+        testInventory.decrementItem("003");
+        Assert.assertEquals(298, testInventory.getItemCount("003"));
+
+
+    }
+
+
 }

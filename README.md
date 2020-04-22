@@ -8,15 +8,20 @@ ZenHub Board - https://app.zenhub.com/workspaces/businessfinancialcalc-5e6001b2a
 Slack Workspace - https://app.slack.com/client/TT6F2ENUF/CUD683Q3C/directory
 
 
+
 SPRINT 1:
 
-#Class Diagram Sprint 1 - https://drive.google.com/file/d/1OHA6MyGw4rrpKgVbx3-ZleGjDY20jRqr/view?usp=sharing
+
+-Class Diagram Sprint 1 - https://drive.google.com/file/d/1OHA6MyGw4rrpKgVbx3-ZleGjDY20jRqr/view?usp=sharing
 
 
-#Sprint Review 1 - https://docs.google.com/document/d/1wTptl9l-s4ysTeYt8SP6RuFYQXYRUfrv_1z32LluFGg/edit?ts=5e838d9
+-Sprint Review 1 - https://docs.google.com/document/d/1wTptl9l-s4ysTeYt8SP6RuFYQXYRUfrv_1z32LluFGg/edit?ts=5e838d9
 
 
-#Sprint 1 Retrospective - https://docs.google.com/document/d/16v1AlBQxT2cGih_Q2H28y_n1VwDGgmLnjKNg5SnKFTw/edit?usp=sharing
+-Sprint 1 Retrospective - https://docs.google.com/document/d/16v1AlBQxT2cGih_Q2H28y_n1VwDGgmLnjKNg5SnKFTw/edit?usp=sharing
+
+
+
 
 
 
@@ -25,12 +30,16 @@ SPRINT 2:
 Sprint 2 goal: Expenses, Revenue, Customer Transactions towards revenue, expenses towards employee pay and re-up inventory
 Begin UI only for things that have been thouroughly tested. 
 
-#Class Diagram Spring 2 - https://drive.google.com/file/d/1qDL_s0iev8UAQLkSKDC2sNTKU2TH229L/view?usp=sharing
 
-#Sprint Review 2 -
+-Class Diagram Spring 2 - https://drive.google.com/file/d/1qDL_s0iev8UAQLkSKDC2sNTKU2TH229L/view?usp=sharing
 
-#Spring 2 Retrospective - 
 
-UI State Diagram: https://app.diagrams.net/#G1jCc-sG7rs0i7BVq2J_MEMJ4v1hENi2Mr
+-Sprint Review 2 - https://docs.google.com/document/d/1ZGQEpEFf8Aa9i4Xn344j2mCqLcVqRGEw7R6eAAWLgzQ/edit?ts=5e9f432c
+
+
+-Spring 2 Retrospective - 
+
+
+-UI State Diagram: https://app.diagrams.net/#G1jCc-sG7rs0i7BVq2J_MEMJ4v1hENi2Mr
 
 

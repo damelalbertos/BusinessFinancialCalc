@@ -1,16 +1,18 @@
 import java.text.DecimalFormat;
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
 
 public class CentralBusiness {
 
-    protected static double revenue;
-    protected static double expenses;
+    private double revenue;
+    private double expenses;
     private String businessName;
     private Map<String, Employee> employeesMap;
-    protected static Inventory inventory;
-    protected static HashMap<String, Order> allOrders;
+    private Inventory inventory;
+    private HashMap<String, Order> allOrders;
     private HashMap<String, MenuItem> menu;
+    private HashMap<String, Double> menuItemRevenue;
 
     public CentralBusiness(String businessName) {
         this.businessName = businessName;
@@ -18,6 +20,7 @@ public class CentralBusiness {
         this.inventory = new Inventory();
         this.allOrders = new HashMap<String, Order>();
         this.menu = new HashMap<String, MenuItem>();
+        this.menuItemRevenue = new HashMap<String, Double>();
         this.revenue = 0;
         this.expenses = 0;
     }
@@ -25,11 +28,20 @@ public class CentralBusiness {
     public CentralBusiness() {
     }
 
+    public HashMap<String, Order> getAllOrders() {
+        return allOrders;
+    }
+
+    public Inventory getInventory() {
+
+        return inventory;
+    }
+
     /**
      * Description: Pass in Item id so we know which one to buy more
      * products of to increase amount of items
      */
-    public static int buyMoreProducts(String itemId, int amount) throws ItemDoesNotExistsException {
+    public int buyMoreProducts(String itemId, int amount) throws ItemDoesNotExistsException {
         if(!inventory.inventory.containsKey(itemId)){ //check is the item exists in the inventory
             throw new ItemDoesNotExistsException("No Item to buy products for");
         }
@@ -41,20 +53,18 @@ public class CentralBusiness {
         return menu;
     }
 
+    public double getRevenue() {return revenue;}
 
 
     /**
      * Adds order total to revenue, called in order function in Customer class
      * @param orderPrice - price of customer order
      */
-    public static void addToRevenue(double orderPrice) {
+    public void addToRevenue(double orderPrice) {
         revenue+=orderPrice;
     }
 
-    public static void addToExpenses(double businessExpense){expenses+=businessExpense;}
-
-
-    public double getRevenue() {return revenue;}
+    public void addToExpenses(double businessExpense){expenses+=businessExpense;}
 
 
     /**
@@ -79,6 +89,7 @@ public class CentralBusiness {
         //if all constraints pass, add menu item to menu
         } else {
             menu.put(menuItem.getMenuID(), menuItem);
+            menuItemRevenue.put(menuItem.getMenuID(), 0.00);
         }
 
     }
@@ -100,11 +111,11 @@ public class CentralBusiness {
 
     }
 
-    public void removeEmployee(String id) {
+    public void removeEmployee(String id, Employee employee) {
         if (!employeesMap.containsKey(id)) {
             throw new IllegalArgumentException("Employee does not exist");
         }
-        employeesMap.remove(id);
+        employeesMap.remove(id, employee);
     }
 
 
@@ -174,6 +185,81 @@ public class CentralBusiness {
 
         return expenses;
     }
+
+
+    /**
+     * @throws ItemDoesNotExistsException if menu item does not exist
+     * @param menuItem
+     * @return the revenue generated for a particular item
+     */
+    public double getRevenueByItem(MenuItem menuItem) throws ItemDoesNotExistsException {
+        if (!menu.containsKey(menuItem.getMenuID())) {
+            throw new ItemDoesNotExistsException(menuItem.getMenuItemName() + " does not exist in menu");
+        } else {
+            return menuItemRevenue.get(menuItem.getMenuID());
+        }
+    }
+
+
+    public void setRevenueByItem(MenuItem menuItem, double rev) throws ItemDoesNotExistsException{
+        if (!menu.containsKey(menuItem.getMenuID())) {
+            throw new ItemDoesNotExistsException(menuItem.getMenuItemName() + " does not exist in menu");
+        } else {
+            double prevRev = menuItemRevenue.get(menuItem.getMenuID());
+            menuItemRevenue.put(menuItem.getMenuID(), prevRev+rev);
+        }
+    }
+
+    public void order(ArrayList<MenuItem> orderItems, Customer customer, String orderID) throws ItemDoesNotExistsException, ItemCountAt0Exception {
+        //throw an exception if they order an item not on the menu or ingredients used are out of stock
+        for (int m = 0; m < orderItems.size(); m++) {
+            if (!menu.containsKey(orderItems.get(m).getMenuID())) {
+                throw new ItemDoesNotExistsException(orderItems.get(m).getMenuItemName() + " does not exist in menu");
+            }
+            for (int n = 0; n < orderItems.get(m).getItemIngredients().size(); n++) {
+                if (orderItems.get(m).getItemIngredients().get(n).getCount() < 1) {
+                    throw new ItemCountAt0Exception("Sorry, we are out of "+orderItems.get(m).getItemIngredients().get(n)+ ", please order again!");
+                }
+            }
+        }
+
+        //create new order
+        Order newOrder = new Order(customer.getCustomerID(), orderID, 0);
+
+        //set ordered items to array of customer's menu items they want
+        newOrder.setOrderedItems(orderItems);
+
+        //create list for ingredients
+        ArrayList<Item> ingredients = new ArrayList<>();
+
+        //create variable that is total of order
+        double tot = 0;
+
+        for (int x = 0; x < orderItems.size(); x++) {
+            //iterate through and calculate total price of all menu items
+            tot+=orderItems.get(x).getPrice();
+            //add revenue for each individual revenue for their own revenue
+            setRevenueByItem(orderItems.get(x), orderItems.get(x).getPrice());
+            //iterate through and add all the ingredients for the menu items to the array
+            ingredients.addAll(orderItems.get(x).getItemIngredients());
+        }
+
+        //set total
+        newOrder.setTotal(tot);
+
+        //put new order in map of all orders
+        allOrders.put(orderID, newOrder);
+
+        //decrement each ingredient used in menu items in order
+        for (int y = 0; y<ingredients.size(); y++) {
+           inventory.decrementItem(ingredients.get(y).getItemID());
+        }
+
+        //make sure the order gets added to revenue
+        addToRevenue(tot);
+    }
+
+
 
 
 
