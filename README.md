@@ -42,4 +42,5 @@ Begin UI only for things that have been thouroughly tested.
 
 -UI State Diagram: https://app.diagrams.net/#G1jCc-sG7rs0i7BVq2J_MEMJ4v1hENi2Mr
 
+- UseCase: https://drive.google.com/file/d/10d53AcFKTg939hD0YR3TRacZW_e83PYK/view?usp=sharing
 
