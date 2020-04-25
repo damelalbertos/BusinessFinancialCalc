@@ -1,5 +1,5 @@
-[
-  {
+ [
+   {
     "menuItemId": "0001",
     "menuItemName": "Burger",
     "price": 4.00
@@ -58,9 +58,5 @@
     "menuItemId": "0007",
     "menuItemName": "Fountain Drink",
     "price": 2.50
-
-
-
-
   }
 ]
