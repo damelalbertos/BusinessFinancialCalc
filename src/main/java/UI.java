@@ -13,10 +13,10 @@ public class UI {
         Item testItem2 = new Item("0002", 5, "Lettuce", 0.50);
         Item testItem3 = new Item("0003", 5, "Tomatoes", 0.69);
         Item testItem4 = new Item("0004", 5, "Burger Patty", 4.00);
-        CentralBusiness.inventory.addItem(testItem1);
-        CentralBusiness.inventory.addItem(testItem2);
-        CentralBusiness.inventory.addItem(testItem3);
-        CentralBusiness.inventory.addItem(testItem4);
+        bus1.getInventory().addItem(testItem1);
+        bus1.getInventory().addItem(testItem2);
+        bus1.getInventory().addItem(testItem3);
+        bus1.getInventory().addItem(testItem4);
 
         Employee employee1 = new Employee("1000", 11.25, 36);
         Employee employee2 = new Employee("1001", 13.25, 50);
