@@ -111,11 +111,11 @@ public class CentralBusiness {
 
     }
 
-    public void removeEmployee(String id, Employee employee) {
+    public void removeEmployee(String id) {
         if (!employeesMap.containsKey(id)) {
             throw new IllegalArgumentException("Employee does not exist");
         }
-        employeesMap.remove(id, employee);
+        employeesMap.remove(id);
     }
 
 
