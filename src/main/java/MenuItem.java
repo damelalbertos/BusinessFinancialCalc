@@ -1,7 +1,5 @@
-import java.lang.reflect.Array;
 import java.util.ArrayList;
 import java.util.HashMap;
-import java.util.List;
 
 public class MenuItem{
 
@@ -18,6 +16,18 @@ public class MenuItem{
         this.itemIngredients = new ArrayList<Item>();
     }
 
+    public void setMenuItemId(String menuItemId) {
+        this.menuItemId = menuItemId;
+    }
+
+    public void setMenuItemName(String menuItemName) {
+        this.menuItemName = menuItemName;
+    }
+
+    public void setPrice(double price) {
+        this.price = price;
+    }
+
     public MenuItem() {
     }
 
@@ -25,6 +35,7 @@ public class MenuItem{
     public String getMenuID(){ return this.menuItemId; }
 
     public String getMenuItemName(){ return this.menuItemName; }
+
 
     public double getPrice() { return this.price;}
 

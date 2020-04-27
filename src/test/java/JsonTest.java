@@ -57,6 +57,7 @@ public class JsonTest {
     @Test
     public void testMenuItems() throws IOException, ItemAlreadyExistsException {
 
+        CentralBusiness bus1 = new CentralBusiness("Business 1");
         Inventory testInventory = new Inventory();
 
         List<Item> items =  JsonUtil.listFromJsonFile("src/test/setItems.json", Item.class);
@@ -75,7 +76,7 @@ public class JsonTest {
         }
 
 
-        assertEquals(10, testInventory.getInventoryCount());
+        assertEquals(11, testInventory.getInventoryCount());
 
 
 

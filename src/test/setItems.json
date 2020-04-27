@@ -67,7 +67,13 @@
     "itemCount" : 1000,
     "itemName" : "cups",
     "cost" : 0.10
-  }
+  },
 
+  {
+    "itemId" : "011",
+    "itemCount" : 300,
+    "itemName" : "potatoes",
+    "cost" : 2.00
+  }
 
 ]
