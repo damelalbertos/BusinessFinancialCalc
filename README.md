@@ -50,4 +50,4 @@ Begin UI only for things that have been thouroughly tested.
 
 SPRINT 3:
 
-Sprint 3 Goal: 
+Sprint 3 Goal: Generate fake data using JSON objects, complete UI with ability to view, edit, and delete financial stats and data.
