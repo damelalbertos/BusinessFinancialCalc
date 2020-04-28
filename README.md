@@ -3,6 +3,7 @@ Financial calculator for a small business
 
 Mutual Design Document - https://docs.google.com/document/d/1FN9UtyNTJhquHfNb9_g121ssypoAyd2O6sOtzPGkuVw/edit?usp=sharing
 
+
 ZenHub Board - https://app.zenhub.com/workspaces/businessfinancialcalc-5e6001b2a503c2d09fdb0828/board?repos=244984909
 
 Slack Workspace - https://app.slack.com/client/TT6F2ENUF/CUD683Q3C/directory
@@ -51,3 +52,5 @@ Begin UI only for things that have been thouroughly tested.
 SPRINT 3:
 
 Sprint 3 Goal: Generate fake data using JSON objects, complete UI with ability to view, edit, and delete financial stats and data.
+
+-Sprint Use Case Document: https://docs.google.com/document/d/1hbugY0ReCsq9vG3cb4Id0wfF-uwgcMV3oUl0EvpVQIU/edit?usp=sharing
