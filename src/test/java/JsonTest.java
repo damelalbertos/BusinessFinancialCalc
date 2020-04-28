@@ -2,6 +2,7 @@ import org.junit.Assert;
 import org.junit.Test;
 
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.List;
 
 import static junit.framework.TestCase.assertEquals;
@@ -63,10 +64,18 @@ public class JsonTest {
         List<Item> items =  JsonUtil.listFromJsonFile("src/test/setItems.json", Item.class);
 
 
+        ArrayList<Item> burgerIngredients = new ArrayList<>();
+        burgerIngredients.add(items.get(0));
+        burgerIngredients.add(items.get(1));
+        burgerIngredients.add(items.get(3));
+
+
         List<MenuItem>menuItems = JsonUtil.listFromJsonFile("src/test/setMenu.json", MenuItem.class);
 
 
+        menuItems.get(0).setItemIngredients(burgerIngredients);
 
+        assertEquals(menuItems.get(0).getItemIngredients(), "[Lettuce, Bun, beef]");
 
 
 
