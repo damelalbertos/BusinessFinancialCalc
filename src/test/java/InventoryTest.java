@@ -22,11 +22,11 @@ public class InventoryTest {
     public void addItemTest() throws ItemAlreadyExistsException, ItemDoesNotExistsException {
         Inventory testInventory = new Inventory();
 
-        Item testItem1 = new Item("0001", 5, "Buns", 1.00);
-        Item testItem2 = new Item("0002", 5, "Lettuce", 0.50);
-        Item testItem3 = new Item("0003", 5, "Tomatoes", 0.69);
-        Item testItem4 = new Item("0004", 5, "Burger Patty", 4.00);
-        Item testItem5 = new Item("0004", 5, "Mustard", 4.00);
+        Item testItem1 = new Item("0001", 500, "Buns", 1.00);
+        Item testItem2 = new Item("0002", 500, "Lettuce", 0.50);
+        Item testItem3 = new Item("0003", 500, "Tomatoes", 0.69);
+        Item testItem4 = new Item("0004", 500, "Burger Patty", 4.00);
+        Item testItem5 = new Item("0004", 500, "Mustard", 4.00);
 
         testInventory.addItem(testItem1);
         testInventory.addItem(testItem2);
@@ -49,8 +49,8 @@ public class InventoryTest {
     public void removeItemTest() throws ItemDoesNotExistsException, ItemAlreadyExistsException {
         Inventory testInventory = new Inventory();
 
-        Item testItem1 = new Item("0001", 5, "Buns", 1.00);
-        Item testItem2 = new Item("0002", 5, "Lettuce", 0.50);
+        Item testItem1 = new Item("0001", 500, "Buns", 1.00);
+        Item testItem2 = new Item("0002", 500, "Lettuce", 0.50);
 
         testInventory.addItem(testItem1);
         testInventory.addItem(testItem2);
@@ -70,8 +70,8 @@ public class InventoryTest {
     @Test
     public void getItemCostTest() throws ItemDoesNotExistsException, ItemAlreadyExistsException {
         Inventory testInventory = new Inventory();
-        Item testItem1 = new Item("0001", 5, "Tomatoes", 0.69);
-        Item testItem2 = new Item("0002", 5, "Burger Patty", 4.00);
+        Item testItem1 = new Item("0001", 500, "Tomatoes", 0.69);
+        Item testItem2 = new Item("0002", 500, "Burger Patty", 4.00);
         testInventory.addItem(testItem1);
         testInventory.addItem(testItem2);
 
@@ -91,19 +91,19 @@ public class InventoryTest {
         assertThrows(EmptyInventoryException.class, () -> testInventory.getProductInventory());
 
         //test with  items
-        Item testItem1 = new Item("0001", 20, "Burger Patty", 1.00);
-        Item testItem2 = new Item("0002", 15, "Lettuce", 0.50);
-        Item testItem3 = new Item("0003", 8, "Tomatoes", 0.69);
-        Item testItem4 = new Item("0004", 10, "Buns", 4.00);
+        Item testItem1 = new Item("0001", 200, "Burger Patty", 1.00);
+        Item testItem2 = new Item("0002", 150, "Lettuce", 0.50);
+        Item testItem3 = new Item("0003", 150, "Tomatoes", 0.69);
+        Item testItem4 = new Item("0004", 150, "Buns", 4.00);
         testInventory.addItem(testItem1);
         testInventory.addItem(testItem2);
         testInventory.addItem(testItem3);
         testInventory.addItem(testItem4);
 
-        String expected = "Buns: 10\n";
-        expected += "Lettuce: 15\n";
-        expected += "Tomatoes: 8\n";
-        expected += "Burger Patty: 20\n";
+        String expected = "Buns: 150\n";
+        expected += "Lettuce: 150\n";
+        expected += "Tomatoes: 150\n";
+        expected += "Burger Patty: 200\n";
 
         assertEquals(expected, testInventory.getProductInventory());
     }
@@ -112,15 +112,15 @@ public class InventoryTest {
     public void getItemCountTest() throws ItemAlreadyExistsException, ItemDoesNotExistsException {
         Inventory testInventory = new Inventory();
         //test with  items
-        Item testItem1 = new Item("0001", 20, "Burger Patty", 1.00);
-        Item testItem2 = new Item("0002", 15, "Lettuce", 0.50);
+        Item testItem1 = new Item("0001", 200, "Burger Patty", 1.00);
+        Item testItem2 = new Item("0002", 150, "Lettuce", 0.50);
         testInventory.addItem(testItem1);
         testInventory.addItem(testItem2);
 
 
-        //test that the methof returns the specified item's count
-        assertEquals(20, testInventory.getItemCount("0001"));
-        assertEquals(15, testInventory.getItemCount("0002"));
+        //test that the method returns the specified item's count
+        assertEquals(200, testInventory.getItemCount("0001"));
+        assertEquals(150, testInventory.getItemCount("0002"));
 
         testInventory.removeItem("0001");
 
@@ -132,10 +132,10 @@ public class InventoryTest {
     public void getInventoryCountTest() throws ItemAlreadyExistsException, ItemDoesNotExistsException {
         Inventory testInventory = new Inventory();
 
-        Item testItem1 = new Item("0001", 20, "Burger Patty", 1.00);
-        Item testItem2 = new Item("0002", 15, "Lettuce", 0.50);
-        Item testItem3 = new Item("0003", 8, "Tomatoes", 0.69);
-        Item testItem4 = new Item("0004", 10, "Buns", 4.00);
+        Item testItem1 = new Item("0001", 200, "Burger Patty", 1.00);
+        Item testItem2 = new Item("0002", 150, "Lettuce", 0.50);
+        Item testItem3 = new Item("0003", 150, "Tomatoes", 0.69);
+        Item testItem4 = new Item("0004", 150, "Buns", 4.00);
         testInventory.addItem(testItem1);
         testInventory.addItem(testItem2);
         testInventory.addItem(testItem3);

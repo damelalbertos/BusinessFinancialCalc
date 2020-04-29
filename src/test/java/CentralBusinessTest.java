@@ -11,10 +11,10 @@ public class CentralBusinessTest {
         //make Business
         CentralBusiness bus1 = new CentralBusiness("Business 1");
 
-        Item testItem1 = new Item("0001", 5, "Buns", 1.00);
-        Item testItem2 = new Item("0002", 5, "Lettuce", 0.50);
-        Item testItem3 = new Item("0003", 5, "Tomatoes", 0.69);
-        Item testItem4 = new Item("0004", 5, "Burger Patty", 4.00);
+        Item testItem1 = new Item("0001", 500, "Buns", 1.00);
+        Item testItem2 = new Item("0002", 500, "Lettuce", 0.50);
+        Item testItem3 = new Item("0003", 500, "Tomatoes", 0.69);
+        Item testItem4 = new Item("0004", 500, "Burger Patty", 4.00);
         bus1.getInventory().addItem(testItem1);
         bus1.getInventory().addItem(testItem2);
         bus1.getInventory().addItem(testItem3);
@@ -22,10 +22,10 @@ public class CentralBusinessTest {
 
 
         //test that the method successfully adds to the inventory count
-        assertEquals(10, bus1.buyMoreProducts("0001", 5));
-        assertEquals(15, bus1.buyMoreProducts("0004", 10));
-        assertEquals(105, bus1.buyMoreProducts("0002", 100));
-        assertEquals(9, bus1.buyMoreProducts("0003", 4));
+        assertEquals(505, bus1.buyMoreProducts("0001", 5));
+        assertEquals(510, bus1.buyMoreProducts("0004", 10));
+        assertEquals(600, bus1.buyMoreProducts("0002", 100));
+        assertEquals(504, bus1.buyMoreProducts("0003", 4));
 
         //test when the specified item does not exist
         assertThrows(ItemDoesNotExistsException.class, () ->bus1.buyMoreProducts("0006", 10));
@@ -37,8 +37,8 @@ public class CentralBusinessTest {
         CentralBusiness bus1 = new CentralBusiness("Business 1");
 
         //create items
-        Item testItem1 = new Item("0001", 5, "Buns", 1.00);
-        Item testItem2 = new Item("0002", 5, "Lettuce", 0.50);
+        Item testItem1 = new Item("0001", 500, "Buns", 1.00);
+        Item testItem2 = new Item("0002", 500, "Lettuce", 0.50);
 
         //add items to the inventory
         bus1.getInventory().addItem(testItem1);
@@ -81,12 +81,12 @@ public class CentralBusinessTest {
         CentralBusiness bus1 = new CentralBusiness("Business 1");
 
         //create items (ingredients)
-        Item testItem1 = new Item("0001", 25, "Buns", 1.00);
-        Item testItem2 = new Item("0002", 25, "Lettuce", 0.50);
-        Item testItem3 = new Item("0003", 25, "Tomatoes", 0.69);
-        Item testItem4 = new Item("0004", 25, "Burger Patty", 4.00);
-        Item testItem5 = new Item("0005", 25, "Coke", 1.00);
-        Item testItem6 = new Item("0006", 25, "Chicken", 4.00);
+        Item testItem1 = new Item("0001", 250, "Buns", 1.00);
+        Item testItem2 = new Item("0002", 250, "Lettuce", 0.50);
+        Item testItem3 = new Item("0003", 250, "Tomatoes", 0.69);
+        Item testItem4 = new Item("0004", 250, "Burger Patty", 4.00);
+        Item testItem5 = new Item("0005", 250, "Coke", 1.00);
+        Item testItem6 = new Item("0006", 250, "Chicken", 4.00);
 
         //add items to business's inventory system
         bus1.getInventory().addItem(testItem1);
@@ -180,12 +180,12 @@ public class CentralBusinessTest {
         Inventory testInventory = new Inventory();
 
         //create items (ingredients)
-        Item testItem1 = new Item("0001", 5, "Buns", 1.00);
-        Item testItem2 = new Item("0002", 5, "Lettuce", 0.50);
-        Item testItem3 = new Item("0003", 5, "Tomatoes", 0.69);
-        Item testItem4 = new Item("0004", 5, "Burger Patty", 4.00);
-        Item testItem5 = new Item("0005", 5, "Coke", 1.00);
-        Item testItem6 = new Item("0006", 5, "Chicken", 4.00);
+        Item testItem1 = new Item("0001", 500, "Buns", 1.00);
+        Item testItem2 = new Item("0002", 500, "Lettuce", 0.50);
+        Item testItem3 = new Item("0003", 500, "Tomatoes", 0.69);
+        Item testItem4 = new Item("0004", 500, "Burger Patty", 4.00);
+        Item testItem5 = new Item("0005", 500, "Coke", 1.00);
+        Item testItem6 = new Item("0006", 500, "Chicken", 4.00);
 
         //add items to business's inventory system
         testInventory.addItem(testItem1);
@@ -278,7 +278,7 @@ public class CentralBusinessTest {
         business.addAccount("1000", employee1);
         business.addAccount("1001", employee2);
         business.addAccount("1002", employee3);
-        business.addAccount("1003", employee4);
+       business.addAccount("1003", employee4);
         business.addAccount("1004", employee5);
 
 
@@ -315,12 +315,12 @@ public class CentralBusinessTest {
         CentralBusiness bus1 = new CentralBusiness("Business 1");
 
         //create items (ingredients)
-        Item testItem1 = new Item("0001", 25, "Buns", 1.00);
-        Item testItem2 = new Item("0002", 25, "Lettuce", 0.50);
-        Item testItem3 = new Item("0003", 25, "Tomatoes", 0.69);
-        Item testItem4 = new Item("0004", 25, "Burger Patty", 4.00);
-        Item testItem5 = new Item("0005", 25, "Coke", 1.00);
-        Item testItem6 = new Item("0006", 25, "Chicken", 4.00);
+        Item testItem1 = new Item("0001", 250, "Buns", 1.00);
+        Item testItem2 = new Item("0002", 250, "Lettuce", 0.50);
+        Item testItem3 = new Item("0003", 250, "Tomatoes", 0.69);
+        Item testItem4 = new Item("0004", 250, "Burger Patty", 4.00);
+        Item testItem5 = new Item("0005", 250, "Coke", 1.00);
+        Item testItem6 = new Item("0006", 250, "Chicken", 4.00);
 
         //add items to business's inventory system
         bus1.getInventory().addItem(testItem1);
@@ -423,14 +423,16 @@ public class CentralBusinessTest {
     @org.junit.jupiter.api.Test
     public void orderTest() throws ItemCountAt0Exception, ItemDoesNotExistsException, ItemAlreadyExistsException{
         CentralBusiness bus1 = new CentralBusiness("Business 1");
+        bus1.setInventoryThreshold(145);
+        bus1.setReorderAmount(100);
 
 
 
         //create items (ingredients)
-        Item testItem1 = new Item("0001", 15, "Buns", 1.00);
-        Item testItem2 = new Item("0002", 15, "Lettuce", 0.50);
-        Item testItem3 = new Item("0003", 15, "Meat", 2.69);
-        Item testItem4 = new Item("0004", 15, "Potatoes", 1.50);
+        Item testItem1 = new Item("0001", 150, "Buns", 1.00);
+        Item testItem2 = new Item("0002", 150, "Lettuce", 0.50);
+        Item testItem3 = new Item("0003", 150, "Meat", 2.69);
+        Item testItem4 = new Item("0004", 150, "Potatoes", 1.50);
         Item testItem5 = new Item("0005", 0, "bacon", 2.20);
 
         //add items to inventory
@@ -488,10 +490,10 @@ public class CentralBusinessTest {
 
 
         //check that items are getting decremented from inventory
-        assertEquals(14, testItem1.getCount());
-        assertEquals(14, testItem2.getCount());
-        assertEquals(14, testItem3.getCount());
-        assertEquals(14, testItem4.getCount());
+        assertEquals(149, testItem1.getCount());
+        assertEquals(149, testItem2.getCount());
+        assertEquals(149, testItem3.getCount());
+        assertEquals(149, testItem4.getCount());
 
         //customer 2 order items
         ArrayList<MenuItem> customer2Order = new ArrayList<>();
@@ -527,11 +529,11 @@ public class CentralBusinessTest {
         ArrayList<MenuItem> customer4FakeOrder2 = new ArrayList<>();
         customer4FakeOrder2.add(bacon);
 
-        //check that items are getting decremented from inventory
-        assertEquals(9, testItem1.getCount());
-        assertEquals(9, testItem2.getCount());
-        assertEquals(9, testItem3.getCount());
-        assertEquals(11, testItem4.getCount());
+        //check that items are getting decremented from inventory, and got automatically re-ordered when went under threshold (145)
+        assertEquals(244, testItem1.getCount());
+        assertEquals(244, testItem2.getCount());
+        assertEquals(244, testItem3.getCount());
+        assertEquals(146, testItem4.getCount());
 
         //check order ID's
         assertEquals("0" , bus1.getAllOrders().get("0").getOrderID());

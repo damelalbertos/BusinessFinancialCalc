@@ -13,6 +13,8 @@ public class CentralBusiness {
     private HashMap<String, Order> allOrders;
     private HashMap<String, MenuItem> menu;
     private HashMap<String, Double> menuItemRevenue;
+    private double reorderAmount; //amount to reorder when hits threshold
+    private double inventoryThreshold; //buy more product when count reaches this threshold
 
     public CentralBusiness(String businessName) {
         this.businessName = businessName;
@@ -258,6 +260,23 @@ public class CentralBusiness {
         //make sure the order gets added to revenue
         addToRevenue(tot);
     }
+
+    public double getInventoryThreshold() {
+        return inventoryThreshold;
+    }
+
+    public void setInventoryThreshold(double threshold) {
+        this.inventoryThreshold = threshold;
+    }
+
+    public double getReorderAmount() {
+        return reorderAmount;
+    }
+
+    public void setReorderAmount(double am) {
+        this.reorderAmount = am;
+    }
+
 
 
 
