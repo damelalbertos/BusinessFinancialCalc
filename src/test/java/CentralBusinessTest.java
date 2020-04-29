@@ -20,12 +20,19 @@ public class CentralBusinessTest {
         bus1.getInventory().addItem(testItem3);
         bus1.getInventory().addItem(testItem4);
 
+        bus1.buyMoreProducts("0001", 5);
+        bus1.buyMoreProducts("0004", 10);
+        bus1.buyMoreProducts("0002", 100);
+        bus1.buyMoreProducts("0003", 4);
+
+
+
 
         //test that the method successfully adds to the inventory count
-        assertEquals(505, bus1.buyMoreProducts("0001", 5));
-        assertEquals(510, bus1.buyMoreProducts("0004", 10));
-        assertEquals(600, bus1.buyMoreProducts("0002", 100));
-        assertEquals(504, bus1.buyMoreProducts("0003", 4));
+        assertEquals(505, bus1.getInventory().getItemCount("0001"));
+        assertEquals(510, bus1.getInventory().getItemCount("0004"));
+        assertEquals(600, bus1.getInventory().getItemCount("0002"));
+        assertEquals(504, bus1.getInventory().getItemCount("0003"));
 
         //test when the specified item does not exist
         assertThrows(ItemDoesNotExistsException.class, () ->bus1.buyMoreProducts("0006", 10));
@@ -39,10 +46,12 @@ public class CentralBusinessTest {
         //create items
         Item testItem1 = new Item("0001", 500, "Buns", 1.00);
         Item testItem2 = new Item("0002", 500, "Lettuce", 0.50);
+        Item testItem3 = new Item("0003", 100, "Meat", 2.50);
 
         //add items to the inventory
         bus1.getInventory().addItem(testItem1);
         bus1.getInventory().addItem(testItem2);
+        bus1.getInventory().addItem(testItem3);
 
         //buyMoreProducts 1
         bus1.buyMoreProducts("0001", 5); //1.00 * 5
@@ -52,7 +61,6 @@ public class CentralBusinessTest {
         //tests that it adds to a previous addition to expenses
         bus1.buyMoreProducts("0002", 7);//0.50 * 7 + 5
         assertEquals(8.5,bus1.getExpenses());
-
 
         //create employees
         Employee employee1 = new Employee("1000", 11.25, 36);
@@ -423,16 +431,16 @@ public class CentralBusinessTest {
     @org.junit.jupiter.api.Test
     public void orderTest() throws ItemCountAt0Exception, ItemDoesNotExistsException, ItemAlreadyExistsException{
         CentralBusiness bus1 = new CentralBusiness("Business 1");
-        bus1.setInventoryThreshold(145);
+        bus1.setInventoryThreshold(150);
         bus1.setReorderAmount(100);
 
 
 
         //create items (ingredients)
-        Item testItem1 = new Item("0001", 150, "Buns", 1.00);
-        Item testItem2 = new Item("0002", 150, "Lettuce", 0.50);
-        Item testItem3 = new Item("0003", 150, "Meat", 2.69);
-        Item testItem4 = new Item("0004", 150, "Potatoes", 1.50);
+        Item testItem1 = new Item("0001", 149, "Buns", 1.00);
+        Item testItem2 = new Item("0002", 149, "Lettuce", 0.50);
+        Item testItem3 = new Item("0003", 149, "Meat", 2.69);
+        Item testItem4 = new Item("0004", 149, "Potatoes", 1.50);
         Item testItem5 = new Item("0005", 0, "bacon", 2.20);
 
         //add items to inventory
@@ -485,15 +493,21 @@ public class CentralBusinessTest {
         customer1Order.add(burger);
         customer1Order.add(fries);
 
+        double curExp = bus1.getExpenses();
+
         //customer 1 orders
         bus1.order(customer1Order, customer1, "0");
 
+        //check that items are getting decremented from inventory, and got automatically re-ordered when went under threshold (150) for a new order
+        assertEquals(248, testItem1.getCount());
+        assertEquals(248, testItem2.getCount());
+        assertEquals(248, testItem3.getCount());
+        assertEquals(248, testItem4.getCount());
 
-        //check that items are getting decremented from inventory
-        assertEquals(149, testItem1.getCount());
-        assertEquals(149, testItem2.getCount());
-        assertEquals(149, testItem3.getCount());
-        assertEquals(149, testItem4.getCount());
+        //check expenses get added for automatic product purchase
+        //100*1 + 100*.50 + 100*2.69 + 100*1.50 = 569.00
+        assertEquals(curExp+569.00, bus1.getExpenses());
+
 
         //customer 2 order items
         ArrayList<MenuItem> customer2Order = new ArrayList<>();
@@ -529,11 +543,12 @@ public class CentralBusinessTest {
         ArrayList<MenuItem> customer4FakeOrder2 = new ArrayList<>();
         customer4FakeOrder2.add(bacon);
 
-        //check that items are getting decremented from inventory, and got automatically re-ordered when went under threshold (145)
-        assertEquals(244, testItem1.getCount());
-        assertEquals(244, testItem2.getCount());
-        assertEquals(244, testItem3.getCount());
-        assertEquals(146, testItem4.getCount());
+        //check that items are getting decremented from inventory (not under threshold since all items in same order, and order didn't start under threshold
+        assertEquals(243, testItem1.getCount());
+        assertEquals(243, testItem2.getCount());
+        assertEquals(243, testItem3.getCount());
+        assertEquals(245, testItem4.getCount());
+
 
         //check order ID's
         assertEquals("0" , bus1.getAllOrders().get("0").getOrderID());
