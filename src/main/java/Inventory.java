@@ -36,18 +36,6 @@ public class Inventory {
         this.inventory = new HashMap<String, Item>();
     }
 
-//    /**
-//     * Description: Pass in Item id so we know which one to buy more
-//     * products of to increase amount of items
-//     */
-//    public int buyMoreProducts(String itemId, int amount) throws ItemDoesNotExistsException {
-//        if(!inventory.containsKey(itemId)){ //check is the item exists in the inventory
-//            throw new ItemDoesNotExistsException("No Item to buy products for");
-//        }
-//        return inventory.get(itemId).addCount(amount);
-//    }
-
-
     /**
      * Description: Gives the chosen item based on itemId
      * @param itemId

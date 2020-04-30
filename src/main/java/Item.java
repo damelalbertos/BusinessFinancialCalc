@@ -63,8 +63,8 @@ public class Item{
 
     public String getItemID(){return this.itemId;}
 
-    public int addCount(int amount){
-        return itemCount+amount;
+    public void addCount(int amount){
+        itemCount+=amount;
     }
 
 

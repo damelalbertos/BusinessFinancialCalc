@@ -13,6 +13,8 @@ public class CentralBusiness {
     private HashMap<String, Order> allOrders;
     private HashMap<String, MenuItem> menu;
     private HashMap<String, Double> menuItemRevenue;
+    private int reorderAmount; //amount to reorder when hits threshold
+    private int inventoryThreshold; //buy more product when count reaches this threshold
 
     public CentralBusiness(String businessName) {
         this.businessName = businessName;
@@ -41,12 +43,12 @@ public class CentralBusiness {
      * Description: Pass in Item id so we know which one to buy more
      * products of to increase amount of items
      */
-    public int buyMoreProducts(String itemId, int amount) throws ItemDoesNotExistsException {
+    public void buyMoreProducts(String itemId, int amount) throws ItemDoesNotExistsException {
         if(!inventory.inventory.containsKey(itemId)){ //check is the item exists in the inventory
             throw new ItemDoesNotExistsException("No Item to buy products for");
         }
         addToExpenses(inventory.inventory.get(itemId).getCost() * amount);
-        return inventory.inventory.get(itemId).addCount(amount);
+       inventory.inventory.get(itemId).addCount(amount);
     }
 
     public HashMap<String, MenuItem> getMenu() {
@@ -212,13 +214,20 @@ public class CentralBusiness {
 
     public void order(ArrayList<MenuItem> orderItems, Customer customer, String orderID) throws ItemDoesNotExistsException, ItemCountAt0Exception {
         //throw an exception if they order an item not on the menu or ingredients used are out of stock
+        //iterate through menu items ordred
         for (int m = 0; m < orderItems.size(); m++) {
             if (!menu.containsKey(orderItems.get(m).getMenuID())) {
                 throw new ItemDoesNotExistsException(orderItems.get(m).getMenuItemName() + " does not exist in menu");
             }
+            //iterate through ingredients
             for (int n = 0; n < orderItems.get(m).getItemIngredients().size(); n++) {
+                //should never reach due to automatic reordering
                 if (orderItems.get(m).getItemIngredients().get(n).getCount() < 1) {
                     throw new ItemCountAt0Exception("Sorry, we are out of "+orderItems.get(m).getItemIngredients().get(n)+ ", please order again!");
+                }
+                //automatic reordering
+                else if (orderItems.get(m).getItemIngredients().get(n).getCount() < inventoryThreshold) {
+                    buyMoreProducts(orderItems.get(m).getItemIngredients().get(n).getItemID(), reorderAmount);
                 }
             }
         }
@@ -258,6 +267,23 @@ public class CentralBusiness {
         //make sure the order gets added to revenue
         addToRevenue(tot);
     }
+
+    public int getInventoryThreshold() {
+        return inventoryThreshold;
+    }
+
+    public void setInventoryThreshold(int threshold) {
+        this.inventoryThreshold = threshold;
+    }
+
+    public int getReorderAmount() {
+        return reorderAmount;
+    }
+
+    public void setReorderAmount(int am) {
+        this.reorderAmount = am;
+    }
+
 
 
 
