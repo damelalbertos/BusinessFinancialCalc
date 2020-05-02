@@ -123,6 +123,7 @@ public class CentralBusinessTest {
         menuItem2.setItemIngredients(cokeIngredients);
 
         //add the two menuItems to the business's menu
+
         bus1.addToMenu(menuItem1, bus1.getInventory().getInventory());
         bus1.addToMenu(menuItem2, bus1.getInventory().getInventory());
 

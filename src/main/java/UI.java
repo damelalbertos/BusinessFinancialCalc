@@ -1,26 +1,74 @@
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
-import java.util.Calendar;
-import java.util.Random;
-import java.util.Scanner;
-
-
+import java.util.*;
 
 
 public class UI {
 
-    public static void main(String[] args) throws ItemAlreadyExistsException {
+    public static void main(String[] args) throws ItemAlreadyExistsException, ItemDoesNotExistsException, ItemCountAt0Exception {
 
         CentralBusiness bus1 = new CentralBusiness("Business 1");
+        Inventory testInventory = new Inventory();
 
-        Item testItem1 = new Item("0001", 5, "Buns", 1.00);
-        Item testItem2 = new Item("0002", 5, "Lettuce", 0.50);
-        Item testItem3 = new Item("0003", 5, "Tomatoes", 0.69);
-        Item testItem4 = new Item("0004", 5, "Burger Patty", 4.00);
+
+        Item testItem1 = new Item("0001", 5000, "Buns", 1.00);
+        Item testItem2 = new Item("0002", 1000, "Lettuce", 0.50);
+        Item testItem3 = new Item("0003", 1000, "Bacon", 0.69);
+        Item testItem4 = new Item("0004", 1000, "Burger Patty", 4.00);
+        Item testItem5 = new Item("0005", 1000, "potatoe", 2.00);
         bus1.getInventory().addItem(testItem1);
         bus1.getInventory().addItem(testItem2);
         bus1.getInventory().addItem(testItem3);
         bus1.getInventory().addItem(testItem4);
+
+
+
+        testInventory.addItem(testItem1);
+        testInventory.addItem(testItem2);
+        testInventory.addItem(testItem3);
+        testInventory.addItem(testItem4);
+        testInventory.addItem(testItem5);
+
+
+        ArrayList<Item> burgerIngredients = new ArrayList<>();
+        burgerIngredients.add(testItem1);
+        burgerIngredients.add(testItem2);
+        burgerIngredients.add(testItem3);
+        burgerIngredients.add(testItem4);
+
+        //add fries ingredients
+        ArrayList<Item> friesIngredients = new ArrayList<>();
+        friesIngredients.add(testItem4);
+
+        //create menuItem object (burger and fries)
+        MenuItem burger = new MenuItem("0001", "Burger", 5.00);
+        MenuItem fries = new MenuItem("0002", "Fries", 3.00);
+        burger.setItemIngredients(burgerIngredients);
+        fries.setItemIngredients(friesIngredients);
+
+        //menuItem to test count < 1 ordering
+        MenuItem bacon = new MenuItem("0003", "Bacon", 3.00);
+        ArrayList<Item> baconIngredients = new ArrayList<>();
+        bacon.setItemIngredients(baconIngredients);
+
+
+
+        bus1.addToMenu(burger, bus1.getInventory().getInventory());
+        bus1.addToMenu(fries, bus1.getInventory().getInventory());
+        bus1.addToMenu(bacon, bus1.getInventory().getInventory());
+
+
+
+
+
+       ArrayList<MenuItem>allMenuItems = new ArrayList<>();
+        allMenuItems.add(fries);
+        allMenuItems.add(bacon);
+        allMenuItems.add(burger);
+
+
+
+
 
         Employee employee1 = new Employee("1000", 11.25, 36);
         Employee employee2 = new Employee("1001", 13.25, 50);
@@ -30,6 +78,7 @@ public class UI {
         bus1.addAccount("1000", employee1);
         bus1.addAccount("1001", employee2);
         bus1.addAccount("1002", employee3);
+
 
 
 
@@ -51,6 +100,7 @@ public class UI {
         }catch(ParseException e){
             e.printStackTrace();
         }
+
         //Incrementing the date by 1 day
         c.add(Calendar.DAY_OF_MONTH, 1);
         String newDate = sdf.format(c.getTime());
@@ -58,23 +108,35 @@ public class UI {
 
 
 
+        String endDate = "2020-12-31";
 
-
-        while(newDate != "2020-12-31"){
+        while(newDate.compareTo(endDate) != 0){
             int orderAmount = rand.nextInt((100-25)+1)+25;
             int counter =0;
 
             while(counter < orderAmount){
+                Customer customer = new Customer("useJava", "Faker", "0");
+                ArrayList<MenuItem> customerOrder = new ArrayList<>();
+
+                customerOrder.add(allMenuItems.get(new Random().nextInt(allMenuItems.size())));
+                customerOrder.add(allMenuItems.get(new Random().nextInt(allMenuItems.size())));
+                customerOrder.add(allMenuItems.get(new Random().nextInt(allMenuItems.size())));
+                customerOrder.add(allMenuItems.get(new Random().nextInt(allMenuItems.size())));
+                bus1.order(customerOrder, customer, "1");
+
+                //System.out.println(counter);
+
 
 
                 //create new objects for customer orders
                 //pick up to 10 random menuItems to chooose from
                 //get total and all that to add automatically to business
-
+                counter++;
             }
 
-
-
+            //Incrementing the date by 1 day
+            c.add(Calendar.DAY_OF_MONTH, 1);
+            newDate = sdf.format(c.getTime());
             //add one day to newDate and continue the process over and over until that date is reached
 
 
