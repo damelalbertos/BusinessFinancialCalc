@@ -11,6 +11,30 @@ public class UI {
 
     public static void main(String[] args) throws ItemAlreadyExistsException {
 
+        CentralBusiness bus1 = new CentralBusiness("Business 1");
+
+        Item testItem1 = new Item("0001", 5, "Buns", 1.00);
+        Item testItem2 = new Item("0002", 5, "Lettuce", 0.50);
+        Item testItem3 = new Item("0003", 5, "Tomatoes", 0.69);
+        Item testItem4 = new Item("0004", 5, "Burger Patty", 4.00);
+        bus1.getInventory().addItem(testItem1);
+        bus1.getInventory().addItem(testItem2);
+        bus1.getInventory().addItem(testItem3);
+        bus1.getInventory().addItem(testItem4);
+
+        Employee employee1 = new Employee("1000", 11.25, 36);
+        Employee employee2 = new Employee("1001", 13.25, 50);
+        Employee employee3 = new Employee("1002", 10, 40);
+        Employee employee4 = new Employee("1002", 20, 40);
+
+        bus1.addAccount("1000", employee1);
+        bus1.addAccount("1001", employee2);
+        bus1.addAccount("1002", employee3);
+
+
+
+
+
         Random rand = new Random();
 
 
@@ -43,38 +67,20 @@ public class UI {
             while(counter < orderAmount){
 
 
+                //create new objects for customer orders
+                //pick up to 10 random menuItems to chooose from
+                //get total and all that to add automatically to business
 
             }
 
 
 
+            //add one day to newDate and continue the process over and over until that date is reached
 
 
 
 
         }
-
-
-
-        CentralBusiness bus1 = new CentralBusiness("Business 1");
-
-        Item testItem1 = new Item("0001", 5, "Buns", 1.00);
-        Item testItem2 = new Item("0002", 5, "Lettuce", 0.50);
-        Item testItem3 = new Item("0003", 5, "Tomatoes", 0.69);
-        Item testItem4 = new Item("0004", 5, "Burger Patty", 4.00);
-        bus1.getInventory().addItem(testItem1);
-        bus1.getInventory().addItem(testItem2);
-        bus1.getInventory().addItem(testItem3);
-        bus1.getInventory().addItem(testItem4);
-
-        Employee employee1 = new Employee("1000", 11.25, 36);
-        Employee employee2 = new Employee("1001", 13.25, 50);
-        Employee employee3 = new Employee("1002", 10, 40);
-        Employee employee4 = new Employee("1002", 20, 40);
-
-        bus1.addAccount("1000", employee1);
-        bus1.addAccount("1001", employee2);
-        bus1.addAccount("1002", employee3);
 
         Scanner scan = new Scanner(System.in);
 
