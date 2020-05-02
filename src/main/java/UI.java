@@ -11,6 +11,8 @@ public class UI {
         Inventory testInventory = new Inventory();
 
 
+
+
         Item testItem1 = new Item("0001", 5000, "Buns", 1.00);
         Item testItem2 = new Item("0002", 1000, "Lettuce", 0.50);
         Item testItem3 = new Item("0003", 1000, "Bacon", 0.69);
@@ -20,6 +22,10 @@ public class UI {
         bus1.getInventory().addItem(testItem2);
         bus1.getInventory().addItem(testItem3);
         bus1.getInventory().addItem(testItem4);
+
+
+        bus1.setInventoryThreshold(100);
+        bus1.setReorderAmount(1000);
 
 
 
@@ -124,7 +130,7 @@ public class UI {
                 customerOrder.add(allMenuItems.get(new Random().nextInt(allMenuItems.size())));
                 bus1.order(customerOrder, customer, "1");
 
-                //System.out.println(counter);
+                System.out.println(counter);
 
 
 
