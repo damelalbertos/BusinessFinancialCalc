@@ -1,9 +1,3 @@
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
-
-
 public class Customer {
 
 
@@ -28,5 +22,10 @@ public class Customer {
     public String getlName() {
         return lName;
     }
+
+
+
+
+
 }
 
