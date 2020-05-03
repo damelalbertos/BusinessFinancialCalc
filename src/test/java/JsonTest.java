@@ -21,7 +21,7 @@ public class JsonTest {
 
         testInventory.decrementItem("003");
         testInventory.decrementItem("003");
-        Assert.assertEquals(298, testInventory.getItemCount("003"));
+        Assert.assertEquals(498, testInventory.getItemCount("003"));
 
 
     }
@@ -67,18 +67,18 @@ public class JsonTest {
         ArrayList<Item> burgerIngredients = new ArrayList<>();
         burgerIngredients.add(items.get(0));
         burgerIngredients.add(items.get(1));
+        burgerIngredients.add(items.get(2));
         burgerIngredients.add(items.get(3));
-
 
         List<MenuItem>menuItems = JsonUtil.listFromJsonFile("src/test/setMenu.json", MenuItem.class);
 
 
         menuItems.get(0).setItemIngredients(burgerIngredients);
 
-        assertEquals(menuItems.get(0).getItemIngredients(), "[Lettuce, Bun, beef]");
-
-
-
+        assertEquals("Lettuce", menuItems.get(0).getItemIngredients().get(0).getItemName());
+        assertEquals("Bun", menuItems.get(0).getItemIngredients().get(1).getItemName());
+        assertEquals("beef", menuItems.get(0).getItemIngredients().get(2).getItemName());
+        assertEquals("cheese", menuItems.get(0).getItemIngredients().get(3).getItemName());
 
         for (Item item : items) {
             testInventory.addItem(item);

@@ -188,7 +188,7 @@ public class InventoryTest {
 
         testInventory.decrementItem("003");
         testInventory.decrementItem("003");
-        Assert.assertEquals(298, testInventory.getItemCount("003"));
+        Assert.assertEquals(498, testInventory.getItemCount("003"));
 
 
     }
