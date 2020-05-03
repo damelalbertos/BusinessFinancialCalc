@@ -69,11 +69,12 @@
     "cost" : 0.10
   },
 
+
   {
     "itemId" : "011",
     "itemCount" : 300,
-    "itemName" : "potatoes",
-    "cost" : 2.00
+    "itemName" : "bacon",
+    "cost" : 1.00
   }
 
 ]

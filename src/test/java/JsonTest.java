@@ -70,6 +70,7 @@ public class JsonTest {
         burgerIngredients.add(items.get(2));
         burgerIngredients.add(items.get(3));
 
+
         List<MenuItem>menuItems = JsonUtil.listFromJsonFile("src/test/setMenu.json", MenuItem.class);
 
 
