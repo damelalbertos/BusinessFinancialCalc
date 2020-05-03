@@ -1,0 +1,36 @@
+[{
+  "menuItemId": "0001",
+  "menuItemName": "Burger",
+  "price": 4.00
+},
+  {
+    "menuItemId": "0002",
+    "menuItemName": "Fries",
+    "price": 2.75
+  },
+  {
+    "menuItemId": "0003",
+    "menuItemName": "CheeseBurger",
+    "price": 5.00
+  },
+  {
+    "menuItemId": "0004",
+    "menuItemName": "Mozzarella Sticks",
+    "price": 5
+  },
+  {
+    "menuItemId": "0005",
+    "menuItemName": "Salad",
+    "price": 6
+  },
+  {
+    "menuItemId": "0006",
+    "menuItemName": "MilkShake",
+    "price": 3.75
+  },
+  {
+    "menuItemId": "0007",
+    "menuItemName": "Fountain Drink",
+    "price": 2.50
+  }
+]

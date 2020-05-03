@@ -1,22 +1,79 @@
 {
   "inventory": {
-    "001" : {
+
+
+
+
+"002": {
+  "itemId" : "002",
+  "itemCount" : 100,
+  "itemName" : "Lettuce",
+  "cost" : 0.15
+},
+
+
+    "001": {
       "itemId" : "001",
       "itemCount" : 100,
-      "itemName" : "lettuce",
-      "cost" : 0.15
+      "itemName" : "cheese",
+      "cost" : 1.00
     },
-    "002" : {
-      "itemId" : "002",
-      "itemCount" : 100,
-      "itemName" : "bun",
-      "cost" : 0.50
-    },
-    "003" : {
-      "itemId" : "003",
-      "itemCount" : 300,
-      "itemName" : "meat",
-      "cost" : 2.75
-    }
+
+    "003": {
+    "itemId" : "003",
+    "itemCount" : 500,
+    "itemName" : "Bun",
+    "cost" : 0.50
+  },
+
+    "004":  {
+    "itemId" : "004",
+    "itemCount" : 300,
+    "itemName" : "beef",
+    "cost" : 2.75
+  },
+
+
+
+
+    "005": {
+    "itemId" : "005",
+    "itemCount" : 200,
+    "itemName" : "tomatoes",
+    "cost" : 0.75
+  },
+
+
+    "006": {
+    "itemId" : "006",
+    "itemCount" : 1000,
+    "itemName" : "ketchup",
+    "cost" : 0.10
+  },
+    "007":{
+    "itemId" : "007",
+    "itemCount" : 20,
+    "itemName" : "milkshake mix",
+    "cost" : 1.65
+  },
+    "008":{
+    "itemId" : "008",
+    "itemCount" : 100,
+    "itemName" : "croutons",
+    "cost" : 0.25
+  },
+    "009":{
+    "itemId" : "009",
+    "itemCount" : 100,
+    "itemName" : "pickles",
+    "cost" : 0.75
+  },
+
+    "010": {
+    "itemId" : "010",
+    "itemCount" : 1000,
+    "itemName" : "cups",
+    "cost" : 0.10
+  }
   }
 }
