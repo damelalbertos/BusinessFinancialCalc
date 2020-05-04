@@ -285,4 +285,13 @@ public class CentralBusiness {
     }
 
 
+    /**
+     *
+     * @return the current profit of the business
+     */
+    public double calculateProfit() {
+        return 0;
+    }
+
+
 }
