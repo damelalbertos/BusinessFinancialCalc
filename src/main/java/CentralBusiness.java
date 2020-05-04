@@ -13,6 +13,7 @@ public class CentralBusiness {
     private HashMap<String, Order> allOrders;
     private HashMap<String, MenuItem> menu;
     private HashMap<String, Double> menuItemRevenue;
+    private HashMap<String, Integer> amountSold;
     private int reorderAmount; //amount to reorder when hits threshold
     private int inventoryThreshold; //buy more product when count reaches this threshold
 
@@ -23,6 +24,7 @@ public class CentralBusiness {
         this.allOrders = new HashMap<String, Order>();
         this.menu = new HashMap<String, MenuItem>();
         this.menuItemRevenue = new HashMap<String, Double>();
+        this.amountSold = new HashMap<String, Integer>();
         this.revenue = 0;
         this.expenses = 0;
     }
@@ -92,6 +94,7 @@ public class CentralBusiness {
         } else {
             menu.put(menuItem.getMenuID(), menuItem);
             menuItemRevenue.put(menuItem.getMenuID(), 0.00);
+            amountSold.put(menuItem.getMenuID(), 0);
         }
 
     }
@@ -251,6 +254,9 @@ public class CentralBusiness {
             setRevenueByItem(orderItems.get(x), orderItems.get(x).getPrice());
             //iterate through and add all the ingredients for the menu items to the array
             ingredients.addAll(orderItems.get(x).getItemIngredients());
+            //add items sold to amount sold map
+            int prevAm = amountSold.get(orderItems.get(x).getMenuID());
+            amountSold.put(orderItems.get(x).getMenuID(), prevAm+1);
         }
 
         //set total
@@ -290,6 +296,15 @@ public class CentralBusiness {
      * @return the current profit of the business
      */
     public double calculateProfit() {
+        return revenue-expenses;
+    }
+
+    /**
+     * @throws ItemDoesNotExistsException if menu item requested does not exist
+     * @param menuItem
+     * @return the current profit for the specified item
+     */
+    public double getProfitByItem(MenuItem menuItem) throws ItemDoesNotExistsException{
         return 0;
     }
 

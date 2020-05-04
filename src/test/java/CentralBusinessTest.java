@@ -594,6 +594,15 @@ public class CentralBusinessTest {
 
         //second profit test
         assertEquals(6642-5121, bus1.calculateProfit());
+
+        //4.19 x 831 = 3481.89 = cost to make burger
+        System.out.println(bus1.getRevenueByItem(burger));
+        //4155.0 is revenue from burgers
+        //test get profit by item
+        double profit = 4155.00-3481.89;
+        profit = Math.round(profit * 100.0) / 100.0;
+        assertEquals(profit, bus1.getProfitByItem(burger));
+
     }
 
 
