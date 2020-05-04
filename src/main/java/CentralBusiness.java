@@ -305,7 +305,21 @@ public class CentralBusiness {
      * @return the current profit for the specified item
      */
     public double getProfitByItem(MenuItem menuItem) throws ItemDoesNotExistsException{
-        return 0;
+        if (!menu.containsKey(menuItem.getMenuID())) {
+            throw new ItemDoesNotExistsException(menuItem.getMenuItemName() + " does not exist in menu");
+        } else {
+           int soldAm = amountSold.get(menuItem.getMenuID());
+           double costOfItem = 0;
+
+           for (int x = 0; x < menuItem.getItemIngredients().size(); x++) {
+               costOfItem+=menuItem.getItemIngredients().get(x).getCost();
+           }
+
+           double totalCosts = soldAm * costOfItem;
+           totalCosts = Math.round(totalCosts * 100.0) / 100.0;
+
+           return getRevenueByItem(menuItem) - totalCosts;
+        }
     }
 
 
