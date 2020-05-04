@@ -509,7 +509,6 @@ public class CentralBusinessTest {
         //100*1 + 100*.50 + 100*2.69 + 100*1.50 = 569.00
         assertEquals(curExp+569.00, bus1.getExpenses());
 
-
         //customer 2 order items
         ArrayList<MenuItem> customer2Order = new ArrayList<>();
         customer2Order.add(burger);
@@ -574,5 +573,47 @@ public class CentralBusinessTest {
 
         //check exception thrown for ordering item with ingredient out of stock
         assertThrows(ItemCountAt0Exception.class, ()-> bus1.order(customer4FakeOrder2, customer4, "3"));
+
+        //simulate customer orders for profit test
+        for (int x = 0; x < 75; x++) {
+            bus1.order(customer1Order, customer1, "10");
+        }
+
+        System.out.println(bus1.getRevenue());
+        System.out.println(bus1.getExpenses());
+
+        //profit test
+        assertEquals(642-569, bus1.calculateProfit());
+
+        for (int x = 0; x < 750; x++) {
+            bus1.order(customer1Order, customer1, "10");
+        }
+
+        System.out.println(bus1.getRevenue());
+        System.out.println(bus1.getExpenses());
+
+        //second profit test
+        assertEquals(6642-5121, bus1.calculateProfit());
+
+
+        //4.19 x 831 = 3481.89 = cost to make burger
+
+        System.out.println(bus1.getRevenueByItem(burger));
+        //4155.0 is revenue from burgers
+
+        //expected profit by item (burger)
+        double prof = 4155.00-3481.89;
+        prof = Math.round(prof * 100.0) / 100.0;
+
+        //actual profit by item (burger)
+        double actProf = bus1.getProfitByItem(burger);
+        actProf = Math.round(actProf * 100.0) / 100.0;
+
+        //test get profit by item
+        assertEquals(prof, actProf);
+
     }
+
+
+
 }
