@@ -13,10 +13,10 @@ public class UI {
         CentralBusiness bus1 = new CentralBusiness("Business 1");
 
         //read ingredients from json file
-        List<Item> items =  JsonUtil.listFromJsonFile("src/test/setItems.json", Item.class);
+        List<Item> items = JsonUtil.listFromJsonFile("src/test/setItems.json", Item.class);
 
         //read menu items from json file
-        List<MenuItem>allMenuItems = JsonUtil.listFromJsonFile("src/test/setMenu.json", MenuItem.class);
+        List<MenuItem> allMenuItems = JsonUtil.listFromJsonFile("src/test/setMenu.json", MenuItem.class);
 
         //add ingredients to business's inventory
         for (Item item : items) {
@@ -40,11 +40,11 @@ public class UI {
         mozzarellaSticksIngredients.add(items.get(2));
 
 
-        ArrayList<Item> saladIngredients= new ArrayList<>();
+        ArrayList<Item> saladIngredients = new ArrayList<>();
         saladIngredients.add(items.get(2));
 
 
-        ArrayList<Item>cheeseBurgerIngredients = new ArrayList<>();
+        ArrayList<Item> cheeseBurgerIngredients = new ArrayList<>();
         cheeseBurgerIngredients.add(items.get(0));
         cheeseBurgerIngredients.add(items.get(1));
         cheeseBurgerIngredients.add(items.get(2));
@@ -78,13 +78,23 @@ public class UI {
 
         Random rand = new Random();
 
+        String quarterOne = "2020-4-14";
+        String quarterTwo = "2020-7-14";
+        String quarterThree = "2020-10-14";
+        String quarterFour = "2020-1-14";
+
+        double quarterOneRev = 0;
+        double quarterTwoRev = 0;
+        double quarterThreeRev = 0;
+        double quarterFourRev = 0;
+
         String oldDate = "2020-01-01";
         //System.out.println("Date before Addition: "+oldDate);
         SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
         Calendar c = Calendar.getInstance();
-        try{
+        try {
             c.setTime(sdf.parse(oldDate));
-        }catch(ParseException e){
+        } catch (ParseException e) {
             e.printStackTrace();
         }
 
@@ -94,14 +104,13 @@ public class UI {
         //System.out.println("Date Incremented by One: "+newDate);
 
 
-
         String endDate = "2020-12-31";
 
-        while(newDate.compareTo(endDate) != 0){
-            int orderAmount = rand.nextInt((100-25)+1)+25;
-            int counter =0;
+        while (newDate.compareTo(endDate) != 0) {
+            int orderAmount = rand.nextInt((100 - 25) + 1) + 25;
+            int counter = 0;
 
-            while(counter < orderAmount){
+            while (counter < orderAmount) {
                 Customer customer = new Customer("useJava", "Faker", "0");
                 ArrayList<MenuItem> customerOrder = new ArrayList<>();
 
@@ -111,8 +120,7 @@ public class UI {
                 customerOrder.add(allMenuItems.get(new Random().nextInt(allMenuItems.size())));
                 bus1.order(customerOrder, customer, "1");
 
-                System.out.println(counter);
-
+                //System.out.println(counter);
 
 
                 //create new objects for customer orders
@@ -124,14 +132,19 @@ public class UI {
             //Incrementing the date by 1 day
             c.add(Calendar.DAY_OF_MONTH, 1);
             newDate = sdf.format(c.getTime());
+
             //add one day to newDate and continue the process over and over until that date is reached
 
 
-
+//            if(newDate.compareTo(quarterOne) == 0){
+//                quarterOneRev = bus1.getRevenue();
+//
+//
+//                System.out.println(quarterOneRev);
+//
+//            }
 
         }
-
-
 
 
         Scanner scan = new Scanner(System.in);
@@ -152,101 +165,128 @@ public class UI {
             //if input is viewe
             //  switch (scan.next().toLowerCase()){
             //   case "view":
-            System.out.println("What would you like to view? (Stats, Inventory, Menu, Employees)");
+            //System.out.println("What would you like to view? (Stats, Inventory, Menu, Employees)");
 //                    while(!scan.next().equalsIgnoreCase("stats") || !scan.next().equalsIgnoreCase("inventory") ||
 //                            !scan.next().equalsIgnoreCase("menu") || !scan.next().equalsIgnoreCase("employees")){
 //                        System.out.println("Invalid, please type stats, inventory, menu, employees, or quit.");
             //}
 
-            switch (scan.next().toLowerCase()) {
-                case "stats":
-                    System.out.println("Would you like to view daily, quarterly, or yearly stats?");
+            boolean again = true;
+
+            while (again) {
+                System.out.println("What would you like to view? (Stats, Inventory, Menu, Employees)");
+
+                switch (scan.next().toLowerCase()) {
+                    case "stats":
 //                    while (!scan.next().equalsIgnoreCase("daily") || !scan.next().equalsIgnoreCase("quarterly") ||
 //                            !scan.next().equalsIgnoreCase("yearly")) {
 //                        System.out.println("Invalid, please type daily, quarterly, yearly, or quit.");
 
-                    //case "revenue":
-                    switch (scan.next().toLowerCase()) {
-                        case "daily":
-                            //TODO
-                            //SHOW DAILY STATS
-                            break;
-                        case "quaterly":
-                            //TODO
-                            //ASK WHICH QUARTER
-                            //SHOW QUARTERLY STATS BASED ON SPECIFIED QUARTER
-                            break;
-                        case "yearly":
-                            //TODO
-                            //SHOW YEARLY STATS
-                            System.out.println(bus1.getRevenue());
-                            break;
-
-                        default:
-                            System.out.println("Hopefully this doesn't happen...ERROR");
-                    }
-                    break;
+                        //case "revenue":
 
 
+                        while (again) {
+                            System.out.println("Would you like to view daily, quarterly, or yearly stats?");
 
-                case "inventory":
-                    System.out.println("There are " + bus1.getInventory().getInventoryCount()+ " items in the inventory");
-                    System.out.println(bus1.getInventory().getProductInventory());
+                            switch (scan.next().toLowerCase()) {
+                                case "daily":
+                                    //TODO
+                                    //SHOW DAILY STATS
+                                    again = false;
+
+
+                                    break;
+                                case "quaterly":
+                                    //TODO
+                                    //ASK WHICH QUARTER
+                                    //SHOW QUARTERLY STATS BASED ON SPECIFIED QUARTER
+                                    again = false;
+                                    break;
+                                case "yearly":
+                                    again = false;
+                                    //TODO
+                                    //SHOW YEARLY STATS
+                                    System.out.println("Revenue: " + bus1.getRevenue());
+                                    System.out.println("Expenses: " + bus1.getExpenses());
+                                    break;
+
+                                default:
+                                    again = true;
+                                    break;
+
+                            }
+                            if (!again) {
+                                break;
+
+                            }
+                        }
+
+                        //INVENTORY KEEPS PRINTING OUT WHEN WE PRINT OUT YEARLY REVENUE
+                    case "inventory":
+                        System.out.println("There are " + bus1.getInventory().getInventoryCount() + " items in the inventory");
+                        System.out.println(bus1.getInventory().getProductInventory());
+                        again = false;
                         break;
 
 
+                    case "menu":
+                        //TODO
+                        //ENTIRE MENU OR A SPECIFIC MENUITEM?
+                        //IF ENTIRE
+                        //LOOP THROUGH BUSINESS' MENU
+                        //DISPLAY SPECIFIC INFO FOT EACH MENUITEM
+                        //IF SPECIFIC
+                        //ASK FOR MENUITEM ID AND DISPLAY INFO
 
-                case "menu":
-                    //TODO
-                    //ENTIRE MENU OR A SPECIFIC MENUITEM?
-                    //IF ENTIRE
-                    //LOOP THROUGH BUSINESS' MENU
-                    //DISPLAY SPECIFIC INFO FOT EACH MENUITEM
-                    //IF SPECIFIC
-                    //ASK FOR MENUITEM ID AND DISPLAY INFO
+
+                        //Print all MenuItems
+                        for (MenuItem menuItem : allMenuItems) {
+                            System.out.println(menuItem.getMenuItemName());
+
+                        }
+                        again = false;
+                        break;
+
+                    case "employees":
+                        //TODO
+                        //ALL EMPLOYEES OR A SPECIFIC ONE?
+                        //IF ALL
+                        //LOOP THROUGH EMPLOYEE MAP AND DISPLAY DATA
+                        //IF SPECIFIC
+                        //ASK FOR EMPLOYEE ID AND DISPLAY DATA
 
 
-                    //Print all MenuItems
-                    for (MenuItem menuItem : allMenuItems) {
-                        System.out.println(menuItem.getMenuItemName());
+                        //add Employee
 
-                    }
+                        again = false;
+                        break;
+//                    default:
+//                        // System.out.println("Hopefully this doesn't happen...ERROR");
+//                        System.out.println("invalid command, please enter employees or  stats");
+
+                }
+                if (!again) {
                     break;
 
-                case "employees":
-                    //TODO
-                    //ALL EMPLOYEES OR A SPECIFIC ONE?
-                    //IF ALL
-                    //LOOP THROUGH EMPLOYEE MAP AND DISPLAY DATA
-                    //IF SPECIFIC
-                    //ASK FOR EMPLOYEE ID AND DISPLAY DATA
-
-
-                    //add Employee
-
-
-                    break;
-                default:
-                    // System.out.println("Hopefully this doesn't happen...ERROR");
-                    System.out.println("invalid command, please enter employees or  stats");
-
-
+                }
             }
-                break;
-            }
-                //case "enter":
+        }
+
+
+    }
+}
+
+   // }
+//}
+
+
+//case "enter":
 //                    //TODO
 //                    break;
 //                default:
 //                    //System.out.println("Hopefully this doesn't happen...ERROR");
 //                    System.out.println("invalid command, please enter view or stats");
 //            }
-
-
-
-
-
-
 
 
 //            System.out.println("Please enter employee id");
@@ -305,5 +345,3 @@ public class UI {
 //                    break;
 //                }
 //            }
-        }
-    }
