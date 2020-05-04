@@ -8,94 +8,41 @@ public class UI {
 
     public static void main(String[] args) throws ItemAlreadyExistsException, ItemDoesNotExistsException, ItemCountAt0Exception, IOException, EmptyInventoryException {
 
+        //create business
         CentralBusiness bus1 = new CentralBusiness("Business 1");
-        Inventory inventory = new Inventory();
 
-
+        //read ingredients from json file
         List<Item> items =  JsonUtil.listFromJsonFile("src/test/setItems.json", Item.class);
 
-
+        //read menu items from json file
         List<MenuItem>allMenuItems = JsonUtil.listFromJsonFile("src/test/setMenu.json", MenuItem.class);
 
-
+        //add ingredients to business's inventory
         for (Item item : items) {
-            System.out.println(item.getItemName());
-            inventory.addItem(item);
+            bus1.getInventory().addItem(item);
         }
 
-
-
-
-
-
-        //        bus1.addToMenu(burger, bus1.getInventory().getInventory());
-//        bus1.addToMenu(fries, bus1.getInventory().getInventory());
-//        bus1.addToMenu(bacon, bus1.getInventory().getInventory());
-
-
-//        Item testItem1 = new Item("0001", 5000, "Buns", 1.00);
-//        Item testItem2 = new Item("0002", 1000, "Lettuce", 0.50);
-//        Item testItem3 = new Item("0003", 1000, "Bacon", 0.69);
-//        Item testItem4 = new Item("0004", 1000, "Burger Patty", 4.00);
-//        Item testItem5 = new Item("0005", 1000, "potato", 2.00);
-//        bus1.getInventory().addItem(testItem1);
-//        bus1.getInventory().addItem(testItem2);
-//        bus1.getInventory().addItem(testItem3);
-//        bus1.getInventory().addItem(testItem4);
-
-
+        //set automatic re-ordering threshold and amount
         bus1.setInventoryThreshold(100);
         bus1.setReorderAmount(1000);
 
-
-
-//        testInventory.addItem(testItem1);
-//        testInventory.addItem(testItem2);
-//        testInventory.addItem(testItem3);
-//        testInventory.addItem(testItem4);
-//        testInventory.addItem(testItem5);
-
-
+        //add ingredients for different menu items
         ArrayList<Item> burgerIngredients = new ArrayList<>();
         burgerIngredients.add(items.get(0));
         burgerIngredients.add(items.get(1));
         burgerIngredients.add(items.get(2));
-        burgerIngredients.add(items.get(3));
 
-
-       // add fries ingredients
         ArrayList<Item> friesIngredients = new ArrayList<>();
         friesIngredients.add(items.get(9));
 
-        //create menuItem object (burger and fries)
-        MenuItem burger = new MenuItem("0001", "Burger", 5.00);
-        MenuItem fries = new MenuItem("0002", "Fries", 3.00);
-        burger.setItemIngredients(burgerIngredients);
-        fries.setItemIngredients(friesIngredients);
-
-        //menuItem to test count < 1 ordering
-        MenuItem bacon = new MenuItem("0003", "Bacon", 3.00);
-        ArrayList<Item> baconIngredients = new ArrayList<>();
-        baconIngredients.add(items.get(10));
-        bacon.setItemIngredients(baconIngredients);
-
-
-
-
-        MenuItem mozzarellaSticks = new MenuItem("0004", "Mozzarella Sticks", 6.00);
         ArrayList<Item> mozzarellaSticksIngredients = new ArrayList<>();
         mozzarellaSticksIngredients.add(items.get(2));
-        mozzarellaSticks.setItemIngredients(mozzarellaSticksIngredients);
 
 
-        MenuItem salad = new MenuItem("0005", "Salad", 8.00);
         ArrayList<Item> saladIngredients= new ArrayList<>();
         saladIngredients.add(items.get(2));
-        salad.setItemIngredients(saladIngredients);
 
 
-        //create menuItem object (burger and fries)
-        MenuItem cheeseBurger = new MenuItem("0006", "CheeseBurger", 7.00);
         ArrayList<Item>cheeseBurgerIngredients = new ArrayList<>();
         cheeseBurgerIngredients.add(items.get(0));
         cheeseBurgerIngredients.add(items.get(1));
@@ -103,52 +50,32 @@ public class UI {
         cheeseBurgerIngredients.add(items.get(3));
         cheeseBurgerIngredients.add(items.get(4));
 
+        //set each menu item's ingredients
+        allMenuItems.get(0).setItemIngredients(burgerIngredients);
+        allMenuItems.get(1).setItemIngredients(friesIngredients);
+        allMenuItems.get(2).setItemIngredients(cheeseBurgerIngredients);
+        allMenuItems.get(3).setItemIngredients(mozzarellaSticksIngredients);
+        allMenuItems.get(4).setItemIngredients(saladIngredients);
 
-        cheeseBurger.setItemIngredients(cheeseBurgerIngredients);
-
-        allMenuItems.add(cheeseBurger);
-        allMenuItems.add(bacon);
-        allMenuItems.add(fries);
-        allMenuItems.add(burger);
-        allMenuItems.add(mozzarellaSticks);
-        allMenuItems.add(salad);
-
-
-
-
+        //add all menu items to the business's menu
         for (MenuItem menuItem : allMenuItems) {
             bus1.addToMenu(menuItem, bus1.getInventory().getInventory());
 
         }
 
-
-
-
-
-
-
-
-
+        //create employees
         Employee employee1 = new Employee("1000", 11.25, 36);
         Employee employee2 = new Employee("1001", 13.25, 50);
         Employee employee3 = new Employee("1002", 10, 40);
         Employee employee4 = new Employee("1002", 20, 40);
 
+        //add employees to business
         bus1.addAccount("1000", employee1);
         bus1.addAccount("1001", employee2);
         bus1.addAccount("1002", employee3);
 
 
-
-
-
-
         Random rand = new Random();
-
-
-
-
-
 
         String oldDate = "2020-01-01";
         //System.out.println("Date before Addition: "+oldDate);
