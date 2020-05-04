@@ -1,4 +1,5 @@
 import java.io.IOException;
+import java.sql.SQLOutput;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.*;
@@ -130,6 +131,9 @@ public class UI {
 
         }
 
+
+
+
         Scanner scan = new Scanner(System.in);
 
 
@@ -140,74 +144,106 @@ public class UI {
         //String j = scan.next();
         while (!scan.next().equalsIgnoreCase("quit")) {
 
-            System.out.println("Would you like to view or enter stats?");
+            // System.out.println("Would you like to view or enter stats?");
             //check that input is view or enter
-            while(!scan.next().equalsIgnoreCase("enter") || !scan.next().equalsIgnoreCase("view")){
-                System.out.println("Invalid, please type view, enter, or quit.");
-            }
-            //if input is view
-            switch (scan.next().toLowerCase()){
-                case "view":
-                    System.out.println("What would you like to view? (Stats, Inventory, Menu, Employees)");
-                    while(!scan.next().equalsIgnoreCase("stats") || !scan.next().equalsIgnoreCase("inventory") ||
-                            !scan.next().equalsIgnoreCase("menu") || !scan.next().equalsIgnoreCase("employees")){
-                        System.out.println("Invalid, please type stats, inventory, menu, employees, or quit.");
-                    }
-                    switch (scan.next().toLowerCase()){
-                        case "stats":
-                            System.out.println("Would you like to view daily, quarterly, or yearly stats?");
-                            while(!scan.next().equalsIgnoreCase("daily") || !scan.next().equalsIgnoreCase("quarterly") ||
-                                    !scan.next().equalsIgnoreCase("yearly")){
-                                System.out.println("Invalid, please type daily, quarterly, yearly, or quit.");
-                            }
-                            switch (scan.next().toLowerCase()){
-                                case "daily":
-                                    //TODO
-                                    //SHOW DAILY STATS
-                                    break;
-                                case "quaterly":
-                                    //TODO
-                                    //ASK WHICH QUARTER
-                                    //SHOW QUARTERLY STATS BASED ON SPECIFIED QUARTER
-                                    break;
-                                case "yearly":
-                                    //TODO
-                                    //SHOW YEARLY STATS
-                                    break;
-                                default:
-                                    System.out.println("Hopefully this doesn't happen...ERROR");
-                            }
-                            break;
-                        case "inventory":
-                            bus1.getInventory().getProductInventory();
-                            break;
-                        case "menu":
+//            while(!scan.next().equalsIgnoreCase("enter") || !scan.next().equalsIgnoreCase("view")){
+//                System.out.println("Invalid, please type view, enter, or quit.");
+//            }
+            //if input is viewe
+            //  switch (scan.next().toLowerCase()){
+            //   case "view":
+            System.out.println("What would you like to view? (Stats, Inventory, Menu, Employees)");
+//                    while(!scan.next().equalsIgnoreCase("stats") || !scan.next().equalsIgnoreCase("inventory") ||
+//                            !scan.next().equalsIgnoreCase("menu") || !scan.next().equalsIgnoreCase("employees")){
+//                        System.out.println("Invalid, please type stats, inventory, menu, employees, or quit.");
+            //}
+
+            switch (scan.next().toLowerCase()) {
+                case "stats":
+                    System.out.println("Would you like to view daily, quarterly, or yearly stats?");
+//                    while (!scan.next().equalsIgnoreCase("daily") || !scan.next().equalsIgnoreCase("quarterly") ||
+//                            !scan.next().equalsIgnoreCase("yearly")) {
+//                        System.out.println("Invalid, please type daily, quarterly, yearly, or quit.");
+
+                    //case "revenue":
+                    switch (scan.next().toLowerCase()) {
+                        case "daily":
                             //TODO
-                            //ENTIRE MENU OR A SPECIFIC MENUITEM?
-                            //IF ENTIRE
-                                //LOOP THROUGH BUSINESS' MENU
-                                //DISPLAY SPECIFIC INFO FOT EACH MENUITEM
-                            //IF SPECIFIC
-                                //ASK FOR MENUITEM ID AND DISPLAY INFO
+                            //SHOW DAILY STATS
                             break;
-                        case "employees":
+                        case "quaterly":
                             //TODO
-                            //ALL EMPLOYEES OR A SPECIFIC ONE?
-                            //IF ALL
-                                //LOOP THROUGH EMPLOYEE MAP AND DISPLAY DATA
-                            //IF SPECIFIC
-                                //ASK FOR EMPLOYEE ID AND DISPLAY DATA
+                            //ASK WHICH QUARTER
+                            //SHOW QUARTERLY STATS BASED ON SPECIFIED QUARTER
                             break;
+                        case "yearly":
+                            //TODO
+                            //SHOW YEARLY STATS
+                            System.out.println(bus1.getRevenue());
+                            break;
+
                         default:
                             System.out.println("Hopefully this doesn't happen...ERROR");
                     }
                     break;
-                case "enter":
+
+
+
+                case "inventory":
+                    System.out.println("There are " + bus1.getInventory().getInventoryCount()+ " items in the inventory");
+                    System.out.println(bus1.getInventory().getProductInventory());
+                        break;
+
+
+
+                case "menu":
                     //TODO
+                    //ENTIRE MENU OR A SPECIFIC MENUITEM?
+                    //IF ENTIRE
+                    //LOOP THROUGH BUSINESS' MENU
+                    //DISPLAY SPECIFIC INFO FOT EACH MENUITEM
+                    //IF SPECIFIC
+                    //ASK FOR MENUITEM ID AND DISPLAY INFO
+
+
+                    //Print all MenuItems
+                    for (MenuItem menuItem : allMenuItems) {
+                        System.out.println(menuItem.getMenuItemName());
+
+                    }
+                    break;
+
+                case "employees":
+                    //TODO
+                    //ALL EMPLOYEES OR A SPECIFIC ONE?
+                    //IF ALL
+                    //LOOP THROUGH EMPLOYEE MAP AND DISPLAY DATA
+                    //IF SPECIFIC
+                    //ASK FOR EMPLOYEE ID AND DISPLAY DATA
+
+
+                    //add Employee
+
+
                     break;
                 default:
-                    System.out.println("Hopefully this doesn't happen...ERROR");
+                    // System.out.println("Hopefully this doesn't happen...ERROR");
+                    System.out.println("invalid command, please enter employees or  stats");
+
+
             }
+                break;
+            }
+                //case "enter":
+//                    //TODO
+//                    break;
+//                default:
+//                    //System.out.println("Hopefully this doesn't happen...ERROR");
+//                    System.out.println("invalid command, please enter view or stats");
+//            }
+
+
+
 
 
 
@@ -271,4 +307,3 @@ public class UI {
 //            }
         }
     }
-}
