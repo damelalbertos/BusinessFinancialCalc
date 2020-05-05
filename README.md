@@ -13,7 +13,7 @@ https://app.slack.com/client/TT6F2ENUF/CUD683Q3C/directory
 
 
 SPRINT 1:
-
+--
 
 ClASS DIAGRAM SPRINT 1 - https://drive.google.com/file/d/1OHA6MyGw4rrpKgVbx3-ZleGjDY20jRqr/view?usp=sharing
 
@@ -22,10 +22,10 @@ SPRINT REVIEW 1 - https://docs.google.com/document/d/1wTptl9l-s4ysTeYt8SP6RuFYQX
 
 
 SPRINT 1 RETROSPECTIVE - https://docs.google.com/document/d/16v1AlBQxT2cGih_Q2H28y_n1VwDGgmLnjKNg5SnKFTw/edit?usp=sharing
---
+
 
 SPRINT 2:
-
+--
 SPRINT 2 GOAL: Expenses, Revenue, Customer Transactions towards revenue, expenses towards employee pay and re-up inventory
 Begin UI only for things that have been thouroughly tested. 
 
@@ -48,7 +48,7 @@ USECASE - https://drive.google.com/file/d/10d53AcFKTg939hD0YR3TRacZW_e83PYK/view
 
 
 SPRINT 3:
-
+--
 SPRINT 3 GOAL: Generate fake data using JSON objects, complete UI with ability to view, edit, and delete financial stats and data.
 
 SPRINT 3 USECASE DIAGRAM: https://docs.google.com/document/d/1hbugY0ReCsq9vG3cb4Id0wfF-uwgcMV3oUl0EvpVQIU/edit?usp=sharing
