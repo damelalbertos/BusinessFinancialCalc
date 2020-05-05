@@ -57,3 +57,7 @@ SPRINT 3 GOAL:
 Generate fake data using JSON objects, complete UI with ability to view, edit, and delete financial stats and data.
 
 SPRINT 3 USECASE DIAGRAM: https://docs.google.com/document/d/1hbugY0ReCsq9vG3cb4Id0wfF-uwgcMV3oUl0EvpVQIU/edit?usp=sharing
+
+
+CLASS DIAGRAM SPRINT 2 - https://drive.google.com/file/d/1qDL_s0iev8UAQLkSKDC2sNTKU2TH229L/view?usp=sharing
+
