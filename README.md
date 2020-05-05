@@ -45,6 +45,7 @@ SPRINT 2 RETROSPECTIVE - https://docs.google.com/document/d/18l3JfEr7kpuw3JDZ29p
 
 UI STATE DIAGRAM - https://app.diagrams.net/#G1jCc-sG7rs0i7BVq2J_MEMJ4v1hENi2Mr
 
+
 USECASE - https://drive.google.com/file/d/10d53AcFKTg939hD0YR3TRacZW_e83PYK/view?usp=sharing
 
 
@@ -59,5 +60,5 @@ Generate fake data using JSON objects, complete UI with ability to view, edit, a
 SPRINT 3 USECASE DIAGRAM: https://docs.google.com/document/d/1hbugY0ReCsq9vG3cb4Id0wfF-uwgcMV3oUl0EvpVQIU/edit?usp=sharing
 
 
-CLASS DIAGRAM SPRINT 2 - https://drive.google.com/file/d/1BXOTeLmnS3RkfGliDHS0tI8kMwxHhSgY/view?usp=sharing
+CLASS DIAGRAM SPRINT 3 - https://drive.google.com/file/d/1BXOTeLmnS3RkfGliDHS0tI8kMwxHhSgY/view?usp=sharing
 
