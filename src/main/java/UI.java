@@ -177,6 +177,7 @@ public class UI {
                 System.out.println("What would you like to view? (Stats, Inventory, Menu, Employees)");
 
                 switch (scan.next().toLowerCase()) {
+
                     case "stats":
 //                    while (!scan.next().equalsIgnoreCase("daily") || !scan.next().equalsIgnoreCase("quarterly") ||
 //                            !scan.next().equalsIgnoreCase("yearly")) {
@@ -185,14 +186,14 @@ public class UI {
                         //case "revenue":
 
 
-                        while (again) {
-                            System.out.println("Would you like to view daily, quarterly, or yearly stats?");
-
+                        System.out.println("Would you like to view daily, quarterly, or yearly stats?");
+                        boolean check = true;
+                        while (check) {
                             switch (scan.next().toLowerCase()) {
                                 case "daily":
                                     //TODO
                                     //SHOW DAILY STATS
-                                    again = false;
+                                    check = false;
 
 
                                     break;
@@ -200,26 +201,31 @@ public class UI {
                                     //TODO
                                     //ASK WHICH QUARTER
                                     //SHOW QUARTERLY STATS BASED ON SPECIFIED QUARTER
-                                    again = false;
+                                    check = false;
                                     break;
                                 case "yearly":
-                                    again = false;
+                                    check = false;
                                     //TODO
                                     //SHOW YEARLY STATS
                                     System.out.println("Revenue: " + bus1.getRevenue());
                                     System.out.println("Expenses: " + bus1.getExpenses());
                                     break;
 
+
                                 default:
-                                    again = true;
+                                    check = true;
                                     break;
 
                             }
-                            if (!again) {
+                            if (!check) {
                                 break;
-
-                            }
                         }
+                            System.out.println("invalid command, please enter daily, quarterly, or yearly");
+
+                        }
+
+
+
 
                         //INVENTORY KEEPS PRINTING OUT WHEN WE PRINT OUT YEARLY REVENUE
                     case "inventory":
