@@ -223,6 +223,7 @@ public class UI {
                             System.out.println("invalid command, please enter daily, quarterly, or yearly");
 
                         }
+                        break;
 
 
 
