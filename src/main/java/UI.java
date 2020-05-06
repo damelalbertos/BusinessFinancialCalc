@@ -1,5 +1,6 @@
 import java.io.IOException;
 import java.sql.SQLOutput;
+import java.text.DateFormat;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.*;
@@ -7,7 +8,7 @@ import java.util.*;
 
 public class UI {
 
-    public static void main(String[] args) throws ItemAlreadyExistsException, ItemDoesNotExistsException, ItemCountAt0Exception, IOException, EmptyInventoryException, EmptyEmployeesMapException, EmptyMenuException {
+    public static void main(String[] args) throws ItemAlreadyExistsException, ItemDoesNotExistsException, ItemCountAt0Exception, IOException, EmptyInventoryException, EmptyEmployeesMapException, EmptyMenuException, ParseException {
 
         //create business
         CentralBusiness bus1 = new CentralBusiness("Business 1");
@@ -90,10 +91,6 @@ public class UI {
 
         Random rand = new Random();
 
-        String quarterOne = "2020-4-14";
-        String quarterTwo = "2020-7-14";
-        String quarterThree = "2020-10-14";
-        String quarterFour = "2020-1-14";
 
         double quarterOneRev = 0;
         double quarterTwoRev = 0;
@@ -104,6 +101,7 @@ public class UI {
         //System.out.println("Date before Addition: "+oldDate);
         SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
         Calendar c = Calendar.getInstance();
+
         try {
             c.setTime(sdf.parse(oldDate));
         } catch (ParseException e) {
@@ -130,6 +128,7 @@ public class UI {
                 customerOrder.add(allMenuItems.get(new Random().nextInt(allMenuItems.size())));
                 customerOrder.add(allMenuItems.get(new Random().nextInt(allMenuItems.size())));
                 customerOrder.add(allMenuItems.get(new Random().nextInt(allMenuItems.size())));
+                customerOrder.add(allMenuItems.get(new Random().nextInt(allMenuItems.size())));
                 bus1.order(customerOrder, customer, "1");
 
                 //System.out.println(counter);
@@ -148,15 +147,44 @@ public class UI {
             //add one day to newDate and continue the process over and over until that date is reached
 
 
-//            if(newDate.compareTo(quarterOne) == 0){
-//                quarterOneRev = bus1.getRevenue();
-//
-//
-//                System.out.println(quarterOneRev);
-//
-//            }
+
+            String quarterOne = "2020-3-31";
+            String quarterTwo = "2020-6-30";
+            String quarterThree = "2020-9-30";
+            String quarterFour = "2020-12-31";
+
+            Date q1 = sdf.parse(quarterOne);
+            Date q2 = sdf.parse(quarterTwo);
+            Date q3 = sdf.parse(quarterThree);
+            Date q4 = sdf.parse(quarterFour);
+
+            Date curr = sdf.parse(newDate);
+
+
+            if(curr.equals(q1)){
+                quarterOneRev = bus1.getRevenue();
+
+            }
+
+            if(curr.equals(q2)){
+                quarterTwoRev = bus1.getRevenue();
+
+            }
+
+            if(curr.equals(q3)) {
+                quarterThreeRev = bus1.getRevenue();
+
+            }
+
+
+
+            if(curr.equals(q4)){
+                quarterFourRev = bus1.getRevenue();
+
+            }
 
         }
+
 
 
         Scanner scan = new Scanner(System.in);
@@ -186,6 +214,8 @@ public class UI {
                         }
                         boolean check = true;
                         while (check) {
+                            System.out.println("Enter which quarter earnings you would like to view or all (q1, q2, q3, q4, all)");
+
                             switch (secondInput.toLowerCase()) {
                                 case "daily":
                                     //TODO
@@ -194,10 +224,55 @@ public class UI {
                                     break;
                                 case "quarterly":
                                     //TODO
+                                    String thirdInput = scan.nextLine();
                                     //ASK WHICH QUARTER
                                     //SHOW QUARTERLY STATS BASED ON SPECIFIED QUARTER
+                                    boolean check2 = true;
+
+                                    while(check2){
+
+
+                                        switch (thirdInput.toLowerCase()) {
+                                            case "q1":
+                                                System.out.println("Quarter 1: " + quarterOneRev);
+                                                check2 = false;
+                                                break;
+
+                                            case "q2":
+                                                System.out.println("Quarter 2: " + quarterTwoRev);
+                                                check2 = false;
+                                                break;
+
+                                            case "q3":
+                                                System.out.println("Quarter 3: " + quarterThreeRev);
+                                                check2 = false;
+                                                break;
+
+                                            case "q4":
+                                                System.out.println("Quarter 4: " + quarterFourRev);
+                                                check2 = false;
+                                                break;
+
+                                            case "all":
+                                                System.out.println("Quarter 1: " + quarterOneRev);
+                                                System.out.println("Quarter 2: " + quarterTwoRev);
+                                                System.out.println("Quarter 3: " + quarterThreeRev);
+                                                System.out.println("Quarter 4: " + quarterFourRev);
+                                                check2 = false;
+                                                break;
+
+
+                                        }
+
+                                        if(check2 = false){
+                                            break;
+                                        }
+
+                                    }
                                     check = false;
                                     break;
+
+
                                 case "yearly":
                                     check = false;
                                     //TODO
@@ -209,7 +284,6 @@ public class UI {
                             if (!check) {
                                 break;
                         }
-                            System.out.println("invalid command, please enter daily, quarterly, or yearly");
 
                         }
                         break;
@@ -359,6 +433,7 @@ public class UI {
 
                     case "orders":
                         try {
+
                             System.out.println(bus1.allOrdersToString());
                         } catch (EmptyOrdersMapException e) {
                             System.out.println("There are no orders to show!");
@@ -373,72 +448,4 @@ public class UI {
     }
 }
 
-   // }
-//}
 
-
-//case "enter":
-//                    //TODO
-//                    break;
-//                default:
-//                    //System.out.println("Hopefully this doesn't happen...ERROR");
-//                    System.out.println("invalid command, please enter view or stats");
-//            }
-
-
-//            System.out.println("Please enter employee id");
-//
-//            if (!bus1.exists(scan.next())) {
-//                System.out.println("ID is invalid");
-//            } else {
-//
-//                System.out.println("What would you like to do?");
-//
-//
-//                String i = scan.next();
-//                if(i.equals("revenue")){
-//                    System.out.println(bus1.getRevenue());
-//                }
-//
-//
-//
-//                if(i.equals("expenses")){
-//                    System.out.println(bus1.getExpenses());
-//                }
-//
-//                if(i.equals("employee")){
-//                    System.out.println("Would you like to add, remove or calculate pay");
-//
-//                    if(scan.next().equals("add")){
-//                        System.out.println("Enter new ID");
-//                        String id = scan.next();
-//                        System.out.println("Enter wage");
-//                        double wage = scan.nextDouble();
-//                        System.out.println("Enter hoursWorked");
-//                        int hoursWorked= scan.nextInt();
-//                        Employee employee = new Employee(id, wage, hoursWorked);
-//                        bus1.addAccount(id, employee);
-//                    }
-//
-//                    if(i.equals("remove")){
-//                        System.out.println("Enter id for Employee to remove");
-//                        String id= scan.next();
-//
-//
-//                        if(bus1.getEmployee(id) != null) {
-//                            bus1.removeEmployee(id);
-//                        }
-//                        else{
-//                            System.out.println("Employee Doesn't exist");
-//                        }
-//                    }
-//                    if(i.equals("pay")){
-//
-//                    }
-//                }
-//                System.out.println("Would you like to continue? type quit or any key");
-//
-//                if(i.equals("quit")){
-//                    break;
-//                }
-//            }
