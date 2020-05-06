@@ -13,7 +13,7 @@ public class MenuItem{
         this.menuItemId = menuItemId;
         this.menuItemName = menuItemName;
         this.price = price;
-        this.itemIngredients = new ArrayList<Item>();
+        this.itemIngredients = new ArrayList<>();
     }
 
     public void setMenuItemId(String menuItemId) {

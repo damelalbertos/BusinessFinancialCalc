@@ -4,27 +4,29 @@ public class Employee {
     private double wage;
     private double hoursWorked;
 
-    private CentralBusiness business;
+    //private CentralBusiness business;
 
-
-    public Employee(CentralBusiness business){
-        this.business = business;
+    public Employee(){
+        this.id = "";
+        this.wage = 0.0;
+        this.hoursWorked = 0.0;
     }
 
-
-
-    public Employee(String id, double wage, double hoursWorked){
+    public void setId(String id) {
         this.id = id;
+    }
+
+    public void setWage(double wage) {
         this.wage = wage;
+    }
+
+    public void setHoursWorked(double hoursWorked) {
         this.hoursWorked = hoursWorked;
     }
-
 
     public double getWage() throws IllegalArgumentException{
         return wage;
     }
-
-
 
 
     /**

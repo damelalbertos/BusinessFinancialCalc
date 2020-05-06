@@ -67,6 +67,12 @@ public class Item{
         itemCount+=amount;
     }
 
+    public String itemToString(){
+        StringBuilder result  = new StringBuilder();
+        result.append("#"+ itemId + " " + itemName +":" + itemCount + ", " + cost);
+        return result.toString();
+    }
+
 
     /**
      * Checks if the amount is in proper format
