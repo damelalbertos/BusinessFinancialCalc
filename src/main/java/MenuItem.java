@@ -24,8 +24,13 @@ public class MenuItem{
         this.menuItemName = menuItemName;
     }
 
-    public void setPrice(double price) {
-        this.price = price;
+    public void setPrice(double price) throws IllegalArgumentException{
+        if (!Item.isAmountValid(price)) {
+            throw new IllegalArgumentException("Price cannot be negative or more than two decimals");
+        } else {
+            this.price = price;
+        }
+
     }
 
     public MenuItem() {

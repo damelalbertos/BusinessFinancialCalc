@@ -16,12 +16,20 @@ public class Employee {
         this.id = id;
     }
 
-    public void setWage(double wage) {
-        this.wage = wage;
+    public void setWage(double wage) throws IllegalArgumentException {
+        if (!Item.isAmountValid(wage)) {
+            throw new IllegalArgumentException("Wage cannot be negative or more than 2 decimals");
+        } else {
+            this.wage = wage;
+        }
     }
 
     public void setHoursWorked(double hoursWorked) {
-        this.hoursWorked = hoursWorked;
+        if (!Item.isAmountValid(hoursWorked)) {
+            throw new IllegalArgumentException("Hours worked cannot be negative or more than 2 decimals");
+        } else {
+            this.hoursWorked = hoursWorked;
+        }
     }
 
     public double getWage() throws IllegalArgumentException{

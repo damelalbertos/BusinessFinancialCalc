@@ -31,12 +31,22 @@ public class Item{
         return itemCount;
     }
 
-    public void setItemCount(int itemCount) {
-        this.itemCount = itemCount;
+    public void setItemCount(int itemCount)throws IllegalArgumentException {
+        if (itemCount < 0 ) {
+            throw new IllegalArgumentException("Cannot be negative count");
+        } else {
+            this.itemCount = itemCount;
+        }
+
     }
 
-    public void setCost(double cost) {
-        this.cost = cost;
+    public void setCost(double cost) throws IllegalArgumentException {
+        if (!Item.isAmountValid(cost)) {
+            throw new IllegalArgumentException("Cost cannot be negative or more than two decimals");
+        } else {
+            this.cost = cost;
+        }
+
     }
 
     public Item(String itemId, int itemCount, String itemName, double cost){
