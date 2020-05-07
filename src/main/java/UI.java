@@ -116,6 +116,12 @@ public class UI {
 
         String endDate = "2020-12-31";
 
+        String tracker = "2020- 01- 01";
+
+
+
+        HashMap<String, Double>dailyRev = new HashMap<>();
+        double rev=  0;
         while (newDate.compareTo(endDate) != 0) {
             int orderAmount = rand.nextInt((100 - 25) + 1) + 25;
             int counter = 0;
@@ -131,18 +137,34 @@ public class UI {
                 customerOrder.add(allMenuItems.get(new Random().nextInt(allMenuItems.size())));
                 bus1.order(customerOrder, customer, "1");
 
-                //System.out.println(counter);
+
 
 
                 //create new objects for customer orders
                 //pick up to 10 random menuItems to chooose from
                 //get total and all that to add automatically to business
                 counter++;
+
+
+
+
+                //rev = bus1.getAllOrders().get("1").getTotal();
+
+                dailyRev.put(newDate, rev);
+
+
             }
+
+
+
 
             //Incrementing the date by 1 day
             c.add(Calendar.DAY_OF_MONTH, 1);
             newDate = sdf.format(c.getTime());
+
+
+
+
 
             //add one day to newDate and continue the process over and over until that date is reached
 
@@ -231,6 +253,24 @@ public class UI {
                                 case "daily":
                                     //TODO
                                     //SHOW DAILY STATS
+
+                                    System.out.println("Enter a  date (yyyy-mm-dd");
+
+
+                                    boolean check4 = true;
+
+                                    String fourthInput = scan.nextLine();
+
+                                     if(dailyRev.containsKey(fourthInput.toLowerCase())){
+                                            System.out.println(dailyRev.get(fourthInput.toLowerCase()));
+
+                                    }
+
+
+
+
+                                    System.out.println(rev);
+
                                     check = false;
                                     break;
                                 case "quarterly":
