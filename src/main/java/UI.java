@@ -216,6 +216,7 @@ public class UI {
                         while (check) {
                             System.out.println("Enter which quarter earnings you would like to view or all (q1, q2, q3, q4, all)");
 
+                            //should work
                             switch (secondInput.toLowerCase()) {
                                 case "daily":
                                     //TODO
