@@ -242,7 +242,7 @@ public class UI {
 
                                     while(check2){
 
-
+                                        //should work
                                         switch (thirdInput.toLowerCase()) {
                                             case "q1":
                                                 System.out.println("Quarter 1: " + quarterOneRev);
