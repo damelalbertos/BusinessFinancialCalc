@@ -134,6 +134,7 @@ public class UI {
             int orderAmount = rand.nextInt((100 - 25) + 1) + 25;
             int counter = 0;
 
+            int k = 0;
             while (counter < orderAmount) {
                 Customer customer = new Customer("useJava", "Faker", "0");
                 ArrayList<MenuItem> customerOrder = new ArrayList<>();
@@ -143,7 +144,7 @@ public class UI {
                 customerOrder.add(allMenuItems.get(new Random().nextInt(allMenuItems.size())));
                 customerOrder.add(allMenuItems.get(new Random().nextInt(allMenuItems.size())));
                 customerOrder.add(allMenuItems.get(new Random().nextInt(allMenuItems.size())));
-                bus1.order(customerOrder, customer, "1");
+                bus1.order(customerOrder, customer, String.valueOf(k++));
 
 
 
@@ -156,8 +157,6 @@ public class UI {
 
 
 
-                //rev = bus1.getAllOrders().get("1").getTotal();
-
 
                 rev = bus1.getRevenue();
 
@@ -165,6 +164,9 @@ public class UI {
 
 
             }
+
+
+
 
 
 
