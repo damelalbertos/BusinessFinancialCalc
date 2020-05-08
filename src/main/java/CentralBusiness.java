@@ -387,20 +387,4 @@ public class CentralBusiness {
         this.reorderAmount = am;
     }
 
-    public String dailyStatsToString(){
-        //TODO
-        return "";
-    }
-
-    public String quarterlyStatsToString(){
-        //TODO
-        return "";
-    }
-
-    public String yearlyStatsToString(){
-        //TODO
-        return "";
-    }
-
-
 }

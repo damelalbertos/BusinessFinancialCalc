@@ -129,7 +129,13 @@ public class UI {
 
 
         HashMap<String, Double>dailyRev = new HashMap<>();
-        double rev=  0;
+        HashMap<String, Double>dailyExp = new HashMap<>();
+        HashMap<String, Double>dailyProf = new HashMap<>();
+
+        double rev = 0;
+        double exp = 0;
+        double prof = 0;
+
         while (newDate.compareTo(endDate) != 0) {
             int orderAmount = rand.nextInt((100 - 25) + 1) + 25;
             int counter = 0;
@@ -161,6 +167,18 @@ public class UI {
                 rev = bus1.getRevenue();
 
                 dailyRev.put(newDate, rev);
+
+                exp = bus1.getExpenses();
+
+                dailyExp.put(newDate, exp);
+
+                prof = rev- exp;
+
+                dailyProf.put(newDate, prof);
+
+
+
+
 
 
             }
@@ -199,20 +217,19 @@ public class UI {
             if(curr.equals(q1)){
                 quarterOneRev = bus1.getRevenue();
                 quarterOneExp = bus1.getExpenses();
-                quarterOneProf = quarterOneRev - quarterOneProf;
+                quarterOneProf = quarterOneRev - quarterOneExp;
             }
 
             if(curr.equals(q2)){
                 quarterTwoRev = bus1.getRevenue() - quarterOneRev;
                 quarterTwoExp = bus1.getExpenses() - quarterOneExp;
-                quarterOneProf = quarterTwoRev - quarterTwoProf;
-
+                quarterTwoProf = quarterTwoRev - quarterTwoExp;
             }
 
             if(curr.equals(q3)) {
                 quarterThreeRev = bus1.getRevenue() - quarterOneRev - quarterTwoRev;
                 quarterThreeExp = bus1.getExpenses() - quarterOneExp - quarterTwoExp;
-                quarterThreeProf = quarterThreeRev - quarterThreeProf;
+                quarterThreeProf = quarterThreeRev - quarterThreeExp;
 
             }
 
@@ -221,7 +238,7 @@ public class UI {
             if(curr.equals(q4)){
                 quarterFourRev = bus1.getRevenue() - quarterOneRev - quarterTwoRev - quarterThreeRev;
                 quarterFourExp = bus1.getExpenses() - quarterOneExp - quarterTwoExp - quarterThreeExp;
-                quarterFourProf = quarterFourRev - quarterFourProf;
+                quarterFourProf = quarterFourRev - quarterFourExp;
 
             }
 
@@ -266,15 +283,14 @@ public class UI {
                         }
                         boolean check = true;
                         while (check) {
-                            System.out.println("Enter which quarter earnings you would like to view or all (q1, q2, q3, q4, all)");
 
-                            //should work
+
+
                             switch (secondInput.toLowerCase()) {
                                 case "daily":
-                                    //TODO
                                     //SHOW DAILY STATS
 
-                                    System.out.println("Enter a  date (yyyy-mm-dd) ");
+                                    System.out.println("Enter a  date (yyyy-mm-dd) you'd like to view up to");
 
 
                                     boolean check4 = true;
@@ -283,6 +299,9 @@ public class UI {
 
                                     if (dailyRev.containsKey(fourthInput.toLowerCase())) {
                                         System.out.println("Revenue to date: " + dailyRev.get(fourthInput.toLowerCase()));
+                                        System.out.println("Expenses to date: " + dailyExp.get(fourthInput.toLowerCase()));
+                                        System.out.println("Profit to date: " + dailyProf.get(fourthInput.toLowerCase()));
+
 
                                     } else {
                                         System.out.println("Invalid date");
@@ -295,6 +314,7 @@ public class UI {
 
 
                                 case "quarterly":
+                                    System.out.println("Enter which quarter earnings you would like to view or all (q1, q2, q3, q4, all)");
                                     String thirdInput = scan.nextLine();
                                     //ASK WHICH QUARTER
                                     //SHOW QUARTERLY STATS BASED ON SPECIFIED QUARTER
@@ -362,7 +382,6 @@ public class UI {
 
                                 case "yearly":
                                     check = false;
-                                    //TODO
                                     //SHOW YEARLY STATS
                                     System.out.println("Revenue: " + bus1.getRevenue());
                                     System.out.println("Expenses: " + bus1.getExpenses());
@@ -399,7 +418,7 @@ public class UI {
                                     System.out.println("That ID is already in use, please use another one.");
                                     potentialId = scan.nextLine();
                                 }
-                                while (!Character.isLetterOrDigit(potentialId.charAt(0))){
+                                while (potentialId.equals("")|| !Character.isLetterOrDigit(potentialId.charAt(0))){
                                     System.out.println("Please Enter a valid ID!");
                                     System.out.println("What is the desired Item ID?");
                                     potentialId = scan.nextLine();
@@ -408,7 +427,7 @@ public class UI {
 
                                 System.out.println("What is the desired Item Name?");
                                 String name = scan.nextLine();
-                                while (!Character.isLetterOrDigit(name.charAt(0))){
+                                while (name.equals("") || !Character.isLetterOrDigit(name.charAt(0))){
                                     System.out.println("Please Enter a valid name!");
                                     System.out.println("What is the desired Item Name?");
                                     name = scan.nextLine();
@@ -474,7 +493,6 @@ public class UI {
 
 
                     case "menu":
-                        //TODO
 
                         //Print all MenuItems
                         System.out.println("Here is your menu:");
@@ -494,7 +512,7 @@ public class UI {
                                     System.out.println("That ID is already in use, please use another one.");
                                     potentialId = scan.nextLine();
                                 }
-                                while (!Character.isLetterOrDigit(potentialId.charAt(0))){
+                                while (potentialId.equals("") || !Character.isLetterOrDigit(potentialId.charAt(0))){
                                     System.out.println("Please Enter a valid ID!");
                                     System.out.println("What is the desired menu item ID?");
                                     potentialId = scan.nextLine();
@@ -503,7 +521,7 @@ public class UI {
 
                                 System.out.println("What is the menu item's name?");
                                 String name = scan.nextLine();
-                                while (!Character.isLetterOrDigit(name.charAt(0))){
+                                while (name.equals("") || !Character.isLetterOrDigit(name.charAt(0))){
                                     System.out.println("Please Enter a valid name!");
                                     System.out.println("What is the desired Item Name?");
                                     name = scan.nextLine();
@@ -514,12 +532,14 @@ public class UI {
                                 System.out.println(bus1.getInventory().getProductInventory());
                                 System.out.println("Type an item ID/ingredient of the menu item or done once finished.");
                                 String ingredient = scan.nextLine();
-                                while (!ingredient.equalsIgnoreCase("done")){
+                                while (!ingredient.equalsIgnoreCase("done")) {
+
                                     Item toBeAdded = bus1.getInventory().getItem(ingredient);
                                     ingredients.add(toBeAdded);
                                     ingredient = scan.nextLine();
                                 }
                                 newMenuItem.setItemIngredients(ingredients);
+
 
                                 System.out.println("What should the price of " + newMenuItem.getMenuItemName() + " be?");
                                 Scanner scan3  = new Scanner(System.in);
@@ -537,10 +557,15 @@ public class UI {
                                         scan3  = new Scanner(System.in);
                                     }
                                 }
+                                    try {
+                                        bus1.addToMenu(newMenuItem, bus1.getInventory().getInventory());
+                                        System.out.println("Menu Item Added!");
+                                        break;
+                                    } catch (NullPointerException npe) {
+                                        System.out.println("Make sure all the ingredient's IDs entered are valid and try again!");
+                                    }
 
 
-                                bus1.addToMenu(newMenuItem, bus1.getInventory().getInventory());
-                                System.out.println("Menu Item Added!");
                                 break;
 
                             case "remove":
@@ -574,7 +599,7 @@ public class UI {
                                     System.out.println("That ID is already in use, please use another one.");
                                     potentialId = scan.nextLine();
                                 }
-                                while (!Character.isLetterOrDigit(potentialId.charAt(0))){
+                                while (potentialId.equals("") || !Character.isLetterOrDigit(potentialId.charAt(0))){
                                     System.out.println("Please Enter a valid ID!");
                                     System.out.println("What is the desired Employee ID?");
                                     potentialId = scan.nextLine();
