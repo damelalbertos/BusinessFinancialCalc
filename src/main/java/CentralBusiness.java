@@ -29,9 +29,12 @@ public class CentralBusiness {
     private String businessName;
     private Map<String, Employee> employeesMap;
     private Inventory inventory;
-    private Map<String, Order> allOrders;
-    private Map<String, MenuItem> menu;
-    private Map<String, Double> menuItemRevenue;
+
+    private HashMap<String, Order> allOrders;
+    private HashMap<String, MenuItem> menu;
+    private HashMap<String, Double> menuItemRevenue;
+    private HashMap<String, Integer> amountSold;
+
     private int reorderAmount; //amount to reorder when hits threshold
     private int inventoryThreshold; //buy more product when count reaches this threshold
 
@@ -42,6 +45,7 @@ public class CentralBusiness {
         this.allOrders = new HashMap<String, Order>();
         this.menu = new HashMap<String, MenuItem>();
         this.menuItemRevenue = new HashMap<String, Double>();
+        this.amountSold = new HashMap<String, Integer>();
         this.revenue = 0;
         this.expenses = 0;
     }
@@ -188,6 +192,7 @@ public class CentralBusiness {
         } else {
             menu.put(menuItem.getMenuID(), menuItem);
             menuItemRevenue.put(menuItem.getMenuID(), 0.00);
+            amountSold.put(menuItem.getMenuID(), 0);
         }
 
     }
@@ -360,6 +365,9 @@ public class CentralBusiness {
             setRevenueByItem(orderItems.get(x), orderItems.get(x).getPrice());
             //iterate through and add all the ingredients for the menu items to the array
             ingredients.addAll(orderItems.get(x).getItemIngredients());
+            //add items sold to amount sold map
+            int prevAm = amountSold.get(orderItems.get(x).getMenuID());
+            amountSold.put(orderItems.get(x).getMenuID(), prevAm+1);
         }
 
         //set total
@@ -392,5 +400,41 @@ public class CentralBusiness {
     public void setReorderAmount(int am) {
         this.reorderAmount = am;
     }
+
+    /**
+     *
+     * @return the current profit of the business
+     */
+    public double calculateProfit() {
+        return revenue-expenses;
+    }
+
+    /**
+     * @throws ItemDoesNotExistsException if menu item requested does not exist
+     * @param menuItem
+     * @return the current profit for the specified item
+     */
+    public double getProfitByItem(MenuItem menuItem) throws ItemDoesNotExistsException{
+        //check that menu item exists
+        if (!menu.containsKey(menuItem.getMenuID())) {
+            throw new ItemDoesNotExistsException(menuItem.getMenuItemName() + " does not exist in menu");
+        } else {
+           //get number of requested menu items sold
+           int soldAm = amountSold.get(menuItem.getMenuID());
+           double costOfItem = 0;
+
+           //calculate price to make one of requested menu items
+           for (int x = 0; x < menuItem.getItemIngredients().size(); x++) {
+               costOfItem+=menuItem.getItemIngredients().get(x).getCost();
+           }
+
+           //calculate total expenses for menu item by multiplying amount sold by price
+           double totalCosts = soldAm * costOfItem;
+
+           //return revenue for menu item minus expenses for menu item to get profit
+           return getRevenueByItem(menuItem) - totalCosts;
+        }
+    }
+
 
 }
