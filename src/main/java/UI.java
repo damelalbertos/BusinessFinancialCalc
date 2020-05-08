@@ -1,3 +1,6 @@
+import java.io.IOException;
+import java.sql.SQLOutput;
+import java.text.DateFormat;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.*;
@@ -5,105 +8,111 @@ import java.util.*;
 
 public class UI {
 
-    public static void main(String[] args) throws ItemAlreadyExistsException, ItemDoesNotExistsException, ItemCountAt0Exception {
+    public static void main(String[] args) throws ItemAlreadyExistsException, ItemDoesNotExistsException, ItemCountAt0Exception, IOException, EmptyInventoryException, EmptyEmployeesMapException, EmptyMenuException, ParseException {
 
+        //create business
         CentralBusiness bus1 = new CentralBusiness("Business 1");
-        Inventory testInventory = new Inventory();
 
+        //read ingredients from json file
+        List<Item> items = JsonUtil.listFromJsonFile("src/test/setItems.json", Item.class);
 
+        //read menu items from json file
+        List<MenuItem> allMenuItems = JsonUtil.listFromJsonFile("src/test/setMenu.json", MenuItem.class);
 
+        //add ingredients to business's inventory
+        for (Item item : items) {
+            bus1.getInventory().addItem(item);
+        }
 
-        Item testItem1 = new Item("0001", 5000, "Buns", 1.00);
-        Item testItem2 = new Item("0002", 1000, "Lettuce", 0.50);
-        Item testItem3 = new Item("0003", 1000, "Bacon", 0.69);
-        Item testItem4 = new Item("0004", 1000, "Burger Patty", 4.00);
-        Item testItem5 = new Item("0005", 1000, "potatoe", 2.00);
-        bus1.getInventory().addItem(testItem1);
-        bus1.getInventory().addItem(testItem2);
-        bus1.getInventory().addItem(testItem3);
-        bus1.getInventory().addItem(testItem4);
-
-
+        //set automatic re-ordering threshold and amount
         bus1.setInventoryThreshold(100);
         bus1.setReorderAmount(1000);
 
-
-
-        testInventory.addItem(testItem1);
-        testInventory.addItem(testItem2);
-        testInventory.addItem(testItem3);
-        testInventory.addItem(testItem4);
-        testInventory.addItem(testItem5);
-
-
+        //add ingredients for different menu items
         ArrayList<Item> burgerIngredients = new ArrayList<>();
-        burgerIngredients.add(testItem1);
-        burgerIngredients.add(testItem2);
-        burgerIngredients.add(testItem3);
-        burgerIngredients.add(testItem4);
+        burgerIngredients.add(items.get(0));
+        burgerIngredients.add(items.get(1));
+        burgerIngredients.add(items.get(2));
 
-        //add fries ingredients
         ArrayList<Item> friesIngredients = new ArrayList<>();
-        friesIngredients.add(testItem4);
+        friesIngredients.add(items.get(9));
 
-        //create menuItem object (burger and fries)
-        MenuItem burger = new MenuItem("0001", "Burger", 5.00);
-        MenuItem fries = new MenuItem("0002", "Fries", 3.00);
-        burger.setItemIngredients(burgerIngredients);
-        fries.setItemIngredients(friesIngredients);
-
-        //menuItem to test count < 1 ordering
-        MenuItem bacon = new MenuItem("0003", "Bacon", 3.00);
-        ArrayList<Item> baconIngredients = new ArrayList<>();
-        bacon.setItemIngredients(baconIngredients);
+        ArrayList<Item> mozzarellaSticksIngredients = new ArrayList<>();
+        mozzarellaSticksIngredients.add(items.get(2));
 
 
-
-        bus1.addToMenu(burger, bus1.getInventory().getInventory());
-        bus1.addToMenu(fries, bus1.getInventory().getInventory());
-        bus1.addToMenu(bacon, bus1.getInventory().getInventory());
+        ArrayList<Item> saladIngredients = new ArrayList<>();
+        saladIngredients.add(items.get(2));
 
 
+        ArrayList<Item> cheeseBurgerIngredients = new ArrayList<>();
+        cheeseBurgerIngredients.add(items.get(0));
+        cheeseBurgerIngredients.add(items.get(1));
+        cheeseBurgerIngredients.add(items.get(2));
+        cheeseBurgerIngredients.add(items.get(3));
+        cheeseBurgerIngredients.add(items.get(4));
 
+        //set each menu item's ingredients
+        allMenuItems.get(0).setItemIngredients(burgerIngredients);
+        allMenuItems.get(1).setItemIngredients(friesIngredients);
+        allMenuItems.get(2).setItemIngredients(cheeseBurgerIngredients);
+        allMenuItems.get(3).setItemIngredients(mozzarellaSticksIngredients);
+        allMenuItems.get(4).setItemIngredients(saladIngredients);
 
+        //add all menu items to the business's menu
+        for (MenuItem menuItem : allMenuItems) {
+            bus1.addToMenu(menuItem, bus1.getInventory().getInventory());
 
-       ArrayList<MenuItem>allMenuItems = new ArrayList<>();
-        allMenuItems.add(fries);
-        allMenuItems.add(bacon);
-        allMenuItems.add(burger);
+        }
 
+        //create employees
+        Employee employee1 = new Employee();
+        employee1.setId("1000");
+        employee1.setWage(11.25);
+        employee1.setHoursWorked(36);
+        Employee employee2 = new Employee();
+        employee2.setId("1001");
+        employee2.setWage(13.25);
+        employee2.setHoursWorked(50);
+        Employee employee3 = new Employee();
+        employee3.setId("1002");
+        employee3.setWage(10);
+        employee3.setHoursWorked(40);
+        Employee employee4 = new Employee();
+        employee4.setId("1003");
+        employee4.setWage(20);
+        employee4.setHoursWorked(40);
 
-
-
-
-        Employee employee1 = new Employee("1000", 11.25, 36);
-        Employee employee2 = new Employee("1001", 13.25, 50);
-        Employee employee3 = new Employee("1002", 10, 40);
-        Employee employee4 = new Employee("1002", 20, 40);
-
+        //add employees to business
         bus1.addAccount("1000", employee1);
         bus1.addAccount("1001", employee2);
         bus1.addAccount("1002", employee3);
 
 
-
-
-
-
         Random rand = new Random();
 
 
-
-
-
+        double quarterOneRev = 0;
+        double quarterTwoRev = 0;
+        double quarterThreeRev = 0;
+        double quarterFourRev = 0;
+        double quarterOneExp = 0;
+        double quarterTwoExp = 0;
+        double quarterThreeExp = 0;
+        double quarterFourExp = 0;
+        double quarterOneProf = 0;
+        double quarterTwoProf = 0;
+        double quarterThreeProf = 0;
+        double quarterFourProf = 0;
 
         String oldDate = "2020-01-01";
         //System.out.println("Date before Addition: "+oldDate);
         SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
         Calendar c = Calendar.getInstance();
-        try{
+
+        try {
             c.setTime(sdf.parse(oldDate));
-        }catch(ParseException e){
+        } catch (ParseException e) {
             e.printStackTrace();
         }
 
@@ -113,14 +122,27 @@ public class UI {
         //System.out.println("Date Incremented by One: "+newDate);
 
 
-
         String endDate = "2020-12-31";
 
-        while(newDate.compareTo(endDate) != 0){
-            int orderAmount = rand.nextInt((100-25)+1)+25;
-            int counter =0;
+        String tracker = "2020- 01- 01";
 
-            while(counter < orderAmount){
+
+
+        HashMap<String, Double>dailyRev = new HashMap<>();
+        HashMap<String, Double>dailyExp = new HashMap<>();
+        HashMap<String, Double>dailyProf = new HashMap<>();
+
+        double rev = 0;
+        double exp = 0;
+        double prof = 0;
+
+        while (newDate.compareTo(endDate) != 0) {
+            int orderAmount = rand.nextInt((100 - 25) + 1) + 25;
+            int counter = 0;
+            int calcPayCounter = 0;
+
+            int k = 0;
+            while (counter < orderAmount) {
                 Customer customer = new Customer("useJava", "Faker", "0");
                 ArrayList<MenuItem> customerOrder = new ArrayList<>();
 
@@ -128,9 +150,9 @@ public class UI {
                 customerOrder.add(allMenuItems.get(new Random().nextInt(allMenuItems.size())));
                 customerOrder.add(allMenuItems.get(new Random().nextInt(allMenuItems.size())));
                 customerOrder.add(allMenuItems.get(new Random().nextInt(allMenuItems.size())));
-                bus1.order(customerOrder, customer, "1");
+                customerOrder.add(allMenuItems.get(new Random().nextInt(allMenuItems.size())));
+                bus1.order(customerOrder, customer, String.valueOf(k++));
 
-                System.out.println(counter);
 
 
 
@@ -138,101 +160,522 @@ public class UI {
                 //pick up to 10 random menuItems to chooose from
                 //get total and all that to add automatically to business
                 counter++;
+
+
+
+
+
+
+                rev = bus1.getRevenue();
+
+                dailyRev.put(newDate, rev);
+
+                exp = bus1.getExpenses();
+
+                dailyExp.put(newDate, exp);
+
+                prof = rev- exp;
+
+                dailyProf.put(newDate, prof);
+
+
+
+
+
+
             }
+
+
+
+
+
+
 
             //Incrementing the date by 1 day
             c.add(Calendar.DAY_OF_MONTH, 1);
             newDate = sdf.format(c.getTime());
-            //add one day to newDate and continue the process over and over until that date is reached
-
-
-
-
-        }
-
-        Scanner scan = new Scanner(System.in);
-
-
-        System.out.println("Hello, please enter any key or quit");
-
-
-        String j = scan.next();
-        while (!j.equals("quit")) {
-
-            System.out.println("Please enter employee id");
-
-            if (!bus1.exists(scan.next())) {
-                System.out.println("ID is invalid");
-            } else {
-
-                System.out.println("What would you like to do?");
-
-//                if (scan.next().equals("order")) {
-//                    System.out.println("Enter first name and last name");
-//                    Customer customer = new Customer(scan.next(), scan.next());
-//
-//
-//                    //new Order(random number 1-1000, random number 1-1000, total = 0);
-//
-//                }
-
-                String i = scan.next();
-                if(i.equals("revenue")){
-                    System.out.println(bus1.getRevenue());
-                }
-
-
-
-                if(i.equals("expenses")){
-                    System.out.println(bus1.getExpenses());
-                }
-
-                if(i.equals("employee")){
-                    System.out.println("Would you like to add, remove or calculate pay");
-
-                    if(scan.next().equals("add")){
-                        System.out.println("Enter new ID");
-                        String id = scan.next();
-                        System.out.println("Enter wage");
-                        double wage = scan.nextDouble();
-                        System.out.println("Enter hoursWorked");
-                        int hoursWorked= scan.nextInt();
-                        Employee employee = new Employee(id, wage, hoursWorked);
-                        bus1.addAccount(id, employee);
-                    }
-
-                    if(i.equals("remove")){
-                        System.out.println("Enter id for Employee to remove");
-                        String id= scan.next();
-
-
-                        if(bus1.getEmployee(id) != null) {
-                            bus1.removeEmployee(id);
-                        }
-
-                        else{
-                            System.out.println("Employee Doesn't exist");
-                        }
-
-                    }
-
-                    if(i.equals("pay")){
-
-                    }
-                }
-                System.out.println("Would you like to continue? type quit or any key");
-
-                if(i.equals("quit")){
-                    break;
-                }
-
-
-
+            calcPayCounter++;
+            if (calcPayCounter == 7){
+                calcPayCounter = 0;
+                bus1.calcPayForAll();
             }
 
 
 
 
+            //add one day to newDate and continue the process over and over until that date is reached
+
+
+
+            String quarterOne = "2020-3-31";
+            String quarterTwo = "2020-6-30";
+            String quarterThree = "2020-9-30";
+            String quarterFour = "2020-12-31";
+
+            Date q1 = sdf.parse(quarterOne);
+            Date q2 = sdf.parse(quarterTwo);
+            Date q3 = sdf.parse(quarterThree);
+            Date q4 = sdf.parse(quarterFour);
+
+            Date curr = sdf.parse(newDate);
+
+
+            if(curr.equals(q1)){
+                quarterOneRev = bus1.getRevenue();
+                quarterOneExp = bus1.getExpenses();
+                quarterOneProf = quarterOneRev - quarterOneExp;
+            }
+
+            if(curr.equals(q2)){
+                quarterTwoRev = bus1.getRevenue() - quarterOneRev;
+                quarterTwoExp = bus1.getExpenses() - quarterOneExp;
+                quarterTwoProf = quarterTwoRev - quarterTwoExp;
+            }
+
+            if(curr.equals(q3)) {
+                quarterThreeRev = bus1.getRevenue() - quarterOneRev - quarterTwoRev;
+                quarterThreeExp = bus1.getExpenses() - quarterOneExp - quarterTwoExp;
+                quarterThreeProf = quarterThreeRev - quarterThreeExp;
+
+            }
+
+
+
+            if(curr.equals(q4)){
+                quarterFourRev = bus1.getRevenue() - quarterOneRev - quarterTwoRev - quarterThreeRev;
+                quarterFourExp = bus1.getExpenses() - quarterOneExp - quarterTwoExp - quarterThreeExp;
+                quarterFourProf = quarterFourRev - quarterFourExp;
+
+            }
+
+        }
+
+
+
+        Scanner scan = new Scanner(System.in);
+
+
+        System.out.println("Hi! Welcome to Business Financial Calculator.");
+        System.out.println("To exit the program, type 'quit' at anytime");
+        System.out.println();
+
+        //String j = scan.next();
+        while (true) {
+            boolean again = true;
+
+            while (again) {
+                System.out.println("What would you like to view/enter? (Stats, Inventory, Menu, Employees, Orders)");
+                String firstInput = scan.nextLine().toLowerCase();
+                while (!firstInput.equals("stats") && !firstInput.equals("inventory") && !firstInput.equals("menu") && !firstInput.equals("employees") && !firstInput.equals("orders") && !firstInput.equals("quit")) {
+                    System.out.println("Please enter a valid command!");
+                    System.out.println("What would you like to view/enter? (Stats, Inventory, Menu, Employees, Orders)");
+                    firstInput = scan.nextLine().toLowerCase();
+                }
+                if (firstInput.equalsIgnoreCase("quit")){
+                    System.exit(0);
+                }
+                switch (firstInput.toLowerCase()) {
+
+                    case "stats":
+                        System.out.println("What stats would you like to view? (Daily, Quarterly, or Yearly)");
+                        String secondInput = scan.nextLine().toLowerCase();
+                        while (!secondInput.equals("daily") && !secondInput.equals("quarterly") && !secondInput.equals("yearly") && !secondInput.equals("quit")) {
+                            System.out.println("Please enter a valid time period or quit!");
+                            System.out.println("What stats would you like to view? (Daily, Quarterly, or Yearly)");
+                            secondInput = scan.nextLine().toLowerCase();
+                        }
+                        if (secondInput.equalsIgnoreCase("quit")){
+                            System.exit(0);
+                        }
+                        boolean check = true;
+                        while (check) {
+
+
+
+                            switch (secondInput.toLowerCase()) {
+                                case "daily":
+                                    //SHOW DAILY STATS
+
+                                    System.out.println("Enter a  date (yyyy-mm-dd) you'd like to view up to");
+
+
+                                    boolean check4 = true;
+
+                                    String fourthInput = scan.nextLine();
+
+                                    if (dailyRev.containsKey(fourthInput.toLowerCase())) {
+                                        System.out.println("Revenue to date: " + dailyRev.get(fourthInput.toLowerCase()));
+                                        System.out.println("Expenses to date: " + dailyExp.get(fourthInput.toLowerCase()));
+                                        System.out.println("Profit to date: " + dailyProf.get(fourthInput.toLowerCase()));
+
+
+                                    } else {
+                                        System.out.println("Invalid date");
+                                    }
+
+
+                                    check = false;
+                                    break;
+
+
+
+                                case "quarterly":
+                                    System.out.println("Enter which quarter earnings you would like to view or all (q1, q2, q3, q4, all)");
+                                    String thirdInput = scan.nextLine();
+                                    //ASK WHICH QUARTER
+                                    //SHOW QUARTERLY STATS BASED ON SPECIFIED QUARTER
+                                    boolean check2 = true;
+
+                                    while(check2){
+
+                                        //should work
+                                        switch (thirdInput.toLowerCase()) {
+                                            case "q1":
+                                                System.out.println("Quarter 1 Revenue: " + quarterOneRev);
+                                                System.out.println("Quarter 1 Expenses: " + quarterOneExp);
+                                                System.out.println("Quarter 1 Profit: " + quarterOneProf);
+                                                check2 = false;
+                                                break;
+
+                                            case "q2":
+                                                System.out.println("Quarter 2 Revenue: " + quarterTwoRev);
+                                                System.out.println("Quarter 2 Expenses: " + quarterTwoExp);
+                                                System.out.println("Quarter 2 Profit: " + quarterTwoProf);
+                                                check2 = false;
+                                                break;
+
+                                            case "q3":
+                                                System.out.println("Quarter 3 Revenue: " + quarterThreeRev);
+                                                System.out.println("Quarter 3 Expenses: " + quarterThreeExp);
+                                                System.out.println("Quarter 3 Profit: " + quarterThreeProf);
+                                                check2 = false;
+                                                break;
+
+                                            case "q4":
+                                                System.out.println("Quarter 4 Revenue: " + quarterFourRev);
+                                                System.out.println("Quarter 4 Expenses: " + quarterFourExp);
+                                                System.out.println("Quarter 4 Profit: " + quarterFourProf);
+                                                check2 = false;
+                                                break;
+
+                                            case "all":
+                                                System.out.println("Quarter 1 Revenue: " + quarterOneRev);
+                                                System.out.println("Quarter 1 Expenses: " + quarterOneExp);
+                                                System.out.println("Quarter 1 Profit: " + quarterOneProf);
+                                                System.out.println("Quarter 2 Revenue: " + quarterTwoRev);
+                                                System.out.println("Quarter 2 Expenses: " + quarterTwoExp);
+                                                System.out.println("Quarter 2 Profit: " + quarterTwoProf);
+                                                System.out.println("Quarter 3 Revenue: " + quarterThreeRev);
+                                                System.out.println("Quarter 3 Expenses: " + quarterThreeExp);
+                                                System.out.println("Quarter 3 Profit: " + quarterThreeProf);
+                                                System.out.println("Quarter 4 Revenue: " + quarterFourRev);
+                                                System.out.println("Quarter 4 Expenses: " + quarterFourExp);
+                                                System.out.println("Quarter 4 Profit: " + quarterFourProf);
+                                                check2 = false;
+                                                break;
+
+
+                                        }
+
+                                        if(check2 = false){
+                                            break;
+                                        }
+
+                                    }
+                                    check = false;
+                                    break;
+
+
+                                case "yearly":
+                                    check = false;
+                                    //SHOW YEARLY STATS
+                                    System.out.println("Revenue: " + bus1.getRevenue());
+                                    System.out.println("Expenses: " + bus1.getExpenses());
+                                    double yearProf = bus1.getRevenue() - bus1.getExpenses();
+                                    System.out.println("Profit: " + yearProf);
+                                    break;
+                            }
+                            if (!check) {
+                                break;
+                        }
+
+                        }
+                        break;
+
+
+
+
+                        //INVENTORY KEEPS PRINTING OUT WHEN WE PRINT OUT YEARLY REVENUE
+                    case "inventory":
+                        System.out.println("There are " + bus1.getInventory().getInventoryCount() + " items in the inventory");
+                        System.out.println("Here is your product inventory list:");
+                        System.out.println(bus1.getInventory().getProductInventory());
+                        System.out.println("Would you like to add or remove any inventory items? (or any other keys to go back)");
+                        String inventoryInput = scan.nextLine();
+                        if (inventoryInput.equalsIgnoreCase("quit")){
+                            System.exit(0);
+                        }
+                        switch (inventoryInput.toLowerCase()){
+                            case "add":
+                                Item newItem = new Item();
+                                System.out.println("What is the desired Item ID?");
+                                String potentialId = scan.nextLine();
+                                while (bus1.getInventory().itemExistsAlready(potentialId)){
+                                    System.out.println("That ID is already in use, please use another one.");
+                                    potentialId = scan.nextLine();
+                                }
+                                while (potentialId.equals("")|| !Character.isLetterOrDigit(potentialId.charAt(0))){
+                                    System.out.println("Please Enter a valid ID!");
+                                    System.out.println("What is the desired Item ID?");
+                                    potentialId = scan.nextLine();
+                                }
+                                newItem.setItemId(potentialId);
+
+                                System.out.println("What is the desired Item Name?");
+                                String name = scan.nextLine();
+                                while (name.equals("") || !Character.isLetterOrDigit(name.charAt(0))){
+                                    System.out.println("Please Enter a valid name!");
+                                    System.out.println("What is the desired Item Name?");
+                                    name = scan.nextLine();
+                                }
+                                newItem.setItemName(name);
+
+                                System.out.println("How many of this item?");
+                                //ensure a positive int is entered
+                                Scanner scan1  = new Scanner(System.in);
+                                while (true) {
+                                    try {
+                                        newItem.setItemCount(scan1.nextInt());
+                                        break;
+                                    } catch (IllegalArgumentException iae) {
+                                        System.out.println("Invalid - cannot be negative!");
+                                        System.out.println("How many of this item?");
+                                        scan1  = new Scanner(System.in);
+                                    } catch (InputMismatchException ime) {
+                                        System.out.println("Invalid - must be an integer!");
+                                        System.out.println("How many of this item?");
+                                        scan1  = new Scanner(System.in);
+                                    }
+
+                                }
+
+                                //ensure cost is valid
+                                System.out.println("How much does this item cost?");
+                                Scanner scan2  = new Scanner(System.in);
+                                while (true) {
+                                    try {
+                                        newItem.setCost(scan2.nextDouble());
+                                        break;
+                                    } catch (IllegalArgumentException iae) {
+                                        System.out.println("Invalid - cannot be negative or more than 2 decimals!");
+                                        System.out.println("How much does this item cost?");
+                                        scan2 = new Scanner(System.in);
+                                    } catch (InputMismatchException ime){
+                                        System.out.println("Invalid - must be a number!");
+                                        System.out.println("How much does this item cost?");
+                                        scan2  = new Scanner(System.in);
+                                    }
+                                }
+
+                                System.out.println("Item Added!");
+                                System.out.println("Here is your new item!");
+                                System.out.println(newItem.itemToString());
+                                bus1.getInventory().addItem(newItem);
+                                break;
+                            case "remove":
+                                System.out.println("What is the ID of the item?");
+                                String toBeRemoved = scan.nextLine();
+                                while (!bus1.getInventory().itemExistsAlready(toBeRemoved)){
+                                    System.out.println("That ID does not exist, please use another one.");
+                                    toBeRemoved = scan.nextLine();
+                                }
+                                bus1.getInventory().removeItem(toBeRemoved);
+                                System.out.println("Item Removed!");
+                                break;
+                        }
+
+                        again = false;
+                        break;
+
+
+                    case "menu":
+
+                        //Print all MenuItems
+                        System.out.println("Here is your menu:");
+                        System.out.println(bus1.menuToString());
+                        System.out.println("Would you like to add or remove a menu item? (or any other keys to go back)");
+                        String menuInput = scan.nextLine();
+                        if (menuInput.equalsIgnoreCase("quit")){
+                            System.exit(0);
+                        }
+                        switch (menuInput.toLowerCase()){
+                            case "add":
+                                MenuItem newMenuItem = new MenuItem();
+                                ArrayList<Item> ingredients = new ArrayList<>();
+                                System.out.println("What is the desired menu item ID?");
+                                String potentialId = scan.nextLine();
+                                while (bus1.menuItemExistsAlready(potentialId)){
+                                    System.out.println("That ID is already in use, please use another one.");
+                                    potentialId = scan.nextLine();
+                                }
+                                while (potentialId.equals("") || !Character.isLetterOrDigit(potentialId.charAt(0))){
+                                    System.out.println("Please Enter a valid ID!");
+                                    System.out.println("What is the desired menu item ID?");
+                                    potentialId = scan.nextLine();
+                                }
+                                newMenuItem.setMenuItemId(potentialId);
+
+                                System.out.println("What is the menu item's name?");
+                                String name = scan.nextLine();
+                                while (name.equals("") || !Character.isLetterOrDigit(name.charAt(0))){
+                                    System.out.println("Please Enter a valid name!");
+                                    System.out.println("What is the desired Item Name?");
+                                    name = scan.nextLine();
+                                }
+                                newMenuItem.setMenuItemName(name);
+
+                                System.out.println("Now we will add ingredients, here is the list of current items:");
+                                System.out.println(bus1.getInventory().getProductInventory());
+                                System.out.println("Type an item ID/ingredient of the menu item or done once finished.");
+                                String ingredient = scan.nextLine();
+                                while (!ingredient.equalsIgnoreCase("done")) {
+
+                                    Item toBeAdded = bus1.getInventory().getItem(ingredient);
+                                    ingredients.add(toBeAdded);
+                                    ingredient = scan.nextLine();
+                                }
+                                newMenuItem.setItemIngredients(ingredients);
+
+
+                                System.out.println("What should the price of " + newMenuItem.getMenuItemName() + " be?");
+                                Scanner scan3  = new Scanner(System.in);
+                                while (true) {
+                                    try {
+                                        newMenuItem.setPrice(scan3.nextDouble());
+                                        break;
+                                    } catch (IllegalArgumentException iae) {
+                                        System.out.println("Invalid - cannot be negative or more than 2 decimals!");
+                                        System.out.println("What should the price of " + newMenuItem.getMenuItemName() + " be?");
+                                        scan3 = new Scanner(System.in);
+                                    } catch (InputMismatchException ime){
+                                        System.out.println("Invalid - must be a number!");
+                                        System.out.println("What should the price of " + newMenuItem.getMenuItemName() + " be?");
+                                        scan3  = new Scanner(System.in);
+                                    }
+                                }
+                                    try {
+                                        bus1.addToMenu(newMenuItem, bus1.getInventory().getInventory());
+                                        System.out.println("Menu Item Added!");
+                                        break;
+                                    } catch (NullPointerException npe) {
+                                        System.out.println("Make sure all the ingredient's IDs entered are valid and try again!");
+                                    }
+
+
+                                break;
+
+                            case "remove":
+                                System.out.println("What is the ID of the Menu Item?");
+                                String toBeRemoved = scan.nextLine();
+                                while (!bus1.menuItemExistsAlready(toBeRemoved)){
+                                    System.out.println("That ID does not exist, please use another one.");
+                                    toBeRemoved = scan.nextLine();
+                                }
+                                bus1.removeMenuItem(toBeRemoved);
+                                System.out.println("Menu Item Removed!");
+                                break;
+                        }
+                        again = false;
+                        break;
+
+                    case "employees":
+                        System.out.println("Here are your employees:");
+                        System.out.println(bus1.employeeDataToString());
+                        System.out.println("Would you like to add or remove an employee? (or any other keys to go back)");
+                        String employeesInput = scan.nextLine();
+                        if (employeesInput.equalsIgnoreCase("quit")){
+                            System.exit(0);
+                        }
+                        switch (employeesInput.toLowerCase()){
+                            case "add":
+                                Employee newEmployee = new Employee();
+                                System.out.println("What is the desired Employee ID?");
+                                String potentialId = scan.nextLine();
+                                while (bus1.employeeExistsAlready(potentialId)){
+                                    System.out.println("That ID is already in use, please use another one.");
+                                    potentialId = scan.nextLine();
+                                }
+                                while (potentialId.equals("") || !Character.isLetterOrDigit(potentialId.charAt(0))){
+                                    System.out.println("Please Enter a valid ID!");
+                                    System.out.println("What is the desired Employee ID?");
+                                    potentialId = scan.nextLine();
+                                }
+                                newEmployee.setId(potentialId);
+                                System.out.println("What is this employee's wage?");
+                                Scanner scan4  = new Scanner(System.in);
+                                while (true) {
+                                    try {
+                                        newEmployee.setWage(scan4.nextDouble());
+                                        break;
+                                    } catch (IllegalArgumentException iae) {
+                                        System.out.println("Invalid - cannot be negative or more than 2 decimals!");
+                                        System.out.println("What is the employee's wage?");
+                                        scan4 = new Scanner(System.in);
+                                    } catch (InputMismatchException ime){
+                                        System.out.println("Invalid - must be a number!");
+                                        System.out.println("What is the employee's wage?");
+                                        scan4  = new Scanner(System.in);
+                                    }
+                                }
+
+                                System.out.println("How many hours has this employee worked?");
+                                Scanner scan5  = new Scanner(System.in);
+                                while (true) {
+                                    try {
+                                        newEmployee.setHoursWorked(scan5.nextDouble());
+                                        break;
+                                    } catch (IllegalArgumentException iae) {
+                                        System.out.println("Invalid - cannot be negative or more than 2 decimals!");
+                                        System.out.println("How many hours has this employee worked?");
+                                        scan5 = new Scanner(System.in);
+                                    } catch (InputMismatchException ime){
+                                        System.out.println("Invalid - must be a number!");
+                                        System.out.println("How many hours has this employee worked?");
+                                        scan5  = new Scanner(System.in);
+                                    }
+                                }
+
+                                bus1.addAccount(newEmployee.getId(), newEmployee);
+                                System.out.println("Employee Added!");
+                                break;
+                            case "remove":
+                                System.out.println("What is the ID of the Employee?");
+                                String toBeRemoved = scan.nextLine();
+                                while (!bus1.employeeExistsAlready(toBeRemoved)){
+                                    System.out.println("That ID does not exist, please use another one.");
+                                    toBeRemoved = scan.nextLine();
+                                }
+                                bus1.removeEmployee(toBeRemoved);
+                                System.out.println("Employee Removed!");
+                                break;
+                        }
+                        again = false;
+                        break;
+
+                    case "orders":
+                        try {
+                            System.out.println(bus1.allOrdersToString());
+                        } catch (EmptyOrdersMapException e) {
+                            System.out.println("There are no orders to show!");
+                        }
+                        break;
+                }
+                if (!again) {
+                    break;
+                }
+            }
         }
     }
 }
+
+

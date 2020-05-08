@@ -22,15 +22,5 @@
     "menuItemId": "0005",
     "menuItemName": "Salad",
     "price": 6
-  },
-  {
-    "menuItemId": "0006",
-    "menuItemName": "MilkShake",
-    "price": 3.75
-  },
-  {
-    "menuItemId": "0007",
-    "menuItemName": "Fountain Drink",
-    "price": 2.50
   }
 ]

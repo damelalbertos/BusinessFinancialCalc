@@ -13,7 +13,7 @@ public class MenuItem{
         this.menuItemId = menuItemId;
         this.menuItemName = menuItemName;
         this.price = price;
-        this.itemIngredients = new ArrayList<Item>();
+        this.itemIngredients = new ArrayList<>();
     }
 
     public void setMenuItemId(String menuItemId) {
@@ -24,8 +24,13 @@ public class MenuItem{
         this.menuItemName = menuItemName;
     }
 
-    public void setPrice(double price) {
-        this.price = price;
+    public void setPrice(double price) throws IllegalArgumentException{
+        if (!Item.isAmountValid(price)) {
+            throw new IllegalArgumentException("Price cannot be negative or more than two decimals");
+        } else {
+            this.price = price;
+        }
+
     }
 
     public MenuItem() {

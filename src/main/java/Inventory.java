@@ -46,6 +46,13 @@ public class Inventory {
         return item;
     }
 
+    public boolean itemExistsAlready(String itemId){
+        if (inventory.containsKey(itemId)){
+            return true;
+        }
+        return false;
+    }
+
     /**
      * Purpose: Adds a new item to inventory HashMap
      * Parameters: the item to be added
@@ -103,7 +110,7 @@ public class Inventory {
         while (it.hasNext()){
             Map.Entry<String, Item> entry = (Map.Entry<String, Item>) it.next();
             String itemCountStr = Integer.toString(entry.getValue().getCount());
-            result.append(entry.getValue().getName() + ": " + itemCountStr + "\n"); //each line is "<name>: <itemCount>", this is added to a string that is returned
+            result.append("#" + entry.getKey() + " " + entry.getValue().getName() + ": " + itemCountStr + ", " + entry.getValue().getCost() + "\n"); //each line is "<name>: <itemCount>", this is added to a string that is returned
         }
 
         return result.toString();

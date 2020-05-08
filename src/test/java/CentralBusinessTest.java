@@ -63,9 +63,18 @@ public class CentralBusinessTest {
         assertEquals(8.5,bus1.getExpenses());
 
         //create employees
-        Employee employee1 = new Employee("1000", 11.25, 36);
-        Employee employee2 = new Employee("1001", 13.25, 50);
-        Employee employee3 = new Employee("1002", 10, 40);
+        Employee employee1 = new Employee();
+        employee1.setId("1000");
+        employee1.setWage(11.25);
+        employee1.setHoursWorked(36);
+        Employee employee2 = new Employee();
+        employee2.setId("1001");
+        employee2.setWage(13.25);
+        employee2.setHoursWorked(50);
+        Employee employee3 = new Employee();
+        employee3.setId("1002");
+        employee3.setWage(10);
+        employee3.setHoursWorked(40);
 
         //add employees to system
         bus1.addAccount("1000", employee1);
@@ -279,11 +288,28 @@ public class CentralBusinessTest {
 
         CentralBusiness business = new CentralBusiness("BusinessName");
 
-        Employee employee1 = new Employee("1000", 11.25, 36);
-        Employee employee2 = new Employee("1001", 13.25, 50);
-        Employee employee3 = new Employee("1002", 10, 40);
-        Employee employee4 = new Employee("1003", 15.37, 27);
-        Employee employee5 = new Employee("1004", 14.26, 42);
+
+        Employee employee1 = new Employee();
+        employee1.setId("1000");
+        employee1.setWage(11.25);
+        employee1.setHoursWorked(36);
+        Employee employee2 = new Employee();
+        employee2.setId("1001");
+        employee2.setWage(13.25);
+        employee2.setHoursWorked(50);
+        Employee employee3 = new Employee();
+        employee3.setId("1002");
+        employee3.setWage(10);
+        employee3.setHoursWorked(40);
+        Employee employee4 = new Employee();
+        employee4.setId("1003");
+        employee4.setWage(15.37);
+        employee4.setHoursWorked(27);
+        Employee employee5 = new Employee();
+        employee5.setId("1004");
+        employee5.setWage(14.26);
+        employee5.setHoursWorked(42);
+
         business.addAccount("1000", employee1);
         business.addAccount("1001", employee2);
         business.addAccount("1002", employee3);
@@ -307,8 +333,14 @@ public class CentralBusinessTest {
 
         CentralBusiness business = new CentralBusiness("BusinessName");
 
-        Employee employee = new Employee("100", 14.26, 42);
-        Employee employee2 = new Employee("1001", 13.25, 50);
+        Employee employee = new Employee();
+        employee.setId("100");
+        employee.setWage(14.26);
+        employee.setHoursWorked(42);
+        Employee employee2 = new Employee();
+        employee2.setId("1001");
+        employee2.setWage(13.25);
+        employee2.setHoursWorked(50);
 
         business.addAccount("100", employee);
         business.addAccount("1001", employee2);

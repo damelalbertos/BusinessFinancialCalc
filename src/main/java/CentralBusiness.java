@@ -1,7 +1,26 @@
 import java.text.DecimalFormat;
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.Iterator;
 import java.util.Map;
+
+class EmptyEmployeesMapException extends Exception{
+    public EmptyEmployeesMapException(String errorMessage) {
+        super(errorMessage);
+    }
+}
+
+class EmptyOrdersMapException extends Exception{
+    public EmptyOrdersMapException(String errorMessage) {
+        super(errorMessage);
+    }
+}
+
+class EmptyMenuException extends Exception{
+    public EmptyMenuException(String errorMessage) {
+        super(errorMessage);
+    }
+}
 
 public class CentralBusiness {
 
@@ -10,10 +29,12 @@ public class CentralBusiness {
     private String businessName;
     private Map<String, Employee> employeesMap;
     private Inventory inventory;
+
     private HashMap<String, Order> allOrders;
     private HashMap<String, MenuItem> menu;
     private HashMap<String, Double> menuItemRevenue;
     private HashMap<String, Integer> amountSold;
+
     private int reorderAmount; //amount to reorder when hits threshold
     private int inventoryThreshold; //buy more product when count reaches this threshold
 
@@ -32,7 +53,84 @@ public class CentralBusiness {
     public CentralBusiness() {
     }
 
-    public HashMap<String, Order> getAllOrders() {
+    public String menuToString() throws EmptyMenuException {
+        StringBuilder result  = new StringBuilder();
+        //check if inventory is empty
+        if (menu.isEmpty()){
+            throw new EmptyMenuException("Menu is Empty!;");
+        }
+
+        // create string, iterate through the inventory
+        Iterator<Map.Entry<String, MenuItem>> it = menu.entrySet().iterator();
+        while (it.hasNext()){
+            Map.Entry<String, MenuItem> entry = (Map.Entry<String, MenuItem>) it.next();
+            String priceToString = Double.toString(entry.getValue().getPrice());
+            result.append("#" + entry.getKey() + " " + entry.getValue().getMenuItemName() + " $" + priceToString + ", Ingredients: ");
+            for (int i = 0; i < entry.getValue().getItemIngredients().size(); i++){
+                result.append(entry.getValue().getItemIngredients().get(i).getName() + " ");
+            }
+            result.append("\n");
+        }
+
+        return result.toString();
+    }
+
+    public String allOrdersToString() throws EmptyOrdersMapException {
+        StringBuilder result  = new StringBuilder();
+        //check if inventory is empty
+        if (allOrders.isEmpty()){
+            throw new EmptyOrdersMapException("All Orders Map is Empty!;");
+        }
+
+        // create string, iterate through the inventory
+        Iterator<Map.Entry<String, Order>> it = allOrders.entrySet().iterator();
+        while (it.hasNext()){
+            Map.Entry<String, Order> entry = (Map.Entry<String, Order>) it.next();
+            String totalToString = Double.toString(entry.getValue().getTotal());
+            result.append("Order#" + entry.getKey() + ", Customer ID: " + entry.getValue().getCustomerID() + ", Total: $" + totalToString + ", Items: ");
+            for (int i = 0; i < entry.getValue().getItems().size(); i++){
+                result.append(entry.getValue().getItems().get(i).getMenuItemName() + ", ");
+            }
+            result.append("\n");
+        }
+
+        return result.toString();
+    }
+
+    public String employeeDataToString() throws EmptyEmployeesMapException {
+        StringBuilder result  = new StringBuilder();
+        //check if inventory is empty
+        if (employeesMap.isEmpty()){
+            throw new EmptyEmployeesMapException("Employees Map is Empty!;");
+        }
+
+        // create string, iterate through the inventory
+        Iterator<Map.Entry<String, Employee>> it = employeesMap.entrySet().iterator();
+        while (it.hasNext()){
+            Map.Entry<String, Employee> entry = (Map.Entry<String, Employee>) it.next();
+            String wageToString = Double.toString(entry.getValue().getWage());
+            String hoursWorkedToString = Double.toString(entry.getValue().getHoursWorked());
+            result.append("#" + entry.getKey() + " Wage: $" + wageToString + ", Hours Worked: " + hoursWorkedToString+ "\n");
+        }
+
+        return result.toString();
+    }
+
+    public boolean employeeExistsAlready(String employeeId){
+        if (employeesMap.containsKey(employeeId)){
+            return true;
+        }
+        return false;
+    }
+
+    public boolean menuItemExistsAlready(String menuItemId){
+        if (menu.containsKey(menuItemId)){
+            return true;
+        }
+        return false;
+    }
+
+    public Map<String, Order> getAllOrders() {
         return allOrders;
     }
 
@@ -53,7 +151,7 @@ public class CentralBusiness {
        inventory.inventory.get(itemId).addCount(amount);
     }
 
-    public HashMap<String, MenuItem> getMenu() {
+    public Map<String, MenuItem> getMenu() {
         return menu;
     }
 
@@ -116,6 +214,13 @@ public class CentralBusiness {
 
     }
 
+    public void removeMenuItem(String id) {
+        if (!menu.containsKey(id)) {
+            throw new IllegalArgumentException("Menu Item does not exist");
+        }
+        menu.remove(id);
+    }
+
     public void removeEmployee(String id) {
         if (!employeesMap.containsKey(id)) {
             throw new IllegalArgumentException("Employee does not exist");
@@ -163,6 +268,12 @@ public class CentralBusiness {
             return pay;
         }
 
+    }
+
+    public void calcPayForAll(){
+        for (Map.Entry<String, Employee> entry : employeesMap.entrySet()){
+           calcPay(entry.getKey());
+        }
     }
 
 
@@ -289,7 +400,6 @@ public class CentralBusiness {
     public void setReorderAmount(int am) {
         this.reorderAmount = am;
     }
-
 
     /**
      *
