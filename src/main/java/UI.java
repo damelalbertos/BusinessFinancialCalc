@@ -96,6 +96,14 @@ public class UI {
         double quarterTwoRev = 0;
         double quarterThreeRev = 0;
         double quarterFourRev = 0;
+        double quarterOneExp = 0;
+        double quarterTwoExp = 0;
+        double quarterThreeExp = 0;
+        double quarterFourExp = 0;
+        double quarterOneProf = 0;
+        double quarterTwoProf = 0;
+        double quarterThreeProf = 0;
+        double quarterFourProf = 0;
 
         String oldDate = "2020-01-01";
         //System.out.println("Date before Addition: "+oldDate);
@@ -188,23 +196,30 @@ public class UI {
 
             if(curr.equals(q1)){
                 quarterOneRev = bus1.getRevenue();
-
+                quarterOneExp = bus1.getExpenses();
+                quarterOneProf = quarterOneRev - quarterOneProf;
             }
 
             if(curr.equals(q2)){
-                quarterTwoRev = bus1.getRevenue();
+                quarterTwoRev = bus1.getRevenue() - quarterOneRev;
+                quarterTwoExp = bus1.getExpenses() - quarterOneExp;
+                quarterOneProf = quarterTwoRev - quarterTwoProf;
 
             }
 
             if(curr.equals(q3)) {
-                quarterThreeRev = bus1.getRevenue();
+                quarterThreeRev = bus1.getRevenue() - quarterOneRev - quarterTwoRev;
+                quarterThreeExp = bus1.getExpenses() - quarterOneExp - quarterTwoExp;
+                quarterThreeProf = quarterThreeRev - quarterThreeProf;
 
             }
 
 
 
             if(curr.equals(q4)){
-                quarterFourRev = bus1.getRevenue();
+                quarterFourRev = bus1.getRevenue() - quarterOneRev - quarterTwoRev - quarterThreeRev;
+                quarterFourExp = bus1.getExpenses() - quarterOneExp - quarterTwoExp - quarterThreeExp;
+                quarterFourProf = quarterFourRev - quarterFourProf;
 
             }
 
@@ -278,7 +293,6 @@ public class UI {
 
 
                                 case "quarterly":
-                                    //TODO
                                     String thirdInput = scan.nextLine();
                                     //ASK WHICH QUARTER
                                     //SHOW QUARTERLY STATS BASED ON SPECIFIED QUARTER
@@ -289,30 +303,46 @@ public class UI {
                                         //should work
                                         switch (thirdInput.toLowerCase()) {
                                             case "q1":
-                                                System.out.println("Quarter 1: " + quarterOneRev);
+                                                System.out.println("Quarter 1 Revenue: " + quarterOneRev);
+                                                System.out.println("Quarter 1 Expenses: " + quarterOneExp);
+                                                System.out.println("Quarter 1 Profit: " + quarterOneProf);
                                                 check2 = false;
                                                 break;
 
                                             case "q2":
-                                                System.out.println("Quarter 2: " + quarterTwoRev);
+                                                System.out.println("Quarter 2 Revenue: " + quarterTwoRev);
+                                                System.out.println("Quarter 2 Expenses: " + quarterTwoExp);
+                                                System.out.println("Quarter 2 Profit: " + quarterTwoProf);
                                                 check2 = false;
                                                 break;
 
                                             case "q3":
-                                                System.out.println("Quarter 3: " + quarterThreeRev);
+                                                System.out.println("Quarter 3 Revenue: " + quarterThreeRev);
+                                                System.out.println("Quarter 3 Expenses: " + quarterThreeExp);
+                                                System.out.println("Quarter 3 Profit: " + quarterThreeProf);
                                                 check2 = false;
                                                 break;
 
                                             case "q4":
-                                                System.out.println("Quarter 4: " + quarterFourRev);
+                                                System.out.println("Quarter 4 Revenue: " + quarterFourRev);
+                                                System.out.println("Quarter 4 Expenses: " + quarterFourExp);
+                                                System.out.println("Quarter 4 Profit: " + quarterFourProf);
                                                 check2 = false;
                                                 break;
 
                                             case "all":
-                                                System.out.println("Quarter 1: " + quarterOneRev);
-                                                System.out.println("Quarter 2: " + quarterTwoRev);
-                                                System.out.println("Quarter 3: " + quarterThreeRev);
-                                                System.out.println("Quarter 4: " + quarterFourRev);
+                                                System.out.println("Quarter 1 Revenue: " + quarterOneRev);
+                                                System.out.println("Quarter 1 Expenses: " + quarterOneExp);
+                                                System.out.println("Quarter 1 Profit: " + quarterOneProf);
+                                                System.out.println("Quarter 2 Revenue: " + quarterTwoRev);
+                                                System.out.println("Quarter 2 Expenses: " + quarterTwoExp);
+                                                System.out.println("Quarter 2 Profit: " + quarterTwoProf);
+                                                System.out.println("Quarter 3 Revenue: " + quarterThreeRev);
+                                                System.out.println("Quarter 3 Expenses: " + quarterThreeExp);
+                                                System.out.println("Quarter 3 Profit: " + quarterThreeProf);
+                                                System.out.println("Quarter 4 Revenue: " + quarterFourRev);
+                                                System.out.println("Quarter 4 Expenses: " + quarterFourExp);
+                                                System.out.println("Quarter 4 Profit: " + quarterFourProf);
                                                 check2 = false;
                                                 break;
 
@@ -334,6 +364,8 @@ public class UI {
                                     //SHOW YEARLY STATS
                                     System.out.println("Revenue: " + bus1.getRevenue());
                                     System.out.println("Expenses: " + bus1.getExpenses());
+                                    double yearProf = bus1.getRevenue() - bus1.getExpenses();
+                                    System.out.println("Profit: " + yearProf);
                                     break;
                             }
                             if (!check) {
@@ -599,7 +631,6 @@ public class UI {
 
                     case "orders":
                         try {
-
                             System.out.println(bus1.allOrdersToString());
                         } catch (EmptyOrdersMapException e) {
                             System.out.println("There are no orders to show!");
