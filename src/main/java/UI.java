@@ -150,6 +150,9 @@ public class UI {
 
                 //rev = bus1.getAllOrders().get("1").getTotal();
 
+
+                rev = bus1.getRevenue();
+
                 dailyRev.put(newDate, rev);
 
 
@@ -254,25 +257,26 @@ public class UI {
                                     //TODO
                                     //SHOW DAILY STATS
 
-                                    System.out.println("Enter a  date (yyyy-mm-dd");
+                                    System.out.println("Enter a  date (yyyy-mm-dd) ");
 
 
                                     boolean check4 = true;
 
                                     String fourthInput = scan.nextLine();
 
-                                     if(dailyRev.containsKey(fourthInput.toLowerCase())){
-                                            System.out.println(dailyRev.get(fourthInput.toLowerCase()));
+                                    if (dailyRev.containsKey(fourthInput.toLowerCase())) {
+                                        System.out.println("Revenue to date: " + dailyRev.get(fourthInput.toLowerCase()));
 
+                                    } else {
+                                        System.out.println("Invalid date");
                                     }
 
 
-
-
-                                    System.out.println(rev);
-
                                     check = false;
                                     break;
+
+
+
                                 case "quarterly":
                                     //TODO
                                     String thirdInput = scan.nextLine();
