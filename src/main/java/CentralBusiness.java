@@ -265,6 +265,12 @@ public class CentralBusiness {
 
     }
 
+    public void calcPayForAll(){
+        for (Map.Entry<String, Employee> entry : employeesMap.entrySet()){
+           calcPay(entry.getKey());
+        }
+    }
+
 
     /**
      *

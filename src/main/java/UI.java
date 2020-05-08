@@ -139,6 +139,7 @@ public class UI {
         while (newDate.compareTo(endDate) != 0) {
             int orderAmount = rand.nextInt((100 - 25) + 1) + 25;
             int counter = 0;
+            int calcPayCounter = 0;
 
             int k = 0;
             while (counter < orderAmount) {
@@ -159,6 +160,7 @@ public class UI {
                 //pick up to 10 random menuItems to chooose from
                 //get total and all that to add automatically to business
                 counter++;
+
 
 
 
@@ -192,7 +194,11 @@ public class UI {
             //Incrementing the date by 1 day
             c.add(Calendar.DAY_OF_MONTH, 1);
             newDate = sdf.format(c.getTime());
-
+            calcPayCounter++;
+            if (calcPayCounter == 7){
+                calcPayCounter = 0;
+                bus1.calcPayForAll();
+            }
 
 
 
